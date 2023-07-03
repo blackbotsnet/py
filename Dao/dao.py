@@ -23,13 +23,11 @@ from contextlib import contextmanager
 @contextmanager
 #from bs4 import BeautifulSoup
 #from threading import Thread
-from time import sleep
 import textwrap
 from PIL import Image
 import io
 import threading
 import time
-
 
 
 st.header("BlackDao")
