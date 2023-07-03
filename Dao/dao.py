@@ -57,17 +57,15 @@ def ReadIt():
 
             finished = False
             while not finished
-                res_box.markdown(f":blue[Book:  Reading]")
+                res_box.markdown(f":blue[Book:  ]Reading..")
                 finished = True
                 if finished is True:
                     break
-        speech=BytesIO();speech_=gTTS(text=d.text,lang='en',slow=False);speech_.write_to_fp(speech);st.audio(speech)
-        st.download_button('Save Text',d.text,key='847*');st.markdown('---')
-
     else:
-        spk.Speak('There appears to be something wrong with the website.')
-        spk.Skip()
+        res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
         raise SystemExit
+    speech=BytesIO();speech_=gTTS(text=d.text,lang='en',slow=False);speech_.write_to_fp(speech);st.audio(speech)
+    st.download_button('Save Text',d.text,key='847*');st.markdown('---')
 
 def Next():
         ## EDIT #############################
