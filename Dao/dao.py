@@ -19,8 +19,10 @@ __version__ = "12.21.21"
 
 
 import requests
-from threading import Thread
+from threading import Thread, current_thread
 import textwrap
+from io import StringIO
+from streamlit.report_thread import REPORT_CONTEXT_ATTR_NAME
 from PIL import Image
 from io import BytesIO
 import threading
@@ -29,6 +31,38 @@ import time
 from bs4 import BeautifulSoup
 from contextlib import contextmanager
 
+@contextmanager
+def st_redirect(src, dst):
+    placeholder = st.empty()
+    output_func = getattr(placeholder, dst)
+
+    with StringIO() as buffer:
+        old_write = src.write
+
+        def new_write(b):
+            if getattr(current_thread(), REPORT_CONTEXT_ATTR_NAME, None):
+                buffer.write(b)
+                output_func(buffer.getvalue())
+            else:
+                old_write(b)
+
+        try:
+            src.write = new_write
+            yield
+        finally:
+            src.write = old_write
+
+
+@contextmanager
+def st_stdout(dst):
+    with st_redirect(sys.stdout, dst):
+        yield
+
+
+@contextmanager
+def st_stderr(dst):
+    with st_redirect(sys.stderr, dst):
+        yield
 
 st.header("BlackDao")
 res_box=st.empty()
@@ -38,7 +72,6 @@ def threading():
     t = Thread(target=ReadIt)
     t.start()
 
-@contextmanager
 def ReadIt():
     url = URL
     try:
@@ -53,7 +86,7 @@ def ReadIt():
         d=soup.find("div",{"class":"epcontent entry-content"})
         
         for d in d.findAll("p"):
-            with st.stdout("code"):
+            with st_stdout("code"):
                 res_box.markdown(f":blue[Book:  ]"+d.text)
             
             finished = False
