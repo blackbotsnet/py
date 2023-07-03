@@ -39,8 +39,8 @@ def threading():
     t = Thread(target=ReadIt)
     t.start()
 
+@contextmanager
 def ReadIt():
-
     url = URL
     try:
         resp=requests.get(url)
@@ -54,7 +54,6 @@ def ReadIt():
         d=soup.find("div",{"class":"epcontent entry-content"})
         
         for d in d.findAll("p"):
-            @contextmanager
             with st_stdout("code"):
                 res_box.markdown(f":blue[Book:  ]"+d.text)
             
@@ -70,7 +69,7 @@ def ReadIt():
     speech=BytesIO();speech_=gTTS(text=d.text,lang='en',slow=False);speech_.write_to_fp(speech);st.audio(speech)
     st.download_button('Save Text',d.text,key='847*');st.markdown('---')
 
-def Next():
+    def Next():
         ## EDIT #############################
         oldurl = url
         chap = ''.join([n for n in oldurl if n.isdigit()])
