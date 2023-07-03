@@ -28,8 +28,7 @@ from contextlib import contextmanager
 @contextmanager
 
 os.environ["DISPLAY"] = ":0"
-import PySimpleGUI as sg
-from xmlrpc.client import boolean
+
 import requests
 from bs4 import BeautifulSoup
 from threading import Thread
