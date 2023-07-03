@@ -22,7 +22,6 @@ import requests
 from threading import Thread, current_thread
 import textwrap
 from io import StringIO
-from streamlit.script_run_context import SCRIPT_RUN_CONTEXT_ATTR_NAME
 
 from PIL import Image
 from io import BytesIO
