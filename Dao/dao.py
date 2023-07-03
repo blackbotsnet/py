@@ -26,8 +26,11 @@ from io import BytesIO
 import threading
 import time
 from bs4 import BeautifulSoup
+
 from contextlib import contextmanager
 @contextmanager
+
+
 st.header("BlackDao")
 res_box=st.empty()
 URL = st.text_area(':orange[Enter DaoTranslate.com URL]',key='input',help='Enter your DAOTranslate URL into the input field.')
