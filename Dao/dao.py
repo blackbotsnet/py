@@ -61,12 +61,12 @@ def ReadIt():
                 res_box.markdown(f":blue[Book:  ]Reading..")
                 finished = True
                 if finished is True:
+                    speech=BytesIO();speech_=gTTS(text=d.text,lang='en',slow=False);speech_.write_to_fp(speech);st.audio(speech)
+                    st.download_button('Save Text',d.text,key='847*');st.markdown('---')
                     break
     else:
         res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
         raise SystemExit
-    speech=BytesIO();speech_=gTTS(text=d.text,lang='en',slow=False);speech_.write_to_fp(speech);st.audio(speech)
-    st.download_button('Save Text',d.text,key='847*');st.markdown('---')
 
     def Next():
         ## EDIT #############################
@@ -76,7 +76,6 @@ def ReadIt():
         nxtUrl = str(oldurl.replace(chap, nxtchap))
 
 
-while True:
-    ok=st.button('📩',help='📖Read',key='1237',use_container_width=False);memory=[];res_box.markdown(f":blue[Book:  ]")
-    if ok:
-      threading()
+ok=st.button('📩',help='📖Read',key='1237',use_container_width=False);memory=[];res_box.markdown(f":blue[Book:  ]")
+if ok:
+  threading()
