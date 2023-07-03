@@ -46,7 +46,6 @@ URL = st.text_area(':orange[Enter DaoTranslate.com URL]',key='input',help='Enter
 
 def threading():
     t = Thread(target=ReadIt)
-    add_report_ctx(thread)
     t.start()
 
 def ReadIt():
