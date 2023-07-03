@@ -26,9 +26,7 @@ from io import BytesIO
 import threading
 import time
 from bs4 import BeautifulSoup
-
 from contextlib import contextmanager
-
 
 
 st.header("BlackDao")
@@ -40,6 +38,7 @@ def threading():
     t.start()
 
 def ReadIt():
+    @contextmanager
     url = URL
     try:
         resp=requests.get(url)
