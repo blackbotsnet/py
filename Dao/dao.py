@@ -10,9 +10,7 @@ try:
     from streamlit.script_run_context import get_script_run_ctx
 except ModuleNotFoundError:
     # streamlit < 1.4
-    from streamlit.report_thread import (
-        get_report_ctx as get_script_run_ctx,
-    )
+    from streamlit.report_thread import get_report_ctx as get_script_run_ctx
 
 from streamlit.server.server import Server
 
