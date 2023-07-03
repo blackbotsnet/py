@@ -51,7 +51,7 @@ def threading():
 def ReadIt():
     url = URL
     try:
-        st.markdown(f":blue[Book:  ]Starting..")
+        res_box.markdown(f":blue[Book:  ]Starting..")
         resp=requests.get(url)
     except:
         res_box.markdown(f":blue[Book:  ]Enter a valid url before running.")
