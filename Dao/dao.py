@@ -27,7 +27,6 @@ __version__ = "12.21.21"
 from contextlib import contextmanager
 @contextmanager
 
-os.environ["DISPLAY"] = ":0"
 
 import requests
 from bs4 import BeautifulSoup
