@@ -25,9 +25,9 @@ from contextlib import contextmanager
 #from threading import Thread
 #import textwrap
 #from PIL import Image
-import io
-import threading
-import time
+from io import BytesIO
+#import threading
+#import time
 
 
 st.header("BlackDao")
