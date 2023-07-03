@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
-import sys
-owd=sys.path.append(os.path.join(os.path.dirname(__file__), os.path.pardir))
+#import os
+#import sys
+#owd=sys.path.append(os.path.join(os.path.dirname(__file__), os.path.pardir))
 
 import streamlit as st
 
@@ -18,11 +18,9 @@ __status__ = "Production"
 __version__ = "12.21.21"
 
 
+import requests
 from contextlib import contextmanager
 @contextmanager
-
-
-import requests
 from bs4 import BeautifulSoup
 from threading import Thread
 from platform import system
