@@ -1,5 +1,8 @@
 [server]
-enableStaticServing = true
+enableStaticServing = false
+runOnSave = true
+maxUploadSize = 400
+maxMessageSize = 400
 [theme]
 base = 'dark'
 primaryColor="#FF4B4B"
