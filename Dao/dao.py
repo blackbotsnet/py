@@ -38,7 +38,8 @@ def threading():
     t.start()
 
 def ReadIt():
-    @contextmanager
+    #@contextmanager
+
     url = URL
     try:
         resp=requests.get(url)
@@ -55,11 +56,12 @@ def ReadIt():
             res_box.markdown(f":blue[Book:  ]"+d.text)
 
             finished = False
-            while not finished:
-                speech=BytesIO();speech_=gTTS(text=d.text,lang='en',slow=False);speech_.write_to_fp(speech);st.audio(speech)
+            while not finished
+                res_box.markdown(f":blue[Book:  Reading]")
                 finished = True
                 if finished is True:
                     break
+        speech=BytesIO();speech_=gTTS(text=d.text,lang='en',slow=False);speech_.write_to_fp(speech);st.audio(speech)
         st.download_button('Save Text',d.text,key='847*');st.markdown('---')
 
     else:
