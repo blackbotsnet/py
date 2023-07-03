@@ -7,8 +7,6 @@
 
 import streamlit as st
 
-from streamlit.server.server import Server
-
 def get_session_id() -> str:
     ctx = get_script_run_ctx()
     if ctx is None:
