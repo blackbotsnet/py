@@ -21,7 +21,6 @@ __version__ = "12.21.21"
 import requests
 #from contextlib import contextmanager
 #@contextmanager
-from bs4 import BeautifulSoup
 from threading import Thread
 import textwrap
 from PIL import Image
