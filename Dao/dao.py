@@ -56,7 +56,7 @@ def ReadIt():
             res_box.markdown(f":blue[Book:  ]"+d.text)
             
             finished = False
-            while not finished
+            while not finished:
                 res_box.markdown(f":blue[Book:  ]Reading..")
                 finished = True
                 if finished is True:
