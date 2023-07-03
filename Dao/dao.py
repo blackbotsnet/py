@@ -6,6 +6,24 @@
 #owd=sys.path.append(os.path.join(os.path.dirname(__file__), os.path.pardir))
 
 import streamlit as st
+try:
+    from streamlit.script_run_context import get_script_run_ctx
+except ModuleNotFoundError:
+    # streamlit < 1.4
+    from streamlit.report_thread import (  # type: ignore
+        get_report_ctx as get_script_run_ctx,
+    )
+
+from streamlit.server.server import Server
+
+def get_session_id() -> str:
+    ctx = get_script_run_ctx()
+    if ctx is None:
+        raise Exception("Failed to get the thread context")
+
+            
+    return ctx.session_id
+
 from streamlit.ReportThread import add_report_ctx
 
 __author__ = "Supreme ciento"
