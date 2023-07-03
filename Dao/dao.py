@@ -95,6 +95,6 @@ def ReadIt():
         nxtUrl = str(oldurl.replace(chap, nxtchap))
 
 
-ok=st.button('📩',help='📖Read',key='1237',use_container_width=False);memory=[];res_box.markdown(f":blue[Book:  ]")
+ok=st.button('📩',help='📖Read',key='1237');memory=[];res_box.markdown(f":blue[Book:  ]")
 if ok:
   threading()
