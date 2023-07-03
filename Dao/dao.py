@@ -27,7 +27,7 @@ from PIL import Image
 from io import BytesIO
 import threading
 import time
-
+from bs4 import BeautifulSoup
 
 st.header("BlackDao")
 res_box=st.empty()
