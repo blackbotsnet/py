@@ -24,7 +24,6 @@ import textwrap
 from PIL import Image
 from io import BytesIO
 import threading
-from streamlit.report_thread import REPORT_CONTEXT_ATTR_NAME
 import sys
 import time
 from bs4 import BeautifulSoup
