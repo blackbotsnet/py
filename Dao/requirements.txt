@@ -1,3 +1,4 @@
+streamlit.report_thread
 beautifulsoup4 
 matplotlib
 speechrecognition
