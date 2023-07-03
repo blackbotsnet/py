@@ -3,14 +3,8 @@
 
 import os
 import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), os.path.pardir))
-def working_directory(directory):
-    owd = os.getcwd()
-    try:
-        os.chdir(directory)
-        yield directory
-    finally:
-        os.chdir(owd)
+owd=sys.path.append(os.path.join(os.path.dirname(__file__), os.path.pardir))
+
 import streamlit as st
 
 __author__ = "Supreme ciento"
