@@ -74,10 +74,9 @@ def ReadIt():
         chap = ''.join([n for n in oldurl if n.isdigit()])
         nxtchap = str(int(chap) + int(+1))
         nxtUrl = str(oldurl.replace(chap, nxtchap))
-def Main():
+
+
+while True:
     ok=st.button('📩',help='📖Read',key='1237',use_container_width=False);memory=[];res_box.markdown(f":blue[Book:  ]")
     if ok:
       threading()
-
-while True:
-    Main()
