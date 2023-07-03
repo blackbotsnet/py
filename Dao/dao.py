@@ -31,7 +31,7 @@ import requests
 from threading import Thread, current_thread
 import textwrap
 from io import StringIO
-
+from gtts import gTTS
 from PIL import Image
 from io import BytesIO
 import threading
