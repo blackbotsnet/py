@@ -1,3 +1,4 @@
+streamlit-pydantic
 beautifulsoup4 
 matplotlib
 speechrecognition
