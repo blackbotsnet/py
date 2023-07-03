@@ -65,7 +65,7 @@ def st_stderr(dst):
         yield
 
 st.header("BlackDao")
-res_box=st.empty()
+#res_box=st.empty()
 URL = st.text_area(':orange[Enter DaoTranslate.com URL]',key='input',help='Enter your DAOTranslate URL into the input field.')
 
 def threading():
