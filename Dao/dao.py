@@ -24,7 +24,6 @@ def get_session_id() -> str:
             
     return ctx.session_id
 
-from streamlit.ReportThread import add_report_ctx
 
 __author__ = "Supreme ciento"
 __copyright__ = "Copyright 2023, Cloud Bots™ BlackBots"
