@@ -34,7 +34,6 @@ from threading import Thread
 from platform import system
 from time import sleep
 import textwrap
-import requests
 from PIL import Image
 import io
 import threading
