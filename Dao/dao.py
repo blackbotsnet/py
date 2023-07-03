@@ -24,7 +24,7 @@ from contextlib import contextmanager
 #from bs4 import BeautifulSoup
 #from threading import Thread
 #import textwrap
-from PIL import Image
+#from PIL import Image
 import io
 import threading
 import time
