@@ -65,7 +65,7 @@ def st_stderr(dst):
         yield
 
 st.header("BlackDao")
-#res_box=st.empty()
+res_box=st.empty()
 URL = st.text_area(':orange[Enter DaoTranslate.com URL]',key='input',help='Enter your DAOTranslate URL into the input field.')
 
 def threading():
@@ -75,7 +75,7 @@ def threading():
 def ReadIt():
     url = URL
     try:
-        res_box.markdown(f":blue[Book:  ]Starting..")
+        st.markdown(f":blue[Book:  ]Starting..")
         resp=requests.get(url)
     except:
         res_box.markdown(f":blue[Book:  ]Enter a valid url before running.")
