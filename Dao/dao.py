@@ -63,15 +63,13 @@ def ReadIt():
         d=soup.find("div",{"class":"epcontent entry-content"})
         
         for d in d.findAll("p"):
-            #res_box.markdown(f":blue[Book:  ]"+d.text)
-            print(d.text)
+            res_box.markdown(f":blue[Book:  ]"+d.text)
             finished = False
             while not finished:
                 res_box.markdown(f":blue[Book:  ]Reading..")
                 finished = True
                 if finished is True:
                     speech=BytesIO();speech_=gTTS(text=d.text,lang='en',slow=False);speech_.write_to_fp(speech);st.audio(speech)
-                    st.download_button('Save Text',d.text,key='847*');st.markdown('---')
                     break
     else:
         res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
