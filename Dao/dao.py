@@ -23,7 +23,7 @@ from contextlib import contextmanager
 @contextmanager
 #from bs4 import BeautifulSoup
 #from threading import Thread
-import textwrap
+#import textwrap
 from PIL import Image
 import io
 import threading
