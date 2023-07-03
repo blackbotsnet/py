@@ -53,14 +53,14 @@ def ReadIt():
         d=soup.find("div",{"class":"epcontent entry-content"})
         
         for d in d.findAll("p"):
-            res_box.markdown(f":blue[Book:  ]"+d.text)
-
-            finished = False
-            while not finished
-                res_box.markdown(f":blue[Book:  ]Reading..")
-                finished = True
-                if finished is True:
-                    break
+        res_box.markdown(f":blue[Book:  ]"+d.text)
+        
+        finished = False
+        while not finished
+            res_box.markdown(f":blue[Book:  ]Reading..")
+            finished = True
+            if finished is True:
+                break
     else:
         res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
         raise SystemExit
