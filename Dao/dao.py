@@ -24,6 +24,8 @@ import textwrap
 from PIL import Image
 from io import BytesIO
 import threading
+from streamlit.report_thread import REPORT_CONTEXT_ATTR_NAME
+import sys
 import time
 from bs4 import BeautifulSoup
 from contextlib import contextmanager
@@ -74,8 +76,10 @@ def Next():
         chap = ''.join([n for n in oldurl if n.isdigit()])
         nxtchap = str(int(chap) + int(+1))
         nxtUrl = str(oldurl.replace(chap, nxtchap))
+def Main():
+    ok=st.button('📩',help='📖Read',key='1237',use_container_width=False);memory=[];res_box.markdown(f":blue[Book:  ]")
+    if ok:
+      threading()
 
-
-ok=st.button('📩',help='📖Read',key='1237',use_container_width=False);memory=[];res_box.markdown(f":blue[Book:  ]")
-if ok:
-  threading()
+while True:
+    Main()
