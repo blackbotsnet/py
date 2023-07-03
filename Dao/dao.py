@@ -88,8 +88,8 @@ def ReadIt():
         
         for d in d.findAll("p"):
             with st_stdout("code"):
-                res_box.markdown(f":blue[Book:  ]"+d.text)
-            
+                #res_box.markdown(f":blue[Book:  ]"+d.text)
+                print(d.text)
             finished = False
             while not finished:
                 res_box.markdown(f":blue[Book:  ]Reading..")
