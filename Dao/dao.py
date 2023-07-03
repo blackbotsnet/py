@@ -38,8 +38,7 @@ def threading():
     t.start()
 
 def ReadIt():
-    #@contextmanager
-    
+
     url = URL
     try:
         resp=requests.get(url)
@@ -53,7 +52,9 @@ def ReadIt():
         d=soup.find("div",{"class":"epcontent entry-content"})
         
         for d in d.findAll("p"):
-            res_box.markdown(f":blue[Book:  ]"+d.text)
+            @contextmanager
+            with st_stdout("code"):
+                res_box.markdown(f":blue[Book:  ]"+d.text)
             
             finished = False
             while not finished:
