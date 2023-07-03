@@ -22,7 +22,8 @@ import requests
 from threading import Thread, current_thread
 import textwrap
 from io import StringIO
-from streamlit.report_thread import REPORT_CONTEXT_ATTR_NAME
+from streamlit.script_run_context import SCRIPT_RUN_CONTEXT_ATTR_NAME
+
 from PIL import Image
 from io import BytesIO
 import threading
@@ -40,7 +41,7 @@ def st_redirect(src, dst):
         old_write = src.write
 
         def new_write(b):
-            if getattr(current_thread(), REPORT_CONTEXT_ATTR_NAME, None):
+            if getattr(current_thread(), SCRIPT_RUN_CONTEXT_ATTR_NAME, None):
                 buffer.write(b)
                 output_func(buffer.getvalue())
             else:
