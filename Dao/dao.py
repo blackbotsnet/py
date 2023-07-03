@@ -87,4 +87,5 @@ def ReadIt():
 
 ok=st.button('📩',help='📖Read',key='1237');memory=[];res_box.markdown(f":blue[Book:  ]")
 if ok:
-  threading()
+    #threading()
+    RunIt()
