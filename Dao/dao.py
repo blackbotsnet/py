@@ -19,8 +19,6 @@ __version__ = "12.21.21"
 
 
 import requests
-#from contextlib import contextmanager
-#@contextmanager
 from threading import Thread
 import textwrap
 from PIL import Image
@@ -28,7 +26,8 @@ from io import BytesIO
 import threading
 import time
 from bs4 import BeautifulSoup
-
+from contextlib import contextmanager
+@contextmanager
 st.header("BlackDao")
 res_box=st.empty()
 URL = st.text_area(':orange[Enter DaoTranslate.com URL]',key='input',help='Enter your DAOTranslate URL into the input field.')
