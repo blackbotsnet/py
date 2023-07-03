@@ -53,7 +53,7 @@ def ReadIt():
         d=soup.find("div",{"class":"epcontent entry-content"})
         
         for d in d.findAll("p"):
-            with st_stdout("code"):
+            with st.stdout("code"):
                 res_box.markdown(f":blue[Book:  ]"+d.text)
             
             finished = False
