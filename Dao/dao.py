@@ -39,14 +39,14 @@ def threading():
 
 def ReadIt():
     #@contextmanager
-
+    
     url = URL
     try:
         resp=requests.get(url)
     except:
         res_box.markdown(f":blue[Book:  ]Enter a valid url before running.")
         raise SystemExit
-
+    
     if resp.status_code==200:
 
         soup=BeautifulSoup(resp.text,'html.parser')    
