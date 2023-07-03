@@ -6,6 +6,7 @@
 #owd=sys.path.append(os.path.join(os.path.dirname(__file__), os.path.pardir))
 
 import streamlit as st
+from streamlit.ReportThread import add_report_ctx
 
 __author__ = "Supreme ciento"
 __copyright__ = "Copyright 2023, Cloud Bots™ BlackBots"
@@ -37,6 +38,7 @@ URL = st.text_area(':orange[Enter DaoTranslate.com URL]',key='input',help='Enter
 
 def threading():
     t = Thread(target=ReadIt)
+    add_report_ctx(thread)
     t.start()
 
 def ReadIt():
