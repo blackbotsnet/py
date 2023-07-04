@@ -65,7 +65,10 @@ def ReadIt():
         soup=BeautifulSoup(resp.text,'html.parser')    
                 
         d=soup.find("div",{"class":"epcontent entry-content"})
-                
+        stoggle(
+                "Click to view text",
+                d.text,
+        )
         speech=BytesIO()
                 
         speech_=gTTS(text=d.text,lang='en',slow=False)
@@ -73,8 +76,6 @@ def ReadIt():
         speech_.save("dao.mp3")
         
         autoplay_audio("dao.mp3")
-        
-                          
 
     else:
         res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
@@ -92,10 +93,7 @@ def ReadIt():
             
     if nxt:
         Next()
-        stoggle(
-                "Click to view text",
-                d.text,
-        )
+
 if ok:
     ReadIt()
     
