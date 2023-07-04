@@ -74,12 +74,12 @@ def ReadIt():
         nxtchap = str(int(chap) + int(+1))
         nxtUrl = str(oldurl.replace(chap, nxtchap))
 
-okk=st.button('📩',help='📖Read',key='126637');memory=[]
+okk=st.button('test',help='📖Read',key='126637');memory=[]
 if okk:
-    mp3_fp = BytesIO()
-    tts = gTTS('hello', lang='en')
-    tts.write_to_fp(mp3_fp)
-
+    speech = BytesIO()
+    tts = gTTS('hello how are you', lang='en')
+    tts.write_to_fp(speech)
+    st.audio(speech)
 ok=st.button('📩',help='📖Read',key='1237');memory=[];res_box.markdown(f":blue[Book:  ]")
 if ok:
     #threading()
