@@ -65,19 +65,15 @@ def ReadIt():
         d=soup.find("div",{"class":"epcontent entry-content"})
         
         for d in d.findAll("p"):
-            finished = False
-            while not finished:
                 res_box.markdown(f":blue[Book:  ]Reading..")
-                finished = True
-                if finished is True:
-                    res_box.markdown(f":blue[Book:  ]"+d.text)
-                    st.write("# Auto-playing Audio!")
-                    speech=BytesIO()
-                    speech_=gTTS(text=d.text,lang='en',slow=False)
-                    #speech_.write_to_fp(speech)
-                    speech_.save("dao.mp3")
-                    autoplay_audio("dao.mp3")
-                    break
+                res_box.markdown(f":blue[Book:  ]"+d.text)
+                st.write("# Auto-playing Audio!")
+                speech=BytesIO()
+                speech_=gTTS(text=d.text,lang='en',slow=False)
+                #speech_.write_to_fp(speech)
+                speech_.save("dao.mp3")
+                autoplay_audio("dao.mp3")
+                break
     else:
         res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
         raise SystemExit
