@@ -60,20 +60,14 @@ def ReadIt():
         raise SystemExit
     
     if resp.status_code==200:
-
         soup=BeautifulSoup(resp.text,'html.parser')    
         d=soup.find("div",{"class":"epcontent entry-content"})
-        
-        for d in d.findAll("p"):
-                res_box.markdown(f":blue[Book:  ]Reading..")
-                res_box.markdown(f":blue[Book:  ]"+d.text)
-                st.write("# Auto-playing Audio!")
-                speech=BytesIO()
-                speech_=gTTS(text=d.text,lang='en',slow=False)
-                #speech_.write_to_fp(speech)
-                speech_.save("dao.mp3")
-                autoplay_audio("dao.mp3")
-                break
+        st.write("# Auto-playing Audio!")
+        speech=BytesIO()
+        speech_=gTTS(text=d.text,lang='en',slow=False)
+        #speech_.write_to_fp(speech)
+        speech_.save("dao.mp3")
+        autoplay_audio("dao.mp3")
     else:
         res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
         raise SystemExit
