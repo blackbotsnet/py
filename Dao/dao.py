@@ -34,7 +34,14 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 st.header("BlackDao")
 res_box=st.empty()
-placeholder = st.empty() 
+placeholder = st.empty()
+st.write("DaoTranslate.com --> [link](https://daotranslate.com/az-list/)")
+with st.expander("See Instructions"):
+    st.write(\"\"\"
+        *1:* Get link such as: *https://daotranslate.com/blackbook-chapter-2-english/*
+        *2:* Paste link into field below
+        *3:* Press Button to Start
+    \"\"\")
 URL = placeholder.text_input(':orange[Enter DaoTranslate.com URL]',key='input',help='Enter your DAOTranslate URL into the input field.')
 
 ok=st.button('📩',help='📖Read',key='1237')
