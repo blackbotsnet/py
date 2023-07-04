@@ -22,6 +22,8 @@ from gtts import gTTS
 import requests
 from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras.customize_running import center_running
+from streamlit_extras.stoggle import stoggle
+
 
 hide_streamlit_style = """
             <style>
@@ -62,6 +64,10 @@ def ReadIt():
     if resp.status_code==200:
         soup=BeautifulSoup(resp.text,'html.parser')    
         d=soup.find("div",{"class":"epcontent entry-content"})
+        stoggle(
+                "Click me!",
+                d.text,
+        )
         speech=BytesIO()
         speech_=gTTS(text=d.text,lang='en',slow=False)
         speech_.save("dao.mp3")
