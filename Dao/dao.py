@@ -87,8 +87,9 @@ def ReadIt():
         nxtUrl = str(oldurl.replace(chap, nxtchap))
         URL = nxtUrl
         st.write("\n\nChapter Complete: " + prvchap + "\n\nNEXT CHAPTER\nChapter: " + nxtchap)
-        nxt=st.button('📩',help='📖Read',key='1233337')
-                
+    
+    nxt=st.button('📖Next Ch.',help='📖Next Chapter',key='13337')
+            
     if nxt:
         Next()
         stoggle(
