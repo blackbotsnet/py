@@ -72,9 +72,9 @@ def ReadIt():
     if resp.status_code==200:
                 
         soup=BeautifulSoup(resp.text,'html.parser')    
-        st.markdown("""
+        st.markdown("""<style>
               p{color: black;}
-              """,
+              </style>""",
               unsafe_allow_html=True
         )
         d=soup.find("div",{"class":"epcontent entry-content"})
