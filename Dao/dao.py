@@ -35,8 +35,9 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 st.header("BlackDao")
 res_box=st.empty()
 placeholder = st.empty()
-st.write("DaoTranslate.com --> [link](https://daotranslate.com/az-list/)")
+st.write("--> [DaoTranslate.com](https://daotranslate.com/az-list/)")
 with st.expander("See Instructions"):
+    st.write("*0:* Visit [DaoTranslate.com](https://daotranslate.com/az-list/)")
     st.write("""
         *1:* Get link such as: *https://daotranslate.com/blackbook-chapter-2-english/*
         *2:* Paste link into field below
