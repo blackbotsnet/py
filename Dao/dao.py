@@ -72,8 +72,8 @@ def ReadIt():
         speech_=gTTS(text=d.text,lang='en',slow=False)
         speech_.save("dao.mp3")
         nxt=st.button('📩',help='📖Read',key='1233337')
-                if nxt:
-                            Next()
+        if nxt:
+            Next()
                             
 
     else:
