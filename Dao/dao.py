@@ -22,8 +22,6 @@ from gtts import gTTS
 import requests
 from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras.customize_running import center_running
-from streamlit_extras.colored_header import colored_header
-
 
 hide_streamlit_style = """
             <style>
@@ -51,11 +49,7 @@ def autoplay_audio(file_path: str):
             unsafe_allow_html=True,
         )
 def ReadIt():
-    colored_header(
-                label="BlackDao",
-                description="",
-                color_name="orange-70",
-    )
+
     center_running()
     url = URL
     try:
