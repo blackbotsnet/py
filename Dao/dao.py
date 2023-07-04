@@ -64,17 +64,17 @@ def ReadIt():
     if resp.status_code==200:
         soup=BeautifulSoup(resp.text,'html.parser')    
         d=soup.find("div",{"class":"epcontent entry-content"})
-        stoggle(
-                "Click to view text",
-                d.text,
-        )
         speech=BytesIO()
         speech_=gTTS(text=d.text,lang='en',slow=False)
         speech_.save("dao.mp3")
         nxt=st.button('📩',help='📖Read',key='1233337')
         if nxt:
             Next()
-                            
+        stoggle(
+                "Click to view text",
+                d.text,
+        )
+                           
 
     else:
         res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
