@@ -73,7 +73,7 @@ def ReadIt():
                 if finished is True:
                     res_box.markdown(f":blue[Book:  ]"+d.text)
                     st.write("# Auto-playing Audio!")
-                    speech=BytesIO();speech_=gTTS(text=d.text,lang='en',slow=False);speech_.write_to_fp(speech);autoplay_audio(speech)
+                    speech=BytesIO();speech_=gTTS(text=d.text,lang='en',slow=False);speech_.write_to_fp(speech);autoplay_audio(speech_)
                     break
     else:
         res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
