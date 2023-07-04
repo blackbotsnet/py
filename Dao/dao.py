@@ -55,19 +55,27 @@ def ReadIt():
     center_running()
     url = URL
     try:
-        res_box.markdown(f":blue[Book:  ]Starting..")
         resp=requests.get(url)
     except:
         res_box.markdown(f":blue[Book:  ]Enter a valid url before running.")
         raise SystemExit
     
     if resp.status_code==200:
+                
         soup=BeautifulSoup(resp.text,'html.parser')    
+                
         d=soup.find("div",{"class":"epcontent entry-content"})
+                
         speech=BytesIO()
+                
         speech_=gTTS(text=d.text,lang='en',slow=False)
+                
         speech_.save("dao.mp3")
+        
+        autoplay_audio("dao.mp3")
+        
         nxt=st.button('📩',help='📖Read',key='1233337')
+                
         if nxt:
             Next()
         stoggle(
