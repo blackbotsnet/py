@@ -73,11 +73,11 @@ def ReadIt():
         soup=BeautifulSoup(resp.text,'html.parser')    
                 
         d=soup.find("div",{"class":"epcontent entry-content"})
-        add_vertical_space(3)
         stoggle(
                 "Click to view text",
                 d.text,
         )
+        add_vertical_space(1)
         speech=BytesIO()
                 
         speech_=gTTS(text=d.text,lang='en',slow=False)
