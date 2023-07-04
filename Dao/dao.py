@@ -23,6 +23,7 @@ import requests
 from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras.customize_running import center_running
 from streamlit_extras.stoggle import stoggle
+from streamlit_extras.add_vertical_space import add_vertical_space
 
 
 hide_streamlit_style = """
@@ -72,6 +73,7 @@ def ReadIt():
         soup=BeautifulSoup(resp.text,'html.parser')    
                 
         d=soup.find("div",{"class":"epcontent entry-content"})
+        add_vertical_space(3)
         stoggle(
                 "Click to view text",
                 d.text,
