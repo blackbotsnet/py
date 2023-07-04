@@ -90,11 +90,11 @@ def ReadIt():
         nxt=st.button('📩',help='📖Read',key='1233337')
                 
     if nxt:
-            Next()
+        Next()
         stoggle(
                 "Click to view text",
                 d.text,
-    )
+        )
 if ok:
     ReadIt()
     
