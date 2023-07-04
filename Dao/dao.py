@@ -35,17 +35,15 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 st.header("BlackDao")
 res_box=st.empty()
 placeholder = st.empty()
-st.write("--> [DaoTranslate.com](https://daotranslate.com/az-list/)")
-with st.expander("See Instructions"):
-    st.write("*0:* Visit [DaoTranslate.com](https://daotranslate.com/az-list/)")
-    st.write("""
-        *1:* Get link such as: *https://daotranslate.com/blackbook-chapter-2-english/*
-        *2:* Paste link into field below
-        *3:* Press Button to Start
-    """)
+
 URL = placeholder.text_input(':orange[Enter DaoTranslate.com URL]',key='input',help='Enter your DAOTranslate URL into the input field.')
 
 ok=st.button('📩',help='📖Read',key='1237')
+with st.expander("See Instructions"):
+    st.write("*1:* Visit [DaoTranslate.com](https://daotranslate.com/az-list/)")
+    st.write("*2:* Get link such as: *https://daotranslate.com/blackbook-chapter-2-english/*")
+    st.write("*3:* Paste link into field below")
+    st.write("*4:* Press Button to Start")
 def autoplay_audio(file_path: str):
     with open(file_path, "rb") as f:
         data = f.read()
