@@ -72,7 +72,8 @@ def ReadIt():
                 
         soup=BeautifulSoup(resp.text,'html.parser')    
         st.markdown("""<style>
-              p{color: black;}
+              .stMarkdown{color: black;}
+              .streamlit-expanderHeader st-ae st-bx st-ag st-ah st-ai st-aj st-by st-bz st-c0 st-c1 st-c2 st-c3 st-c4 st-ar st-as st-b6 st-b5 st-b3 st-c5 st-c6 st-c7 st-b4 st-c8 st-c9 st-ca st-cb st-cc{color:orange;}
               </style>""",
               unsafe_allow_html=True
         )
