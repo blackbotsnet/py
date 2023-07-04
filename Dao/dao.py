@@ -74,9 +74,10 @@ def ReadIt():
         soup=BeautifulSoup(resp.text,'html.parser')    
                 
         d=soup.find("div",{"class":"epcontent entry-content"})
-        text = annotated_text("",
-                              (d.text, "", "#fea"),
-                             "")
+        with st.expander("Click to view text"):
+                    annotated_text("",
+                                          (d.text, "", "#fea"),
+                                  "")
         stoggle(
                 "Click to view text",
                 text,
