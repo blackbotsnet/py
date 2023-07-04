@@ -79,7 +79,7 @@ if okk:
     speech = BytesIO()
     tts = gTTS('hello how are you', lang='en')
     tts.write_to_fp(speech)
-    st.audio(speech)
+
 ok=st.button('📩',help='📖Read',key='1237');memory=[];res_box.markdown(f":blue[Book:  ]")
 if ok:
     #threading()
