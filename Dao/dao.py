@@ -38,7 +38,19 @@ URL = st.text_input(':orange[Enter DaoTranslate.com URL]',key='input',help='Ente
 def threading():
     t = Thread(target=ReadIt)
     t.start()
-
+def autoplay_audio(file_path: str):
+    with open(file_path, "rb") as f:
+        data = f.read()
+        b64 = base64.b64encode(data).decode()
+        md = f"""
+            <audio controls autoplay="true">
+            <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+            </audio>
+            """
+        st.markdown(
+            md,
+            unsafe_allow_html=True,
+        )
 def ReadIt():
     url = URL
     try:
@@ -59,9 +71,9 @@ def ReadIt():
                 res_box.markdown(f":blue[Book:  ]Reading..")
                 finished = True
                 if finished is True:
-                    
                     res_box.markdown(f":blue[Book:  ]"+d.text)
-                    speech=BytesIO();speech_=gTTS(text=d.text,lang='en',slow=False);speech_.write_to_fp(speech);st.audio(speech)
+                    st.write("# Auto-playing Audio!")
+                    speech=BytesIO();speech_=gTTS(text=d.text,lang='en',slow=False);speech_.write_to_fp(speech);autoplay_audio(speech)
                     break
     else:
         res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
@@ -73,25 +85,6 @@ def ReadIt():
         chap = ''.join([n for n in oldurl if n.isdigit()])
         nxtchap = str(int(chap) + int(+1))
         nxtUrl = str(oldurl.replace(chap, nxtchap))
-
-okk=st.button('test',help='📖Read',key='126637');memory=[]
-if okk:
-    def autoplay_audio(file_path: str):
-        with open(file_path, "rb") as f:
-            data = f.read()
-            b64 = base64.b64encode(data).decode()
-            md = f"""
-                <audio controls autoplay="true">
-                <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
-                </audio>
-                """
-            st.markdown(
-                md,
-                unsafe_allow_html=True,
-            )
-    st.write("# Auto-playing Audio!")
-    autoplay_audio("local_audio.mp3")
-
 
 ok=st.button('📩',help='📖Read',key='1237');memory=[];res_box.markdown(f":blue[Book:  ]")
 if ok:
