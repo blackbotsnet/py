@@ -74,15 +74,7 @@ def ReadIt():
         
         autoplay_audio("dao.mp3")
         
-        nxt=st.button('📩',help='📖Read',key='1233337')
-                
-        if nxt:
-            Next()
-        stoggle(
-                "Click to view text",
-                d.text,
-        )
-                           
+                          
 
     else:
         res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
@@ -95,6 +87,14 @@ def ReadIt():
         nxtUrl = str(oldurl.replace(chap, nxtchap))
         URL = nxtUrl
         st.write("\n\nChapter Complete: " + prvchap + "\n\nNEXT CHAPTER\nChapter: " + nxtchap)
+        nxt=st.button('📩',help='📖Read',key='1233337')
+                
+    if nxt:
+            Next()
+        stoggle(
+                "Click to view text",
+                d.text,
+    )
 if ok:
     ReadIt()
     
