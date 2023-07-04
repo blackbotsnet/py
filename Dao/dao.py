@@ -22,6 +22,8 @@ from gtts import gTTS
 import requests
 from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras.customize_running import center_running
+from streamlit_extras.colored_header import colored_header
+
 
 hide_streamlit_style = """
             <style>
@@ -49,6 +51,11 @@ def autoplay_audio(file_path: str):
             unsafe_allow_html=True,
         )
 def ReadIt():
+    colored_header(
+                label="BlackDao",
+                description="",
+                color_name="orange-70",
+    )
     center_running()
     url = URL
     try:
@@ -61,12 +68,10 @@ def ReadIt():
     if resp.status_code==200:
         soup=BeautifulSoup(resp.text,'html.parser')    
         d=soup.find("div",{"class":"epcontent entry-content"})
-        st.write("# Auto-playing Audio!")
         speech=BytesIO()
         speech_=gTTS(text=d.text,lang='en',slow=False)
-        #speech_.write_to_fp(speech)
         speech_.save("dao.mp3")
-        autoplay_audio("dao.mp3")
+
     else:
         res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
         raise SystemExit
