@@ -39,7 +39,7 @@ placeholder = st.empty()
 URL = placeholder.text_input(':orange[Enter DaoTranslate.com URL]',key='input',help='Enter your DAOTranslate URL into the input field.')
 
 ok=st.button('📩',help='📖Read',key='1237')
-with st.expander("See Instructions", help="Visit link, copy URL of Chapter'x', Paste URL, Click Button"):
+with st.expander("See Instructions"):
     st.write("*1:* Visit [DaoTranslate.com](https://daotranslate.com/az-list/)")
     st.write("*2:* Get link such as: *https://daotranslate.com/blackbook-chapter-2-english/*")
     st.write("*3:* Paste link into field below")
