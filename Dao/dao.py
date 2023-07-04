@@ -6,6 +6,7 @@ import sys
 #owd=sys.path.append(os.path.join(os.path.dirname(__file__), os.path.pardir))
 
 import streamlit as st
+import base64
 
 __author__ = "Supreme ciento"
 __copyright__ = "Copyright 2023, Cloud Bots™ BlackBots"
