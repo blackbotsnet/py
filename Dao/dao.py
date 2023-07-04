@@ -24,6 +24,7 @@ from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras.customize_running import center_running
 from streamlit_extras.stoggle import stoggle
 from streamlit_extras.add_vertical_space import add_vertical_space
+from annotated_text import annotated_text
 
 
 hide_streamlit_style = """
@@ -75,7 +76,7 @@ def ReadIt():
         d=soup.find("div",{"class":"epcontent entry-content"})
         stoggle(
                 "Click to view text",
-                d.text,
+                (annotated_text(d.text, "", "#fea")),
         )
         add_vertical_space(1)
         speech=BytesIO()
