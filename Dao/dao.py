@@ -36,7 +36,7 @@ st.header("BlackDao")
 res_box=st.empty()
 URL = st.text_input(':orange[Enter DaoTranslate.com URL]',key='input',help='Enter your DAOTranslate URL into the input field.')
 
-ok=st.button('📩',help='📖Read',key='1237');memory=[];res_box.markdown(f":blue[Book:  ]")
+ok=st.button('📩',help='📖Read',key='1237')
 def autoplay_audio(file_path: str):
     with open(file_path, "rb") as f:
         data = f.read()
@@ -65,23 +65,28 @@ def ReadIt():
         soup=BeautifulSoup(resp.text,'html.parser')    
         d=soup.find("div",{"class":"epcontent entry-content"})
         stoggle(
-                "Click me!",
+                "Click to view text",
                 d.text,
         )
         speech=BytesIO()
         speech_=gTTS(text=d.text,lang='en',slow=False)
         speech_.save("dao.mp3")
+        nxt=st.button('📩',help='📖Read',key='1233337')
+                if nxt:
+                            Next()
+                            
 
     else:
         res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
         raise SystemExit
 
     def Next():
-        ## EDIT #############################
         oldurl = url
         chap = ''.join([n for n in oldurl if n.isdigit()])
         nxtchap = str(int(chap) + int(+1))
         nxtUrl = str(oldurl.replace(chap, nxtchap))
+        URL = nxtUrl
+        st.write("\n\nChapter Complete: " + prvchap + "\n\nNEXT CHAPTER\nChapter: " + nxtchap)
 if ok:
     ReadIt()
     
