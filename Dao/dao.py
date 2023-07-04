@@ -80,7 +80,7 @@ def ReadIt():
                                   "")
         stoggle(
                 "Click to view text",
-                text,
+                d.text,
         )
         add_vertical_space(1)
         speech=BytesIO()
