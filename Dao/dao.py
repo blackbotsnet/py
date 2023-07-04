@@ -74,7 +74,7 @@ def ReadIt():
         st.markdown("""<style>
               .stMarkdown{color: black;}
               .st-c8:hover{color:orange;}
-              .css-1fcdlhc e1mp27150{display:none;}
+              .streamlit-expander st-bc st-as st-ar st-bd st-be st-b8 st-bf st-bg st-bh st-bi{display:none;}
               </style>""",
               unsafe_allow_html=True
         )
