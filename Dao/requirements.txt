@@ -1,13 +1,14 @@
+streamlit
 streamlit-analytics
 streamlit-pydantic
+stramlit-extras
+streamlit_player
 beautifulsoup4 
 matplotlib
 speechrecognition
 requests
-streamlit
 pymongo==4.1.1
 dnspython==2.2.1
-streamlit_player
 gTTS==2.2.4
 fake_useragent 
 wit
