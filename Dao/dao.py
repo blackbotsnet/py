@@ -7,15 +7,6 @@
 
 import streamlit as st
 
-def get_session_id() -> str:
-    ctx = get_script_run_ctx()
-    if ctx is None:
-        raise Exception("Failed to get the thread context")
-
-            
-    return ctx.session_id
-
-
 __author__ = "Supreme ciento"
 __copyright__ = "Copyright 2023, Cloud Bots™ BlackBots"
 __credits__ = ["Supreme Ciento"]
@@ -42,7 +33,7 @@ from bs4 import BeautifulSoup
 
 st.header("BlackDao")
 res_box=st.empty()
-URL = st.text_area(':orange[Enter DaoTranslate.com URL]',key='input',help='Enter your DAOTranslate URL into the input field.')
+URL = st.text_input(':orange[Enter DaoTranslate.com URL]',key='input',help='Enter your DAOTranslate URL into the input field.')
 
 def threading():
     t = Thread(target=ReadIt)
@@ -68,6 +59,7 @@ def ReadIt():
                 res_box.markdown(f":blue[Book:  ]Reading..")
                 finished = True
                 if finished is True:
+                    
                     res_box.markdown(f":blue[Book:  ]"+d.text)
                     speech=BytesIO();speech_=gTTS(text=d.text,lang='en',slow=False);speech_.write_to_fp(speech);st.audio(speech)
                     break
@@ -82,6 +74,11 @@ def ReadIt():
         nxtchap = str(int(chap) + int(+1))
         nxtUrl = str(oldurl.replace(chap, nxtchap))
 
+okk=st.button('📩',help='📖Read',key='126637');memory=[]
+if okk:
+    mp3_fp = BytesIO()
+    tts = gTTS('hello', lang='en')
+    tts.write_to_fp(mp3_fp)
 
 ok=st.button('📩',help='📖Read',key='1237');memory=[];res_box.markdown(f":blue[Book:  ]")
 if ok:
