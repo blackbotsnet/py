@@ -72,7 +72,11 @@ def ReadIt():
     if resp.status_code==200:
                 
         soup=BeautifulSoup(resp.text,'html.parser')    
-                
+        st.markdown("""
+              p{color: black;}
+              """,
+              unsafe_allow_html=True
+        )
         d=soup.find("div",{"class":"epcontent entry-content"})
         with st.expander("Click to view text"):
                     annotated_text("",
@@ -80,8 +84,11 @@ def ReadIt():
                                   "")
         stoggle(
                 "Click to view text",
-                d.text,
+                annotated_text("",
+                                          (d.text, "", "#fea"),
+                              ""),
         )
+
         add_vertical_space(1)
         speech=BytesIO()
                 
