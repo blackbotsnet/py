@@ -6,7 +6,7 @@ __copyright__ = "Copyright 2023, Cloud Bots™ BlackBots"
 __credits__ = ["Supreme Ciento"]
 __license__ = "GPL"
 __maintainer__ = "Cloud Bots™"
-__email__ = "cloudbotsbiz@gmail.com"
+__email__ = "admin@BlackBots.net"
 __status__ = "Production"
 
 __version__ = "12.21.21"
@@ -34,7 +34,8 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 st.header("BlackDao")
 res_box=st.empty()
-URL = st.text_input(':orange[Enter DaoTranslate.com URL]',key='input',help='Enter your DAOTranslate URL into the input field.')
+placeholder = st.empty() 
+URL = placeholder.text_input(':orange[Enter DaoTranslate.com URL]',key='input',help='Enter your DAOTranslate URL into the input field.')
 
 ok=st.button('📩',help='📖Read',key='1237')
 def autoplay_audio(file_path: str):
@@ -82,13 +83,15 @@ def ReadIt():
         raise SystemExit
 
     def Next():
+        
         oldurl = url
         chap = ''.join([n for n in oldurl if n.isdigit()])
         nxtchap = str(int(chap) + int(+1))
         nxtUrl = str(oldurl.replace(chap, nxtchap))
         URL = nxtUrl
-        st.write("\n\nChapter Complete: " + prvchap + "\n\nNEXT CHAPTER\nChapter: " + nxtchap)
-    
+        input = placeholder.text_input(URL, value='', key=1)
+
+    st.write("\n\nChapter Complete: " + prvchap + "\n\nNEXT CHAPTER\nChapter: " + nxtchap)
     nxt=st.button('📖Next Ch.',help='📖Next Chapter',key='13337')
             
     if nxt:
