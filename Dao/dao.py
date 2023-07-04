@@ -89,7 +89,7 @@ def ReadIt():
         nxtchap = str(int(chap) + int(+1))
         prvchap = str(int(chap))
 
-        st.write("\n\nChapter Complete: " + prvchap + "\n\nNEXT CHAPTER\nChapter: " + nxtchap)
+        st.write(f"\n\nChapter Complete: :red[*{prvchap}*] Next Chapter: :green[*{nxtchap}*]")
 
     else:
         res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
