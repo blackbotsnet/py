@@ -74,9 +74,12 @@ def ReadIt():
         soup=BeautifulSoup(resp.text,'html.parser')    
                 
         d=soup.find("div",{"class":"epcontent entry-content"})
+        text = annotated_text("",
+                              (d.text, "", "#fea"),
+                             "")
         stoggle(
                 "Click to view text",
-                (annotated_text(d.text, "", "#fea")),
+                text,
         )
         add_vertical_space(1)
         speech=BytesIO()
