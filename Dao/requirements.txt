@@ -1,7 +1,7 @@
 streamlit
 streamlit-analytics
 streamlit-pydantic
-stramlit-extras
+streamlit-extras
 streamlit_player
 beautifulsoup4 
 matplotlib
