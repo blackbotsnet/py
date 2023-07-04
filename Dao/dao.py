@@ -83,6 +83,13 @@ def ReadIt():
         speech_.save("dao.mp3")
         
         autoplay_audio("dao.mp3")
+                
+        oldurl = url
+        chap = ''.join([n for n in oldurl if n.isdigit()])
+        nxtchap = str(int(chap) + int(+1))
+        prvchap = str(int(chap))
+
+        st.write("\n\nChapter Complete: " + prvchap + "\n\nNEXT CHAPTER\nChapter: " + nxtchap)
 
     else:
         res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
@@ -97,7 +104,6 @@ def ReadIt():
         URL = nxtUrl
         input = placeholder.text_input(URL, value='', key=1)
 
-    st.write("\n\nChapter Complete: " + prvchap + "\n\nNEXT CHAPTER\nChapter: " + nxtchap)
     nxt=st.button('📖Next Ch.',help='📖Next Chapter',key='13337')
             
     if nxt:
