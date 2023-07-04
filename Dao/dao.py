@@ -73,7 +73,7 @@ def ReadIt():
         soup=BeautifulSoup(resp.text,'html.parser')    
         st.markdown("""<style>
               .stMarkdown{color: black;}
-              .streamlit-expanderHeader{color:orange;}
+              .css-q8sbsg eqr7zpz4{color:orange;}
               </style>""",
               unsafe_allow_html=True
         )
