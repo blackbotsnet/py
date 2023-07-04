@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 #import os
-#import sys
+import sys
 #owd=sys.path.append(os.path.join(os.path.dirname(__file__), os.path.pardir))
 
 import streamlit as st
@@ -19,14 +19,12 @@ __version__ = "12.21.21"
 
 
 import requests
+import threading
 from threading import Thread, current_thread
 import textwrap
-from io import StringIO
+from io import StringIO,BytesIO
 from gtts import gTTS
 from PIL import Image
-from io import BytesIO
-import threading
-import sys
 import time
 from bs4 import BeautifulSoup
 
