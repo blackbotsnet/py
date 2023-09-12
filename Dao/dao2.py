@@ -22,7 +22,7 @@ from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras.customize_running import center_running
 from streamlit_extras.add_vertical_space import add_vertical_space
 from annotated_text import annotated_text
-import pyttsx3 as pyttsx
+from tts import TextToSpeech
 
 hide_streamlit_style = """
             <style>
@@ -66,7 +66,10 @@ if ok:
 
         add_vertical_space(1)
 
-    engine = pyttsx.init()
-    engine.setProperty('voice', 'english-us')
-    engine.say(d.text)
-    engine.stop()
+        txt2speech = TextToSpeech()
+        conversion_text = d.text
+        if st.button('Convert'):
+            txt2speech.convert(text=conversion_text)
+            with open('hello.mp3', 'rb') as audio_file:
+                audio_bytes = audio_file.read()
+            st.audio(audio_bytes, format='audio/mp3')
