@@ -98,8 +98,7 @@ def ReadIt():
         st.write(f"\n\n:orange[Chapter Complete: :red[*{prvchap}*] Next Chapter: :green[*{nxtchap}*]]")
 
         nxtUrl = str(oldurl.replace(chap, nxtchap))
-
-
+        st.write(f"URL: {nxtUrl}")
     def NEXT():
                 url = nxtUrl
                 try:
@@ -137,7 +136,9 @@ def ReadIt():
                 chap = ''.join([n for n in oldurl if n.isdigit()])
                 nxtchap = str(int(chap) + int(+1))
                 prvchap = str(int(chap))
+                nxtUrl = str(oldurl.replace(chap, nxtchap))
                 st.write(f"\n\n:orange[Chapter Complete: :red[*{prvchap}*] Next Chapter: :green[*{nxtchap}*]]")
+                st.write(f"URL: {nxtUrl}")
     NEXT()
     NEXT()
     NEXT()
