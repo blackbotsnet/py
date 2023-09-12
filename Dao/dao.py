@@ -100,6 +100,11 @@ def ReadIt():
         nxtUrl = str(oldurl.replace(chap, nxtchap))
         st.write(f"URL: {nxtUrl}")
     def NEXT():
+                oldurl = url
+                chap = ''.join([n for n in oldurl if n.isdigit()])
+                nxtchap = str(int(chap) + int(+1))
+                prvchap = str(int(chap))
+                nxtUrl = str(oldurl.replace(chap, nxtchap))                
                 url = nxtUrl
                 try:
                     resp=requests.get(url)
@@ -132,11 +137,7 @@ def ReadIt():
                 else:
                     res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
                     raise SystemExit
-                oldurl = url
-                chap = ''.join([n for n in oldurl if n.isdigit()])
-                nxtchap = str(int(chap) + int(+1))
-                prvchap = str(int(chap))
-                nxtUrl = str(oldurl.replace(chap, nxtchap))
+
                 st.write(f"\n\n:orange[Chapter Complete: :red[*{prvchap}*] Next Chapter: :green[*{nxtchap}*]]")
                 st.write(f"URL: {nxtUrl}")
     NEXT()
