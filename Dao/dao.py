@@ -128,11 +128,15 @@ def ReadIt():
                     speech=BytesIO()
                     speech_=gTTS(text=d.text,lang='en',slow=False)
                     speech_.save("dao.mp3")
-                    autoplay_audio("dao.mp3")
+                    #autoplay_audio("dao.mp3")
+                    st.audio("dao.mp3")
                 else:
                     res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
                     raise SystemExit
-                
+                oldurl = url
+                chap = ''.join([n for n in oldurl if n.isdigit()])
+                nxtchap = str(int(chap) + int(+1))
+                prvchap = str(int(chap))
                 st.write(f"\n\n:orange[Chapter Complete: :red[*{prvchap}*] Next Chapter: :green[*{nxtchap}*]]")
     NEXT()
     NEXT()
