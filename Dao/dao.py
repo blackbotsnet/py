@@ -99,21 +99,16 @@ def ReadIt():
 
         nxtUrl = str(oldurl.replace(chap, nxtchap))
         st.write(f"URL: {nxtUrl}")
-    def NEXT():
-                oldurl = url
-                chap = ''.join([n for n in oldurl if n.isdigit()])
-                nxtchap = str(int(chap) + int(+1))
-                prvchap = str(int(chap))
-                nxtUrl = str(oldurl.replace(chap, nxtchap))                
-                url = nxtUrl
-                try:
-                    resp=requests.get(url)
-                except:
-                    res_box.markdown(f":blue[Book:  ]Enter a valid url before running.")
-                    raise SystemExit
+               
+        url = nxtUrl
+        try:
+                resp=requests.get(url)
+        except:
+                res_box.markdown(f":blue[Book:  ]Invalid url, End of read?")
+                raise SystemExit
+    
+        if resp.status_code==200:
                 
-                if resp.status_code==200:
-                            
                     soup=BeautifulSoup(resp.text,'html.parser')    
                     st.markdown("""<style>
                           .stMarkdown{color: black;}
@@ -134,15 +129,13 @@ def ReadIt():
                     speech_.save("dao.mp3")
                     #autoplay_audio("dao.mp3")
                     st.audio("dao.mp3")
-                else:
+        else:
                     res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
                     raise SystemExit
 
-                st.write(f"\n\n:orange[Chapter Complete: :red[*{prvchap}*] Next Chapter: :green[*{nxtchap}*]]")
-                st.write(f"URL: {nxtUrl}")
-    NEXT()
-    NEXT()
-    NEXT()
+        st.write(f"\n\n:orange[Chapter Complete: :red[*{prvchap}*] Next Chapter: :green[*{nxtchap}*]]")
+        st.write(f"URL: {nxtUrl}")
+
 if ok:
     ReadIt()
     
