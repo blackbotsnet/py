@@ -86,11 +86,8 @@ def ReadIt():
 
         add_vertical_space(1)
         speech=BytesIO()
-                
         speech_=gTTS(text=d.text,lang='en',slow=False)
-                
         speech_.save("dao.mp3")
-        
         autoplay_audio("dao.mp3")
                 
         oldurl = url
@@ -99,54 +96,47 @@ def ReadIt():
         prvchap = str(int(chap))
 
         st.write(f"\n\n:orange[Chapter Complete: :red[*{prvchap}*] Next Chapter: :green[*{nxtchap}*]]")
-        
-        #def Next():
-        oldurl = url
-        chap = ''.join([n for n in oldurl if n.isdigit()])
-        nxtchap = str(int(chap) + int(+1))
+
         nxtUrl = str(oldurl.replace(chap, nxtchap))
-        #URL = nxtUrl
-        #input = placeholder.text_input(URL, value='', key=1)
- 
-        #nxt=st.button('📖Next Ch.',help='📖Next Chapter',key='13337')
-        #if nxt:
-            #Next()
 
-    url = nxtUrl
-    try:
-        resp=requests.get(url)
-    except:
-        res_box.markdown(f":blue[Book:  ]Enter a valid url before running.")
-        raise SystemExit
-    
-    if resp.status_code==200:
-                
-        soup=BeautifulSoup(resp.text,'html.parser')    
-        st.markdown("""<style>
-              .stMarkdown{color: black;}
-              .st-c8:hover{color:orange;}
-              .streamlit-expander.st-bc.st-as.st-ar.st-bd.st-be.st-b8.st-bf.st-bg.st-bh.st-bi{display:none;}
-              </style>""",
-              unsafe_allow_html=True
-        )
-        d=soup.find("div",{"class":"epcontent entry-content"})
-        with st.expander("Click to view text"):
-                    annotated_text("",
-                                          (d.text, "", "#fea"),
-                                  "")
 
-        add_vertical_space(1)
-        speech=BytesIO()
+    def NEXT():
+                url = nxtUrl
+                try:
+                    resp=requests.get(url)
+                except:
+                    res_box.markdown(f":blue[Book:  ]Enter a valid url before running.")
+                    raise SystemExit
                 
-        speech_=gTTS(text=d.text,lang='en',slow=False)
+                if resp.status_code==200:
+                            
+                    soup=BeautifulSoup(resp.text,'html.parser')    
+                    st.markdown("""<style>
+                          .stMarkdown{color: black;}
+                          .st-c8:hover{color:orange;}
+                          .streamlit-expander.st-bc.st-as.st-ar.st-bd.st-be.st-b8.st-bf.st-bg.st-bh.st-bi{display:none;}
+                          </style>""",
+                          unsafe_allow_html=True
+                    )
+                    d=soup.find("div",{"class":"epcontent entry-content"})
+                    with st.expander("Click to view text"):
+                                annotated_text("",
+                                                      (d.text, "", "#fea"),
+                                              "")
+            
+                    add_vertical_space(1)
+                    speech=BytesIO()
+                    speech_=gTTS(text=d.text,lang='en',slow=False)
+                    speech_.save("dao.mp3")
+                    autoplay_audio("dao.mp3")
+                else:
+                    res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
+                    raise SystemExit
                 
-        speech_.save("dao.mp3")
-        
-        autoplay_audio("dao.mp3")
-    else:
-        res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
-        raise SystemExit
-
+                st.write(f"\n\n:orange[Chapter Complete: :red[*{prvchap}*] Next Chapter: :green[*{nxtchap}*]]")
+    NEXT()
+    NEXT()
+    NEXT()
 if ok:
     ReadIt()
     
