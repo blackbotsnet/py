@@ -3,7 +3,8 @@ streamlit-analytics
 streamlit-pydantic
 streamlit-extras
 streamlit_player
-beautifulsoup4 
+beautifulsoup4
+pyttsx
 matplotlib
 speechrecognition
 requests
