@@ -105,14 +105,14 @@ def ReadIt():
         chap = ''.join([n for n in oldurl if n.isdigit()])
         nxtchap = str(int(chap) + int(+1))
         nxtUrl = str(oldurl.replace(chap, nxtchap))
-        URL = nxtUrl
+        #URL = nxtUrl
         #input = placeholder.text_input(URL, value='', key=1)
  
         #nxt=st.button('📖Next Ch.',help='📖Next Chapter',key='13337')
-            
         #if nxt:
             #Next()
-    url = URL
+
+    url = nxtUrl
     try:
         resp=requests.get(url)
     except:
@@ -146,7 +146,6 @@ def ReadIt():
     else:
         res_box.markdown(f":blue[Book: ]There appears to be something wrong with the website.")
         raise SystemExit
-
 
 if ok:
     ReadIt()
