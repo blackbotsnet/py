@@ -22,7 +22,7 @@ from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras.customize_running import center_running
 from streamlit_extras.add_vertical_space import add_vertical_space
 from annotated_text import annotated_text
-import pyttsx
+import pyttsx3 as pyttsx
 
 hide_streamlit_style = """
             <style>
