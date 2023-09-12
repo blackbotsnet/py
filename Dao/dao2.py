@@ -68,8 +68,7 @@ if ok:
 
         txt2speech = TextToSpeech()
         conversion_text = d.text
-        if st.button('Convert'):
-            txt2speech.convert(text=conversion_text)
-            with open('hello.mp3', 'rb') as audio_file:
-                audio_bytes = audio_file.read()
-            st.audio(audio_bytes, format='audio/mp3')
+        txt2speech.convert(text=conversion_text)
+        with open('hello.mp3', 'rb') as audio_file:
+            audio_bytes = audio_file.read()
+        st.audio(audio_bytes, format='audio/mp3')
