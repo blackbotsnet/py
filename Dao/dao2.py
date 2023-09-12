@@ -31,7 +31,7 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-st.header("BlackDao")
+st.header("BlackDao2")
 res_box=st.empty()
 placeholder = st.empty()
 
