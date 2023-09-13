@@ -33,7 +33,7 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-image = Image.open('blackdao.png')
+image = Image.open('etc\blackdao.png')
 st.image(image,use_column_width="auto")
 
 st.header("BlackDao")
