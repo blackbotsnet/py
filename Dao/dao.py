@@ -40,7 +40,6 @@ image = path+'/blackdao.png'
 #image = Image.open('etc/blackdao.png')
 st.image(image,use_column_width="auto")
 
-st.header("BlackDao")
 res_box=st.empty()
 placeholder = st.empty()
 
