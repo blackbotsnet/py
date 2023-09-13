@@ -26,8 +26,6 @@ from annotated_text import annotated_text
 from PIL import Image
 
 
-_image ='blackdao.png'
-
 hide_streamlit_style = """
             <style>
             footer {visibility: hidden;}
@@ -35,7 +33,7 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-st.image(_image,use_column_width="auto")
+st.image('blackdao.png',use_column_width="auto")
 
 st.header("BlackDao")
 res_box=st.empty()
