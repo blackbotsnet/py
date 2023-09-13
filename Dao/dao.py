@@ -12,6 +12,7 @@ __status__ = "Production"
 __version__ = "12.21.21"
 
 
+import os
 import sys
 import streamlit as st
 import base64
@@ -33,7 +34,10 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-image = Image.open('etc/blackdao.png')
+path = os.path.dirname(__file__)
+image = path+'/blackdao.png'
+
+#image = Image.open('etc/blackdao.png')
 st.image(image,use_column_width="auto")
 
 st.header("BlackDao")
