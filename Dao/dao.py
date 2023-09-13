@@ -19,7 +19,7 @@ import base64
 from bs4 import BeautifulSoup
 import textwrap
 from io import StringIO,BytesIO
-#from gtts import gTTS
+from gtts import gTTS
 import requests
 from streamlit_extras.customize_running import center_running
 from streamlit_extras.add_vertical_space import add_vertical_space
