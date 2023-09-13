@@ -26,7 +26,7 @@ from annotated_text import annotated_text
 from PIL import Image
 
 
-_image = Image.open('blackdao.png')
+_image ='blackdao.png'
 
 hide_streamlit_style = """
             <style>
