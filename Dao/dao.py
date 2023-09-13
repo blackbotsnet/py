@@ -48,10 +48,10 @@ URL = placeholder.text_input(':orange[Enter DaoTranslate.com URL]',key='input',h
 ok=st.button('📩',help='📖Read',key='1237')
 with st.sidebar:
             with st.expander("See Instructions"):
-                st.write("*1:* Visit [DaoTranslate.com](https://daotranslate.com/az-list/)")
-                st.write("*2:* Get link such as: *https://daotranslate.com/blackbook-chapter-2-english/*")
-                st.write("*3:* Paste link into field below")
-                st.write("*4:* Press Button to Start")
+                st.write("*1:* Visit :green[[DaoTranslate.com](https://daotranslate.com/az-list/)]")
+                st.write("*2:* Get link such as: :green[*https://daotranslate.com/blackbook-chapter-2-english/*]")
+                st.write("*3:* Paste link into input-field")
+                st.write("*4:* Press 📩Button to Start")
 def autoplay_audio(file_path: str):
     with open(file_path, "rb") as f:
         data = f.read()
