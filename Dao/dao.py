@@ -100,8 +100,8 @@ def autoplay_audio(file_path: str):
             unsafe_allow_html=True,
         )
 
-main_image = Image.open('../static/dojutsu.png')
-side_image = Image.open('../static/1.png')
+main_image = Image.open(path+'/static/dojutsu.png')
+side_image = Image.open(path+'/static/1.png')
 st.image(main_image)
 res_box = st.empty()
 
