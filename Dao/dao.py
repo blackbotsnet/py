@@ -26,7 +26,7 @@ from bs4 import BeautifulSoup
 
 history = []
 
-icob = Image.open('static/-.ico')
+icob = Image.open('https://raw.githubusercontent.com/black-bots/BBWlit/main/static/-.ico')
 
 st.set_page_config(
     page_title="BlackButler WEB",
