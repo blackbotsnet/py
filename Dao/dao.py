@@ -66,26 +66,24 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+def get_driver(chrome_driver_path):
+    options = Options()
+    options.add_argument("--disable-gpu")
+    options.add_argument("--headless")
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_experimental_option("useAutomationExtension", False)
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36")
+    options.add_argument('--dns-prefetch-disable')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--lang=en-US')
+    options.add_argument('--disable-setuid-sandbox')
+    options.add_argument("--ignore-certificate-errors")
 
-options = Options()
-options.add_argument("--disable-gpu")
-options.add_argument("--headless")
-options.add_argument("--disable-blink-features=AutomationControlled")
-options.add_experimental_option("useAutomationExtension", False)
-options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36")
-options.add_argument('--dns-prefetch-disable')
-options.add_argument('--no-sandbox')
-options.add_argument('--lang=en-US')
-options.add_argument('--disable-setuid-sandbox')
-options.add_argument("--ignore-certificate-errors")
-
-def get_driver():
     return webdriver.Chrome(
-        service=Service(
-            ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-        ),
+        service=Service(chrome_driver_path),
         options=options,
     )
+
 def autoplay_audio(file_path: str):
     with open(file_path, "rb") as f:
         data = f.read()
@@ -121,7 +119,7 @@ with tab1:
     res_box.markdown(f':blue[Dao:]')
     if tab1:
         if ok:
-            driver = get_driver()
+            driver = get_driver(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
             try:
                 driver.get(url)
             except:
