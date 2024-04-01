@@ -24,4 +24,4 @@ fake_useragent
 wit
 pydantic
 emoji
-tls_client 
+tls_client
