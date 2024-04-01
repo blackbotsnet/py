@@ -12,7 +12,7 @@ opencv-python-headless
 easyocr
 instagrapi
 g4f
-webdriver-manager
+webdriver_manager
 seleniumbase
 pymongo==4.1.1
 dnspython==2.2.1
