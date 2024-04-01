@@ -26,7 +26,7 @@ from bs4 import BeautifulSoup
 
 history = []
 
-icob = Image.open('https://raw.githubusercontent.com/black-bots/BBWlit/main/static/-.ico')
+icob = Image.open('../static/-.ico')
 
 st.set_page_config(
     page_title="BlackButler WEB",
@@ -98,8 +98,8 @@ def autoplay_audio(file_path: str):
             unsafe_allow_html=True,
         )
 
-main_image = Image.open('static/dojutsu.png')
-side_image = Image.open('static/1.png')
+main_image = Image.open('../static/dojutsu.png')
+side_image = Image.open('../static/1.png')
 st.image(main_image)
 res_box = st.empty()
 
