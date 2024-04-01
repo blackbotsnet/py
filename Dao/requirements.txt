@@ -6,6 +6,9 @@ streamlit_player
 beautifulsoup4
 pyttsx3
 matplotlib
+easyocr
+seleniumbase
+opencv-python
 speechrecognition
 requests
 pymongo==4.1.1
