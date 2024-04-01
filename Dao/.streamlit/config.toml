@@ -7,7 +7,7 @@ textColor="#FAFAFA"
 font="sans serif"
 
 [server]
-enableStaticServing = false
+enableStaticServing = true
 runOnSave = true
 maxUploadSize = 400
 maxMessageSize = 400
