@@ -23,16 +23,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
 
 from bs4 import BeautifulSoup
-def file_selector(folder_path='.'):
-    filenames = os.listdir(folder_path)
-    selected_filename = st.selectbox('Select a file', filenames)
-    return os.path.join(folder_path, selected_filename)
 
-filename = file_selector()
-st.write('You selected `%s`' % filename)
+
 history = []
 
-icob = Image.open('../static/-.ico')
+path = os.path.dirname(__file__)
+icob = Image.open(path+'/static/-.ico')
 
 st.set_page_config(
     page_title="BlackButler WEB",
