@@ -6,6 +6,8 @@ from io import BytesIO
 
 import re
 import requests
+from pydub import AudioSegment
+from pydub.effects import speedup
 from gtts import gTTS
 from PIL import Image
 
@@ -24,14 +26,12 @@ from webdriver_manager.core.os_manager import ChromeType
 
 from bs4 import BeautifulSoup
 
-
 history = []
 
-path = os.path.dirname(__file__)
-icob = Image.open(path+'/static/-.ico')
+icob = Image.open('static/-.ico')
 
 st.set_page_config(
-    page_title="BlackButler WEB",
+    page_title="Manga Dōjutsu",
     page_icon=icob,
     layout="centered",
     initial_sidebar_state="expanded"
@@ -66,24 +66,26 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-def get_driver(chrome_driver_path):
-    options = Options()
-    options.add_argument("--disable-gpu")
-    options.add_argument("--headless")
-    options.add_argument("--disable-blink-features=AutomationControlled")
-    options.add_experimental_option("useAutomationExtension", False)
-    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36")
-    options.add_argument('--dns-prefetch-disable')
-    options.add_argument('--no-sandbox')
-    options.add_argument('--lang=en-US')
-    options.add_argument('--disable-setuid-sandbox')
-    options.add_argument("--ignore-certificate-errors")
 
+options = Options()
+options.add_argument("--disable-gpu")
+options.add_argument("--headless")
+options.add_argument("--disable-blink-features=AutomationControlled")
+options.add_experimental_option("useAutomationExtension", False)
+options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36")
+options.add_argument('--dns-prefetch-disable')
+options.add_argument('--no-sandbox')
+options.add_argument('--lang=en-US')
+options.add_argument('--disable-setuid-sandbox')
+options.add_argument("--ignore-certificate-errors")
+
+def get_driver():
     return webdriver.Chrome(
-        service=Service(chrome_driver_path),
+        service=Service(
+            ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
+        ),
         options=options,
     )
-
 def autoplay_audio(file_path: str):
     with open(file_path, "rb") as f:
         data = f.read()
@@ -98,17 +100,23 @@ def autoplay_audio(file_path: str):
             unsafe_allow_html=True,
         )
 
-main_image = Image.open(path+'/static/dojutsu.png')
-side_image = Image.open(path+'/static/1.png')
+main_image = Image.open('static/dojutsu.png')
+side_image = Image.open('static/1.png')
 st.image(main_image)
 res_box = st.empty()
 
 with st.sidebar:
     st.image(side_image)
     on = st.checkbox('Stream Story', value=True)
-    with st.expander("Need a link?"):
-        st.caption("Test Based: https://daotranslate.us/solo-leveling-ragnarok-chapter-1/")
-        st.caption("Image Based: https://manhuaaz.com/manga/monster-pet-evolution/chapter-1/")
+    
+    col1, col2 = st.columns(2)
+
+    with col1:
+        with st.expander("Text Based"):
+            st.caption("Example: https://daotranslate.us/solo-leveling-ragnarok-chapter-1/")
+    with col2:
+        with st.expander("Image Based"):
+            st.caption("Example: https://manhuaaz.com/manga/monster-pet-evolution/chapter-1/")
     url = st.text_input(":orange[CH. Url:]", placeholder="https://daotranslate.us/solo-leveling-ragnarok-chapter-1/", key='input', help="Enter manga chapter here")
     ok = st.button("📚Read", help="Read", key='123', use_container_width=False)
     st.header("Official Version")
@@ -119,7 +127,7 @@ with tab1:
     res_box.markdown(f':blue[Dao:]')
     if tab1:
         if ok:
-            driver = get_driver(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
+            driver = get_driver()
             try:
                 driver.get(url)
             except:
@@ -136,34 +144,46 @@ with tab1:
                             all_text = ""
                             num_paragraphs = len(d.findAll("p"))
                             paragraphs = d.findAll("p")
-                            num_groups = 100
-                            group_size = len(paragraphs) // num_groups
-                            groups = [paragraphs[i:i + group_size] for i in range(0, len(paragraphs), group_size)]
+                            desired_group_size = 1  # Set your desired group size here
+                            num_groups = num_paragraphs // desired_group_size  # Calculate the number of groups based on desired group size
+                            groups = [paragraphs[i:i + desired_group_size] for i in range(0, len(paragraphs), desired_group_size)]
         
                             story = ""
                             for paragraph in paragraphs:
-                                story += paragraph.text + "\n\n"
+                                story += paragraph.text + "\n"
                             story = story.replace('<p>', '')
                             story = story.replace('"', '')
+
+                            st.markdown("""<style>
+                                  .stMarkdown{color: black;}
+                                  .st-c8:hover{color:orange;}
+                                  .streamlit-expander.st-bc.st-as.st-ar.st-bd.st-be.st-b8.st-bf.st-bg.st-bh.st-bi{display:none;}
+                                  </style>""",
+                                  unsafe_allow_html=True
+                            )
+                            with st.expander("Read"):
+                                from annotated_text import annotated_text
+                                paragraphs = story.split("\n") 
+                                formatted_paragraphs = [(paragraph, "", "#fea") for paragraph in paragraphs]
+                                annotated_text(*formatted_paragraphs)
+                                #st.write(f':green[*{story}*]')
                             
-                            # Convert text to speech and save it as a temporary mp3 file
                             with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False) as tmp_file:
                                 tts = gTTS(text=story, lang='en', slow=False)
                                 tts.save(tmp_file.name)                            
-    
-                                autoplay_audio(tmp_file.name)
-                                
-                            with st.expander("Read"):
-                                st.write(f':green[*{story}*]')
-    
-                            if on:
-                                for group in groups:
-                                    group_text = ""
-                                    for d_paragraph in group:
-                                        group_text += d_paragraph.text + "\n"
-                                    #res_box.markdown(f':blue[Dao: ]:green[*{group_text}*]')
+                                audio = AudioSegment.from_mp3(tmp_file.name)
+                                new_file = speedup(audio,1.2,150)
+                                new_file.export("file.mp3", format="mp3")
+                                autoplay_audio("file.mp3")
+
+                            for group in groups:
+                                group_text = ""
+                                for d_paragraph in group:
+                                    group_text += d_paragraph.text + "\n"
+                                if on:
                                     res_box.markdown(f':blue[Dao: ]:green[*{d_paragraph.text}*]')
-                                    time.sleep(5)
+                                    time.sleep(5) 
+
                             next_ch = st.button("Next CH.", key='next_button', help="Next Chapter", use_container_width=False)
                             if next_ch:
                                 oldurl = url
@@ -184,7 +204,7 @@ def get_image_links(url):
         driver.get(url)
     except WebDriverException as ex:
         if driver.current_url == url:
-            st.write('Cannot load the URL..')
+            pass
             return []
         else:
             st.write(f'Error loading URL: {ex}')
@@ -221,6 +241,7 @@ def transcribe_to_audio(image_links):
                 for text in result:
                     result_text.append(text[1].strip())
                     st.write(result_text)
+                    st.write(type(result_text))
 
             text = filter_english_words(result_text)
 
