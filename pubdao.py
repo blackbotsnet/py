@@ -63,7 +63,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
 from bs4 import BeautifulSoup
 
-
+#https://black-dao.streamlit.app/
 _T='next_button'
 _S='file.mp3'
 _R='https://manhuaaz.com/manga/'
