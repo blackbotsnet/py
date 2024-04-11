@@ -8,7 +8,7 @@ instaloader
 ffmpeg-python
 pandas
 curl_cffi
-torch==1.13.1
+torch
 torchvision
 opencv-python
 easyocr
