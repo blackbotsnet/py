@@ -238,8 +238,10 @@ with st.sidebar:
                         title_url = tab_thumb.find("a")['href']
                         ch = f"{title_url}chapter-1/"
                         st.write(f"Title: :green[{title_name}]  \n{ch}\n")
-    url = st.text_input(":orange[CH. Url:]", value=ih, placeholder="https://daotranslate.us/solo-leveling-ragnarok-chapter-1/", key='input', help="Enter manga chapter URL here")
+    url = st.text_input(":orange[Enter URL:]", value=ih, placeholder="https://daotranslate.us/solo-leveling-ragnarok-chapter-1/", key='input', help="Enter manga chapter URL here")
     ok = st.button("📚Read", help="Read", key='123', use_container_width=False)
+    st.header("Google Play Store")
+    st.caption("Download from: https://play.google.com/store/apps/details?id=com.blackbots.blackdao")
     st.header("Official PC Version")
     st.caption("Download from: https://blackbots.gumroad.com/l/manga")
 
