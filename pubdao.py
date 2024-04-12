@@ -73,7 +73,17 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
 
 from bs4 import BeautifulSoup
+url = "https://daotranslate.us/series/?status=&type=&order=update"
 
+response = requests.get(url)
+html_content = response.content
+
+soup = BeautifulSoup(html_content, 'html.parser')
+
+image_elements = soup.find_all('img', class_='ts-post-image')
+
+for img in image_elements:
+    print(img['src'])
 history = []
 
 icob = Image.open('static/-.ico')
