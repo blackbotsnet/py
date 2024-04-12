@@ -146,14 +146,6 @@ def autoplay_audio(file_path: str):
             md,
             unsafe_allow_html=True,
         )
-def extract_image_urls(html_content):
-    soup = BeautifulSoup(html_content, 'html.parser')
-    images = []
-    for div in soup.find_all("div", {"class": "mdthumb"}):
-        img = div.find("img")
-        if img and "src" in img.attrs:
-            images.append(img["src"])
-    return images
 
 main_image = Image.open('static/dojutsu.png')
 side_image = Image.open('static/1.png')
@@ -178,15 +170,15 @@ with st.sidebar:
                     if manga_list_div:
                         titles = manga_list_div.find_all("div", {"class": "mdthumb"})
                         for title in titles:
-                            image_urls = extract_image_urls(resp.text)
-                            for img_url in image_urls:
-                                title_url = title.a["href"]
-                                title_name = title_url.split("series/")[1]
-                                title_name = title_name.replace('/', '')
-                                title_name = title_name.title()                            
-                                st.image(img_url, caption=title_name)
-                                ch = f"https://daotranslate.us/{title_name}-chapter-1/"
-                                st.write(f"{ch}")
+                            title_url = title.a["href"]
+                            title_name = title_url.split("series/")[1]
+                            title_name = title_name.replace('/', '')
+                            title_name = title_name.title()
+                            img_url = title.img["src"]
+                            st.write(f"Image URL: {img_url}")
+                            st.image(img_url, caption=title_name)
+                            ch = f"https://daotranslate.us/{title_name}-chapter-1/"
+                            st.write(f"{ch}")
             with st.expander("Search.."):
                 search_variable = st.text_input(":orange[Title:]", placeholder="Martial Peak", key='search', help="Enter a title here to search for")
                 search_url = f"https://daotranslate.us/?s={search_variable}"
