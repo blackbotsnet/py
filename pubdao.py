@@ -118,6 +118,8 @@ st.markdown("""
         .css-m70y {display:none}
         .st-emotion-cache-zq5wmm.ezrtsby0{visibility: hidden;}
         .st-emotion-cache-zq5wmm.ezrtsby0{display:none}
+        .styles_terminalButton__JBj5T{visibility: hidden;}
+        .styles_terminalButton__JBj5T{display:none}
     </style>
 """, unsafe_allow_html=True)
 
