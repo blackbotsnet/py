@@ -129,7 +129,7 @@ for img in image_elements:
     
     with open(f"image_{image_elements.index(img)}.png", "wb") as file:
         file.write(image_data)
-html_string = f"<img src='{image_data}' width=100 height=100 ></td>"
+html_string = f'<img src="{image_data}" width=100 height=100 />'
 
 st.markdown(html_string, unsafe_allow_html=True)
 
