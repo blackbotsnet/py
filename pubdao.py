@@ -48,6 +48,7 @@ import os
 import base64
 import time
 import tempfile
+import io
 from io import BytesIO
 
 import re
