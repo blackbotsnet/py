@@ -1,4 +1,5 @@
 [server]
+baseUrlPath = "google.com"
 enableStaticServing = true
 [theme]
 base = 'dark'
