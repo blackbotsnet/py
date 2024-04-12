@@ -184,7 +184,8 @@ with st.sidebar:
                                 title_name = title_name.replace('/', '')
                                 title_name = title_name.title()                            
                                 st.image(img_url, caption=title_name)
-                                st.write(f"{title_url}\n")
+                                ch = f"https://daotranslate.us/{title_name}-chapter-1/"
+                                st.write(f"{ch}")
             with st.expander("Search.."):
                 search_variable = st.text_input(":orange[Title:]", placeholder="Martial Peak", key='search', help="Enter a title here to search for")
                 search_url = f"https://daotranslate.us/?s={search_variable}"
