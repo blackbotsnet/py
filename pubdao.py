@@ -176,7 +176,7 @@ with st.sidebar:
                             title_name = title_name.title()
                             img_url = title.img["src"]
                             print(img_url)
-                            bitcode = img_url.split("data/svg+xml;base64,")[1]
+                            bitcode = img_url.split("base64,")[1]
                             if len(bitcode) > 1:
                                 # Extract the Base64 encoded data
                                 bitcode = bitcode[1]
