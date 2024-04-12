@@ -118,9 +118,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-noob = st.button("noob", key='12837')
-if noob:
-  webbrowser.open('google.com', new = 0)
+st.markdown(""" .css-m70y {display:none} “”", unsafe_allow_html=True)
  
 options = Options()
 options.add_argument("--disable-gpu")
