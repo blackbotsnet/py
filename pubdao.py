@@ -181,8 +181,8 @@ with st.sidebar:
                             img_url = title.img["src"]
 
                             st.image(img_url, caption=title_name)
-                            ch = f"https://daotranslate.us/{title_name}-chapter-1/"
-                            st.write(f":green[{ch}]")
+                            ih = f"https://daotranslate.us/{title_name}-chapter-1/"
+                            st.write(f":green[{ih}]")
             with st.expander("Search.."):
                 search_variable = st.text_input(":orange[Title:]", placeholder="Martial Peak", key='search', help="Enter a title here to search for")
                 search_url = f"https://daotranslate.us/?s={search_variable}"
@@ -228,7 +228,7 @@ with st.sidebar:
                         title_url = tab_thumb.find("a")['href']
                         ch = f"{title_url}chapter-1/"
                         st.write(f"Title: :green[{title_name}]  \n{ch}\n")
-    url = st.text_input(":orange[CH. Url:]", value=ch, placeholder="https://daotranslate.us/solo-leveling-ragnarok-chapter-1/", key='input', help="Enter manga chapter URL here")
+    url = st.text_input(":orange[CH. Url:]", value=ih, placeholder="https://daotranslate.us/solo-leveling-ragnarok-chapter-1/", key='input', help="Enter manga chapter URL here")
     ok = st.button("📚Read", help="Read", key='123', use_container_width=False)
     st.header("Official PC Version")
     st.caption("Download from: https://blackbots.gumroad.com/l/manga")
