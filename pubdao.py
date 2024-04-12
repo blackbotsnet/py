@@ -180,7 +180,7 @@ with st.sidebar:
                             title_name = title_name.title()
                             img_url = title.img["src"]
 
-                            st.image(img_url, caption=title_name")
+                            st.image(img_url, caption=title_name)
                             ch = f"https://daotranslate.us/{title_name}-chapter-1/"
                             st.write(f":green[{ch}]")
             with st.expander("Search.."):
