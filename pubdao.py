@@ -177,16 +177,17 @@ with st.sidebar:
                     if manga_list_div:
                         titles = manga_list_div.find_all("div", {"class": "mdthumb"})
                         for title in titles:
-                            title_url = title.a["href"]
-                            title_name = title_url.split("series/")[1]
-                            title_name = title_name.replace('/', '')
-                            title_name = title_name.title()
                             image_urls = extract_image_urls(resp.text)
                             for img_url in image_urls:
+                                title_url = title.a["href"]
+                                title_name = title_url.split("series/")[1]
+                                title_name = title_name.replace('/', '')
+                                title_name = title_name.title()
+                                
                                 st.image(img_url, caption="Image")
-                            pic_url = title.img["src"]
-                            st.image(pic_url)
-                            st.write(f"Title: :green[{title_name}]  \nURL: {title_url}\n")
+                                pic_url = title.img["src"]
+                                st.image(pic_url)
+                                st.write(f"Title: :green[{title_name}]  \nURL: {title_url}\n")
             with st.expander("Search.."):
                 search_variable = st.text_input(":orange[Title:]", placeholder="Martial Peak", key='search', help="Enter a title here to search for")
                 search_url = f"https://daotranslate.us/?s={search_variable}"
