@@ -198,9 +198,9 @@ with st.sidebar:
                             title_name = title_url.split("series/")[1]
                             title_name = title_name.replace('/', '')
                             title_name = title_name.title()
-                            st.write(f"Title: :green[{title_name}]  \nURL: {title_url}\n")
+                            st.write(f"Title: :green[{title_name}]\n")
                             ch = f"https://daotranslate.us/{title_name}-chapter-1/"
-                            st.write(f"CH 01: {ch}")
+                            st.write(f"{ch}")
     with col2:
         with st.expander("Image Based"):
             st.caption("Example: https://manhuaaz.com/manga/monster-pet-evolution/chapter-1/")
@@ -214,7 +214,7 @@ with st.sidebar:
                         href = link.get("href")
                         manga_name = href.split("https://manhuaaz.com/manga/")[1]
                         ch = f"{href}/chapter-1/"
-                        st.write(f"Title: :green[{manga_name}]  \nCH 01: {ch}\n")
+                        st.write(f"Title: :green[{manga_name}]  \n{ch}\n")
                         
             with st.expander("Search.."):
                 search_variable = st.text_input(":orange[Title:]", placeholder="Martial Peak", key='search2', help="Enter a title here to search for")
@@ -228,7 +228,7 @@ with st.sidebar:
                         title_name = tab_thumb.find("a")['title']
                         title_url = tab_thumb.find("a")['href']
                         ch = f"{title_url}chapter-1/"
-                        st.write(f"Title: :green[{title_name}]  \nCH 01: {ch}\n")
+                        st.write(f"Title: :green[{title_name}]  \n{ch}\n")
     url = st.text_input(":orange[CH. Url:]", placeholder="https://daotranslate.us/solo-leveling-ragnarok-chapter-1/", key='input', help="Enter manga chapter URL here")
     ok = st.button("📚Read", help="Read", key='123', use_container_width=False)
     st.header("Official PC Version")
