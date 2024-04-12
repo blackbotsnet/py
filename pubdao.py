@@ -154,14 +154,21 @@ res_box = st.empty()
 
 with st.sidebar:
     dataimg = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTEiIGhlaWdodD0iMjE1IiB2aWV3Qm94PSIwIDAgMTUxIDIxNSI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6I2NmZDRkYjtmaWxsLW9wYWNpdHk6IDAuMTsiLz48L3N2Zz4="
-    bitcode = dataimg.split("data/svg+xml;base64,")[1]
+    bitcode = dataimg.split("data/svg+xml;base64,")
     
-    # Decode Base64 data
-    svg_bytes = base64.b64decode(bitcode)
-    svg_text = svg_bytes.decode('utf-8')
-    
-    # Display SVG image
-    st.image(svg_text, format="svg")
+    # Check if the split operation succeeded
+    if len(bitcode) > 1:
+        # Extract the Base64 encoded data
+        bitcode = bitcode[1]
+        
+        # Decode Base64 data
+        svg_bytes = base64.b64decode(bitcode)
+        svg_text = svg_bytes.decode('utf-8')
+        
+        # Display SVG image
+        st.image(svg_text, format="svg")
+    else:
+        st.error("Invalid image data format")
 
 
     st.image(side_image)
