@@ -169,7 +169,7 @@ with st.sidebar:
                     image_elements = soup.find_all('div', class_='mdthumb')
                     for image_element in image_elements:
                         img_src = image_element.find('img')['src']
-                        print(img_src)
+                        print("image shit" + img_src)
                     manga_list_div = soup.find("div", {"class": "listupd"})
                     if manga_list_div:
                         titles = manga_list_div.find_all("div", {"class": "mdthumb"})
