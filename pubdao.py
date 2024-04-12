@@ -175,9 +175,6 @@ with st.sidebar:
                             title_name = title_name.replace('/', '')
                             title_name = title_name.title()
                             pic_url = title.img["src"]
-                            if not pic_url.startswith("http"):
-                                # If the URL is relative, prepend the base URL
-                                pic_url = "https://daotranslate.us" + pic_url
                             st.image(pic_url)
                             st.write(f"Title: :green[{title_name}]  \nURL: {title_url}\n")
             with st.expander("Search.."):
