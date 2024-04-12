@@ -1,6 +1,5 @@
-baseUrlPath = ""
 [server]
-enableStaticServing = false
+enableStaticServing = True
 [theme]
 base = 'dark'
 primaryColor="#FF4B4B"
