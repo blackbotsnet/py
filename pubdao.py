@@ -77,17 +77,6 @@ from bs4 import BeautifulSoup
 import webbrowser
 
 
-js_code = """
-function goToGoogle() {
-    window.location.href = 'https://black-dao.streamlit.app/~/+/';
-}
-"""
-st.components.v1.html(js_code)
-
-# Button to trigger the JavaScript function
-if st.button("Go to Google"):
-    st.write("<script>goToGoogle();</script>", unsafe_allow_html=True)
-
 history = []
 
 icob = Image.open('static/-.ico')
@@ -98,6 +87,14 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="expanded"
 )
+js_code = """
+function goToGoogle() {
+    window.location.href = 'https://black-dao.streamlit.app/~/+/';
+}
+"""
+st.components.v1.html(js_code)
+if st.button("Go to Google"):
+    st.write("<script>goToGoogle();</script>", unsafe_allow_html=True)
 st.markdown("""
     <style>
         <br><hr><center>
