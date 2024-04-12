@@ -73,25 +73,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
 
 from bs4 import BeautifulSoup
-url = "https://daotranslate.us/series/?status=&type=&order=update"
-
-response = requests.get(url)
-html_content = response.content
-
-soup = BeautifulSoup(html_content, 'html.parser')
-
-image_elements = soup.find_all('img', class_='ts-post-image')
-
-for img in image_elements:
-    base64_data = img['src'].split(',')[1]  # Extract the Base64 data part after the comma
-    image_data = base64.b64decode(base64_data)
-    
-    with open(f"image_{image_elements.index(img)}.png", "wb") as file:
-        file.write(image_data)
-html_string = "<img src= '''+image_data+''' width=100 height=100 ></td>"
-
-st.markdown(html_string, unsafe_allow_html=True)
-
 
 history = []
 
@@ -132,6 +113,25 @@ st.markdown("""
         .css-14xtw13 e8zbici0{visibility: hidden;}
     </style>
 """, unsafe_allow_html=True)
+
+url = "https://daotranslate.us/series/?status=&type=&order=update"
+
+response = requests.get(url)
+html_content = response.content
+
+soup = BeautifulSoup(html_content, 'html.parser')
+
+image_elements = soup.find_all('img', class_='ts-post-image')
+
+for img in image_elements:
+    base64_data = img['src'].split(',')[1]  # Extract the Base64 data part after the comma
+    image_data = base64.b64decode(base64_data)
+    
+    with open(f"image_{image_elements.index(img)}.png", "wb") as file:
+        file.write(image_data)
+html_string = "<img src= '''+image_data+''' width=100 height=100 ></td>"
+
+st.markdown(html_string, unsafe_allow_html=True)
 
 
 options = Options()
