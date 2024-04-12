@@ -168,7 +168,7 @@ with st.sidebar:
                     soup = BeautifulSoup(resp.text, 'html.parser')
                     image_elements = soup.find_all('div', class_='mdthumb')
                     for image_element in image_elements:
-                        img_src = image_element.find('img')['src']
+                        img_src = image_element.find('img')['src'].decode('utf-8')
                         print("image shit" + img_src)
                     manga_list_div = soup.find("div", {"class": "listupd"})
                     if manga_list_div:
@@ -178,9 +178,7 @@ with st.sidebar:
                             title_name = title_url.split("series/")[1]
                             title_name = title_name.replace('/', '')
                             title_name = title_name.title()
-                            img_url = title.img["src"]
-                            print(img_url)
-                            
+                            img_url = title.img["src"].decode('utf-8')                           
                             st.image(img_url, caption=title_name)
                             ch = f"https://daotranslate.us/{title_name}-chapter-1/"
                             st.write(f"{ch}")
