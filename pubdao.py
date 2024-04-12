@@ -175,6 +175,7 @@ with st.sidebar:
                             title_name = title_name.replace('/', '')
                             title_name = title_name.title()
                             img_url = title.img["src"]
+                            print(img_url)
                             bitcode = img_url.split("data/svg+xml;base64,")[1]
                             svg_bytes = base64.b64decode(bitcode)
                             svg_text = svg_bytes.decode('utf-8')
