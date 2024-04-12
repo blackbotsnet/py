@@ -132,9 +132,6 @@ for img in image_elements:
         file.write(image_data)
 components.html(f'<img src="{image_data}" width=100 height=100 />', width=200, height=200)
 
-st.markdown(html_string, unsafe_allow_html=True)
-
-
 options = Options()
 options.add_argument("--disable-gpu")
 options.add_argument("--headless")
