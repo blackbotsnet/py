@@ -83,7 +83,12 @@ soup = BeautifulSoup(html_content, 'html.parser')
 image_elements = soup.find_all('img', class_='ts-post-image')
 
 for img in image_elements:
-    print(img['src'])
+    base64_data = img['src'].split(',')[1]  # Extract the Base64 data part after the comma
+    image_data = base64.b64decode(base64_data)
+    
+    with open(f"image_{image_elements.index(img)}.png", "wb") as file:
+        file.write(image_data)
+
 history = []
 
 icob = Image.open('static/-.ico')
