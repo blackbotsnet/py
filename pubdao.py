@@ -74,6 +74,19 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
 
 from bs4 import BeautifulSoup
+import webbrowser
+
+
+js_code = """
+function goToGoogle() {
+    window.location.href = 'https://black-dao.streamlit.app/~/+/';
+}
+"""
+st.components.v1.html(js_code)
+
+# Button to trigger the JavaScript function
+if st.button("Go to Google"):
+    st.write("<script>goToGoogle();</script>", unsafe_allow_html=True)
 
 history = []
 
