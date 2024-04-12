@@ -172,7 +172,24 @@ with st.sidebar:
     outer_cols = st.columns([1, 1])
     with col1:
         with st.expander("Text Based"):
-            st.caption("Example: https://daotranslate.us/solo-leveling-ragnarok-chapter-1/")
+            with st.expander("Search.."):
+                search_variable = st.text_input(":orange[Title:]", placeholder="Martial Peak", key='search', help="Enter a title here to search for")
+                search_url = f"https://daotranslate.us/?s={search_variable}"
+                resp = requests.get(search_url)
+                if resp.status_code == 200:
+                    soup = BeautifulSoup(resp.text, 'html.parser')
+                    search_result_div = soup.find("div", {"class": "listupd"})
+                    if search_result_div:
+                        titless = search_result_div.find_all("div", {"class": "mdthumb"})
+                        for title in titless:
+                            title_url = title.a["href"]
+                            title_name = title_url.split("series/")[1]
+                            title_name = title_name.replace('/', '')
+                            title_name = title_name.title()
+                            img_url = title.img["src"]
+                            st.image(img_url, caption=title_name)
+                            ch = f"https://daotranslate.us/{title_name}-chapter-1/"
+                            st.write(f"{ch}")
             with st.expander("Latest Releases"):
                 resp = requests.get("https://daotranslate.us/series/?status=&type=&order=update")
                 if resp.status_code == 200:
@@ -192,24 +209,6 @@ with st.sidebar:
                             st.image(img_url, caption=title_name)
                             ih = f"https://daotranslate.us/{title_name}-chapter-1/"
                             st.write(f":green[{ih}]")
-            with st.expander("Search.."):
-                search_variable = st.text_input(":orange[Title:]", placeholder="Martial Peak", key='search', help="Enter a title here to search for")
-                search_url = f"https://daotranslate.us/?s={search_variable}"
-                resp = requests.get(search_url)
-                if resp.status_code == 200:
-                    soup = BeautifulSoup(resp.text, 'html.parser')
-                    search_result_div = soup.find("div", {"class": "listupd"})
-                    if search_result_div:
-                        titless = search_result_div.find_all("div", {"class": "mdthumb"})
-                        for title in titless:
-                            title_url = title.a["href"]
-                            title_name = title_url.split("series/")[1]
-                            title_name = title_name.replace('/', '')
-                            title_name = title_name.title()
-                            img_url = title.img["src"]
-                            st.image(img_url, caption=title_name)
-                            ch = f"https://daotranslate.us/{title_name}-chapter-1/"
-                            st.write(f"{ch}")
     with col2:
         with st.expander("Image Based"):
             st.caption("Example: https://manhuaaz.com/manga/monster-pet-evolution/chapter-1/")
@@ -223,6 +222,7 @@ with st.sidebar:
                         href = link.get("href")
                         manga_name = href.split("https://manhuaaz.com/manga/")[1]
                         ch = f"{href}/chapter-1/"
+                        st.caption(manga_name)
                         st.write(f"{ch}")
                         
             with st.expander("Search.."):
@@ -236,8 +236,6 @@ with st.sidebar:
                         # Extract title and URL from the anchor tag within the div
                         title_name = tab_thumb.find("a")['title']
                         title_url = tab_thumb.find("a")['href']
-                        img_url = tab_thumb.find("img")['src']
-                        st.image(img_url, caption=title_name)
                         ch = f"{title_url}chapter-1/"
                         st.write(f"{ch}")
     url = st.text_input(":orange[Enter URL:]", value=ih, placeholder="https://daotranslate.us/solo-leveling-ragnarok-chapter-1/", key='input', help="Enter manga chapter URL here")
