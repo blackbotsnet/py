@@ -174,8 +174,11 @@ with st.sidebar:
                             title_name = title_url.split("series/")[1]
                             title_name = title_name.replace('/', '')
                             title_name = title_name.title()
-                            pic = title.img["src"]
-                            st.image(pic)
+                            pic_url = title.img["src"]
+                            if not pic_url.startswith("http"):
+                                # If the URL is relative, prepend the base URL
+                                pic_url = "https://daotranslate.us" + pic_url
+                            st.image(pic_url)
                             st.write(f"Title: :green[{title_name}]  \nURL: {title_url}\n")
             with st.expander("Search.."):
                 search_variable = st.text_input(":orange[Title:]", placeholder="Martial Peak", key='search', help="Enter a title here to search for")
