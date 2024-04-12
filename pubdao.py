@@ -189,7 +189,6 @@ with st.sidebar:
                             title_name = title_name.replace('/', '')
                             title_name = title_name.title()
                             img_url = title.img["src"]
-
                             st.image(img_url, caption=title_name)
                             ih = f"https://daotranslate.us/{title_name}-chapter-1/"
                             st.write(f":green[{ih}]")
@@ -207,7 +206,8 @@ with st.sidebar:
                             title_name = title_url.split("series/")[1]
                             title_name = title_name.replace('/', '')
                             title_name = title_name.title()
-                            st.write(f"Title: :green[{title_name}]\n")
+                            img_url = title.img["src"]
+                            st.image(img_url, caption=title_name)
                             ch = f"https://daotranslate.us/{title_name}-chapter-1/"
                             st.write(f"{ch}")
     with col2:
@@ -223,7 +223,7 @@ with st.sidebar:
                         href = link.get("href")
                         manga_name = href.split("https://manhuaaz.com/manga/")[1]
                         ch = f"{href}/chapter-1/"
-                        st.write(f"Title: :green[{manga_name}]  \n{ch}\n")
+                        st.write(f"{ch}")
                         
             with st.expander("Search.."):
                 search_variable = st.text_input(":orange[Title:]", placeholder="Martial Peak", key='search2', help="Enter a title here to search for")
@@ -236,8 +236,10 @@ with st.sidebar:
                         # Extract title and URL from the anchor tag within the div
                         title_name = tab_thumb.find("a")['title']
                         title_url = tab_thumb.find("a")['href']
+                        img_url = tab_thumb.find("img")['src']
+                        st.image(img_url, caption=title_name)
                         ch = f"{title_url}chapter-1/"
-                        st.write(f"Title: :green[{title_name}]  \n{ch}\n")
+                        st.write(f"{ch}")
     url = st.text_input(":orange[Enter URL:]", value=ih, placeholder="https://daotranslate.us/solo-leveling-ragnarok-chapter-1/", key='input', help="Enter manga chapter URL here")
     ok = st.button("📚Read", help="Read", key='123', use_container_width=False)
     st.header("Google Play Store")
