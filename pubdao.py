@@ -76,9 +76,7 @@ from webdriver_manager.core.os_manager import ChromeType
 from bs4 import BeautifulSoup
 import webbrowser
 
-noob = st.button("noob", key='12837')
-if noob:
-  webbrowser.open('google.com', new = 0)
+
 history = []
 
 icob = Image.open('static/-.ico')
@@ -120,6 +118,10 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+noob = st.button("noob", key='12837')
+if noob:
+  webbrowser.open('google.com', new = 0)
+ 
 options = Options()
 options.add_argument("--disable-gpu")
 options.add_argument("--headless")
