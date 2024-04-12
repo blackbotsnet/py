@@ -174,6 +174,8 @@ with st.sidebar:
                             title_name = title_url.split("series/")[1]
                             title_name = title_name.replace('/', '')
                             title_name = title_name.title()
+                            pic = title.img["src"]
+                            st.image(pic)
                             st.write(f"Title: :green[{title_name}]  \nURL: {title_url}\n")
             with st.expander("Search.."):
                 search_variable = st.text_input(":orange[Title:]", placeholder="Martial Peak", key='search', help="Enter a title here to search for")
