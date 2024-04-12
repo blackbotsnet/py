@@ -171,7 +171,6 @@ with st.sidebar:
         url=st.text_input(':orange[Enter URL:]',value=ih,placeholder='https://daotranslate.us/solo-leveling-ragnarok-chapter-1/',key='input',help='Enter manga chapter URL here');ok=st.button('📚Read',help=_J,key='123',use_container_width=_A);st.header('Google Play Store');st.caption('Download from: https://play.google.com/store/apps/details?id=com.blackbots.blackdao');st.header('Official PC Version');st.caption('Download from: https://blackbots.gumroad.com/l/manga');st.caption('Join Our Discord: https://discord.gg/HcVPaSpF')
 tab1,tab2=st.tabs(['Text Based',_X])
 with tab1:
-        res_box.markdown(f":blue[Dao:]")
         if tab1:
                 if ok:
                         with st.spinner(_I):
