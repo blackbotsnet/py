@@ -139,7 +139,7 @@ side_image=Image.open('static/1.png')
 st.image(main_image)
 res_box=st.empty()
 with st.sidebar:
-        st.image(side_image);st.caption('Manga Text or Image To Speach');on=st.checkbox('Stream Story',value=_A,disabled=_B);search_variable=st.text_input(':orange[Search:]',placeholder='',key='search',help='Enter a title here to search for')
+        st.image(side_image);st.caption('Manga Text or Image To Speech');on=st.checkbox('Stream Story',value=_A,disabled=_B);search_variable=st.text_input(':orange[Search:]',placeholder='',key='search',help='Enter a title here to search for')
         if search_variable:
                 with st.expander('Search Results..'):
                         search_url=f"https://daotranslate.us/?s={search_variable}";resp=requests.get(search_url)
