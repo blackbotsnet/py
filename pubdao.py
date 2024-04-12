@@ -146,7 +146,14 @@ def autoplay_audio(file_path: str):
             md,
             unsafe_allow_html=True,
         )
-
+def extract_image_urls(html_content):
+    soup = BeautifulSoup(html_content, 'html.parser')
+    images = []
+    for div in soup.find_all("div", class_="mdthumb"):
+        img = div.find("img")
+        if img and "src" in img.attrs:
+            images.append(img["src"])
+    return images
 main_image = Image.open('static/dojutsu.png')
 side_image = Image.open('static/1.png')
 st.image(main_image)
@@ -174,6 +181,9 @@ with st.sidebar:
                             title_name = title_url.split("series/")[1]
                             title_name = title_name.replace('/', '')
                             title_name = title_name.title()
+                            image_urls = extract_image_urls(resp.text)
+                            for img_url in image_urls:
+                                st.image(img_url, caption="Image")
                             pic_url = title.img["src"]
                             st.image(pic_url)
                             st.write(f"Title: :green[{title_name}]  \nURL: {title_url}\n")
