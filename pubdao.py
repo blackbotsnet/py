@@ -289,7 +289,7 @@ with tab1:
                                 new_file = speedup(audio,1.2,150)
                                 new_file.export("file.mp3", format="mp3")
                                 autoplay_audio("file.mp3")
-                                st.download_button("file.mp3")
+                                #st.download_button("file.mp3")
 
                             for group in groups:
                                 group_text = ""
