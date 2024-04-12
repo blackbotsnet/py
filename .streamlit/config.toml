@@ -1,4 +1,4 @@
-baseUrlPath = "/~/+/"
+baseUrlPath = "https://black-dao.streamlit.app/~/+/"
 [server]
 enableStaticServing = true
 [theme]
