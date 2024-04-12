@@ -169,7 +169,6 @@ with st.sidebar:
                     image_elements = soup.find_all('div', {"class": "mdthumb"})
                     for image_element in image_elements:
                         img_src = image_element.find('img')['src']
-                        print("image shit" + img_src)
                     manga_list_div = soup.find("div", {"class": "listupd"})
                     if manga_list_div:
                         titles = manga_list_div.find_all("div", {"class": "mdthumb"})
@@ -178,8 +177,19 @@ with st.sidebar:
                             title_name = title_url.split("series/")[1]
                             title_name = title_name.replace('/', '')
                             title_name = title_name.title()
-                            img_url = title.img["src"]                           
-                            st.image(img_url, caption=title_name)
+
+                            def convert_webp_to_png(webp_url):
+                                response = requests.get(webp_url)
+                                webp_image = Image.open(BytesIO(response.content))
+                                png_image = webp_image.convert("RGBA")
+                                return png_image                            
+                            img_url = title.img["src"]
+                            
+                            webp_url = img_url
+                            png_image = convert_webp_to_png(webp_url)
+                            st.image(png_image, use_column_width=True)
+                            
+                            #st.image(img_url, caption=title_name)
                             ch = f"https://daotranslate.us/{title_name}-chapter-1/"
                             st.write(f"{ch}")
             with st.expander("Search.."):
