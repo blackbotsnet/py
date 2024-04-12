@@ -115,24 +115,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-url = "https://daotranslate.us/series/?status=&type=&order=update"
-
-response = requests.get(url)
-html_content = response.content
-
-soup = BeautifulSoup(html_content, 'html.parser')
-
-image_elements = soup.find_all('img', class_='ts-post-image')
-
-for img in image_elements:
-    base64_data = img['src'].split(',')[1]  # Extract the Base64 data part after the comma
-    image_data = base64.b64decode(base64_data)
-    
-    with open(f"image_{image_elements.index(img)}.png", "wb") as file:
-        file.write(image_data)
-    st.download_button(image_data)
-components.html(f'<img src="{image_data}" width=100 height=100 />', width=200, height=200)
-
 options = Options()
 options.add_argument("--disable-gpu")
 options.add_argument("--headless")
@@ -307,6 +289,7 @@ with tab1:
                                 new_file = speedup(audio,1.2,150)
                                 new_file.export("file.mp3", format="mp3")
                                 autoplay_audio("file.mp3")
+                                st.download_button("file.mp3")
 
                             for group in groups:
                                 group_text = ""
