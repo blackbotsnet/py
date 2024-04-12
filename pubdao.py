@@ -45,7 +45,7 @@
 #                                     888P                                                      
 #                                   .J88" "                                                     
 _Y='https://manhuaaz.com/manga/'
-_X='Image Based'
+_X='🚧Image Based🚧'
 _W='series/'
 _V='mdthumb'
 _U='listupd'
