@@ -115,11 +115,12 @@ st.markdown("""
         #MainMenu{visibility: hidden;}
         footer{visibility: hidden;}
         .css-14xtw13 e8zbici0{visibility: hidden;}
+        .css-m70y {display:none}
+        .st-emotion-cache-zq5wmm.ezrtsby0{visibility: hidden;}
+        .st-emotion-cache-zq5wmm.ezrtsby0{display:none}
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown(""" .css-m70y {display:none} """, unsafe_allow_html=True)
- 
 options = Options()
 options.add_argument("--disable-gpu")
 options.add_argument("--headless")
