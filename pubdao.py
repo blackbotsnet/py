@@ -175,8 +175,10 @@ with st.sidebar:
                             title_name = title_name.replace('/', '')
                             title_name = title_name.title()
                             img_url = title.img["src"]
-                            st.write(f"Image URL: {img_url}")
-                            st.image(img_url, caption=title_name)
+                            svg_bytes = base64.b64decode(img_url)
+                            svg_text = svg_bytes.decode('utf-8')
+                            st.image(svg_text, format="svg")
+                            st.image(svg_text, caption=title_name)
                             ch = f"https://daotranslate.us/{title_name}-chapter-1/"
                             st.write(f"{ch}")
             with st.expander("Search.."):
