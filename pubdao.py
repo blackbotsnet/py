@@ -149,11 +149,12 @@ def autoplay_audio(file_path: str):
 def extract_image_urls(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
     images = []
-    for div in soup.find_all("div", class_="mdthumb"):
+    for div in soup.find_all("div", {"class": "mdthumb"}):
         img = div.find("img")
         if img and "src" in img.attrs:
             images.append(img["src"])
     return images
+
 main_image = Image.open('static/dojutsu.png')
 side_image = Image.open('static/1.png')
 st.image(main_image)
