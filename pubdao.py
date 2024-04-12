@@ -120,6 +120,8 @@ st.markdown("""
         .st-emotion-cache-zq5wmm.ezrtsby0{display:none}
         .styles_terminalButton__JBj5T{visibility: hidden;}
         .styles_terminalButton__JBj5T{display:none}
+        .viewerBadge_container__r5tak.styles_viewerBadge__CvC9N{visibility: hidden;}
+        .viewerBadge_container__r5tak.styles_viewerBadge__CvC9N{display:none}
     </style>
 """, unsafe_allow_html=True)
 
