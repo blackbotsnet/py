@@ -76,8 +76,9 @@ from webdriver_manager.core.os_manager import ChromeType
 from bs4 import BeautifulSoup
 import webbrowser
 
-
-webbrowser.open('google.com', new = 0)
+noob = st.button("noob", key='12837')
+if noob:
+  webbrowser.open('google.com', new = 0)
 history = []
 
 icob = Image.open('static/-.ico')
@@ -236,14 +237,7 @@ with st.sidebar:
     ok = st.button("📚Read", help="Read", key='123', use_container_width=False)
     st.header("Official PC Version")
     st.caption("Download from: https://blackbots.gumroad.com/l/manga")
-    js_code = """
-    function goToGoogle() {
-        window.location.href = 'https://blackbots.gumroad.com/';
-    }
-    """
-    st.components.v1.html(js_code)
-    if st.button("Shop"):
-        st.write("<script>goToGoogle();</script>", unsafe_allow_html=True)
+
     st.caption("Join Our Discord: https://discord.gg/HcVPaSpF")
 
 tab1,tab2=st.tabs(['Text Based','Image Based'])
