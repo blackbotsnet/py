@@ -63,6 +63,7 @@ import numpy as np  # Image Processing
 from easyocr import Reader
 import streamlit as st
 import streamlit_nested_layout
+import streamlit.components.v1 as components
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -129,7 +130,7 @@ for img in image_elements:
     
     with open(f"image_{image_elements.index(img)}.png", "wb") as file:
         file.write(image_data)
-html_string = f'<img src="{image_data}" width=100 height=100 />'
+components.html(f'<img src="{image_data}" width=100 height=100 />', width=200, height=200)
 
 st.markdown(html_string, unsafe_allow_html=True)
 
