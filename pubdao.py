@@ -166,9 +166,9 @@ with st.sidebar:
                 resp = requests.get("https://daotranslate.us/series/?status=&type=&order=update")
                 if resp.status_code == 200:
                     soup = BeautifulSoup(resp.text, 'html.parser')
-                    image_elements = soup.find_all('div', class_='mdthumb')
+                    image_elements = soup.find_all('div', {"class": "mdthumb"})
                     for image_element in image_elements:
-                        img_src = image_element.find('img')['src'].decode('utf-8')
+                        img_src = image_element.find('img')['src']
                         print("image shit" + img_src)
                     manga_list_div = soup.find("div", {"class": "listupd"})
                     if manga_list_div:
