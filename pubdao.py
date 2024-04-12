@@ -176,20 +176,8 @@ with st.sidebar:
                             title_name = title_name.title()
                             img_url = title.img["src"]
                             print(img_url)
-                            bitcode = img_url.split("base64,")[1]
-                            if len(bitcode) > 1:
-                                # Extract the Base64 encoded data
-                                bitcode = bitcode[1]
-                                
-                                # Decode Base64 data
-                                svg_bytes = base64.b64decode(bitcode)
-                                svg_text = svg_bytes.decode('utf-8')
                             
-                                # Display SVG image
-                                st.image(svg_text, format="svg")
-                            else:
-                                st.error("Invalid image URL format")
-                            st.image(svg_text, caption=title_name)
+                            st.image(img_url, caption=title_name)
                             ch = f"https://daotranslate.us/{title_name}-chapter-1/"
                             st.write(f"{ch}")
             with st.expander("Search.."):
