@@ -118,7 +118,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown(""" .css-m70y {display:none} “”", unsafe_allow_html=True)
+st.markdown(""" .css-m70y {display:none} """, unsafe_allow_html=True)
  
 options = Options()
 options.add_argument("--disable-gpu")
