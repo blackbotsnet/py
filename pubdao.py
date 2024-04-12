@@ -89,11 +89,11 @@ st.set_page_config(
 )
 js_code = """
 function goToGoogle() {
-    window.location.href = 'https://black-dao.streamlit.app/~/+/';
+    window.location.href = 'https://blackbots.gumroad.com/';
 }
 """
 st.components.v1.html(js_code)
-if st.button("Go to Google"):
+if st.button("Shop"):
     st.write("<script>goToGoogle();</script>", unsafe_allow_html=True)
 st.markdown("""
     <style>
