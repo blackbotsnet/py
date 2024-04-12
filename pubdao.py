@@ -181,15 +181,9 @@ with st.sidebar:
                            
                             img_url = title.img["src"]
                             
-                            image_data = img_url.split(';base64,')[-1]
-
-                            # Decode the Base64 encoded image data
-                            decoded_image_data = base64.b64decode(image_data)
-                            
-                            # Open the image using PIL
-                            image = Image.open(io.BytesIO(decoded_image_data))
-                            
-                            # Display the image using Streamlit
+                            image_data = img_url.split('data:image/svg+xml;base64,')[-1]
+                            decoded_image_data = base64.b64decode(image_data)                            
+                            image = Image.open(io.BytesIO(decoded_image_data))                            
                             st.image(image, caption='Decoded Image', use_column_width=True)
                             
                             #st.image(img_url, caption=title_name)
