@@ -185,7 +185,6 @@ with st.sidebar:
                                 title_name = title_name.replace('/', '')
                                 title_name = title_name.title()                            
                                 st.image(img_url, caption=title_name)
-                                st.image("https://i0.wp.com/daotranslate.us/wp-content/uploads/2022/08/Harvey-Yorks-Rise-To-Power.jpg?resize=151,215")
                                 ch = f"https://daotranslate.us/{title_name}-chapter-1/"
                                 st.write(f"{ch}")
             with st.expander("Search.."):
