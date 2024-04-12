@@ -177,17 +177,19 @@ with st.sidebar:
                             title_name = title_url.split("series/")[1]
                             title_name = title_name.replace('/', '')
                             title_name = title_name.title()
-
-                            def convert_webp_to_png(webp_url):
-                                response = requests.get(webp_url)
-                                webp_image = Image.open(BytesIO(response.content))
-                                png_image = webp_image.convert("RGBA")
-                                return png_image                            
+                           
                             img_url = title.img["src"]
                             
-                            webp_url = img_url
-                            png_image = convert_webp_to_png(webp_url)
-                            st.image(png_image, use_column_width=True)
+                            image_data = img_url.split(';base64,')[-1]
+
+                            # Decode the Base64 encoded image data
+                            decoded_image_data = base64.b64decode(image_data)
+                            
+                            # Open the image using PIL
+                            image = Image.open(io.BytesIO(decoded_image_data))
+                            
+                            # Display the image using Streamlit
+                            st.image(image, caption='Decoded Image', use_column_width=True)
                             
                             #st.image(img_url, caption=title_name)
                             ch = f"https://daotranslate.us/{title_name}-chapter-1/"
