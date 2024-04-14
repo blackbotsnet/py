@@ -4,6 +4,7 @@ requests
 streamlit
 streamlit-nested-layout
 PyPDF2
+googletrans
 instaloader
 ffmpeg-python
 pandas
