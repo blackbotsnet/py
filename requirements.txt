@@ -4,7 +4,6 @@ requests
 streamlit
 streamlit-nested-layout
 PyPDF2
-googletrans
 instaloader
 ffmpeg-python
 pandas
@@ -29,4 +28,6 @@ wit
 pydantic
 emoji
 tls_client 
-st-annotated-text 
+st-annotated-text
+googletrans
+
