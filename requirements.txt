@@ -29,5 +29,3 @@ pydantic
 emoji
 tls_client 
 st-annotated-text
-googletrans
-
