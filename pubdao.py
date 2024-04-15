@@ -44,38 +44,36 @@
 #                                     888E                                                      
 #                                     888P                                                      
 #                                   .J88" "                                                     
-_X='https://manhuaaz.com/manga/'
-_W='Image Based'
-_V='always'
-_U='series/'
-_T='mdthumb'
-_S='listupd'
-_R='orange'
-_Q='\n\nNEXT CHAPTER\nChapter: '
-_P='Chapter Complete: '
-_O='epcontent entry-content'
-_N='Play'
+_W='daotrans'
+_V='https://manhuaaz.com/manga/'
+_U='Image Based'
+_T='always'
+_S='series/'
+_R='mdthumb'
+_Q='listupd'
+_P='epcontent entry-content'
+_O='current_image_index'
+_N='image_links'
 _M='href'
-_L='src'
-_K='.mp3'
-_J='Read'
+_L='.mp3'
+_K='src'
+_J='Loading text & audio..'
 _I='file.mp3'
-_H='Loading text & audio..'
-_G='html.parser'
-_F='en'
-_E='\n'
+_H='Link'
+_G='\n'
+_F='html.parser'
+_E='en'
 _D='class'
 _C='div'
 _B=False
 _A=True
 import os,base64,time,random,tempfile,io
 from io import BytesIO
-import re,requests
+import uuid,hashlib,re,requests
 from pydub import AudioSegment
 from pydub.effects import speedup
 from gtts import gTTS
 from PIL import Image
-from translate import Translator
 import easyocr as ocr,numpy as np
 from easyocr import Reader
 import streamlit as st,streamlit_nested_layout,streamlit.components.v1 as components
@@ -88,44 +86,19 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
 from bs4 import BeautifulSoup
 import webbrowser
+def generate_unique_key():A=str(uuid.uuid4());B=hashlib.sha256(A.encode()).hexdigest();return B
 def get_driver():return webdriver.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()),options=options)
 def autoplay_audio(file_path):
         with open(file_path,'rb')as A:B=A.read();C=base64.b64encode(B).decode();D=f'\n            <audio controls autoplay="true">\n            <source src="data:audio/mp3;base64,{C}" type="audio/mp3">\n            </audio>\n            ';st.markdown(D,unsafe_allow_html=_A)
-def perform_ok_actions(url):
-        B=url
-        with st.spinner(_H):
-                B=ih;L=get_driver()
-                try:L.get(B)
-                except:pass
-                if not B:res_box.markdown(f":blue[Dao: ]:green[*Enter a valid URL before running.*]")
-                else:
-                        try:
-                                G=requests.get(B)
-                                if G.status_code==200:
-                                        M=BeautifulSoup(G.text,_G);D=M.find(_C,{_D:_O})
-                                        if D:
-                                                a='';N=len(D.findAll('p'));C=D.findAll('p');E=1;b=N//E;O=[C[A:A+E]for A in range(0,len(C),E)];A=''
-                                                for P in C:A+=P.text+_E
-                                                A=A.replace('<p>','');A=A.replace('"','');st.markdown('<style>\n                              .stMarkdown{color: black;}\n                              .st-c8:hover{color:orange;}\n                              .streamlit-expander.st-bc.st-as.st-ar.st-bd.st-be.st-b8.st-bf.st-bg.st-bh.st-bi{display:none;}\n                              </style>',unsafe_allow_html=_A)
-                                                with st.expander(_J):from annotated_text import annotated_text as Q;C=A.split(_E);R=[(A,'','#fea')for A in C];Q(*R)
-                                                with tempfile.NamedTemporaryFile(suffix=_K,delete=_B)as H:A=A.replace('"','');S=gTTS(text=A,lang=_F,slow=_B);S.save(H.name);T=AudioSegment.from_mp3(H.name);U=speedup(T,1.2,150);U.export(_I,format='mp3');autoplay_audio(_I)
-                                                for V in O:
-                                                        W=''
-                                                        for I in V:W+=I.text+_E
-                                                        if on:res_box.markdown(f":blue[Dao: ]:green[*{I.text}*]");time.sleep(5)
-                                                X=st.button('Next CH.',key='next_button',help='Next Chapter',use_container_width=_B)
-                                                if X:J=B;F=''.join([A for A in J if A.isdigit()]);K=str(int(F)+int(+1));Y=str(int(F));c=str(J.replace(F,K));st.caption(_P+Y+_Q+K,text_color=_R)
-                                        else:res_box.markdown(f":blue[Dao: ]: ...")
-                                else:res_box.markdown(f":blue[Dao: ]:green[*Failed to fetch URL. Check your internet connection or the validity of the URL.*]")
-                        except Exception as Z:res_box.markdown(f":blue[Dao: ]:green[*Error occurred: {Z}*]")
 def perform_img_actions(url):
-        A=url;A=str(ih)
-        try:driver.get(A)
+        if _N not in st.session_state:st.session_state.image_links=[]
+        if _O not in st.session_state:st.session_state.current_image_index=0
+        try:driver.get(url)
         except:pass
-        with st.spinner(_H):
-                st.session_state.image_links=get_image_links(A);st.session_state.current_image_index=0
+        with st.spinner(_J):
+                st.session_state.image_links=get_image_links(url);st.session_state.current_image_index=0
                 if st.session_state.image_links:
-                        for B in st.session_state.image_links:st.image(B,use_column_width=_A)
+                        for A in st.session_state.image_links:st.image(A,use_column_width=_A)
                         st.write(f"Total Images: {len(st.session_state.image_links)}");transcribe_to_audio(st.session_state.image_links)
 def get_image_links(url):
         try:driver.get(url)
@@ -134,7 +107,7 @@ def get_image_links(url):
                 else:st.write(f"Error loading URL: {C}");return[]
         B=[];D=driver.find_elements(By.CSS_SELECTOR,'img')
         for E in D:
-                A=E.get_attribute(_L)
+                A=E.get_attribute(_K)
                 if A and is_image_link(A):B.append(A)
         driver.quit();return B
 def transcribe_to_audio(image_links):
@@ -143,12 +116,12 @@ def transcribe_to_audio(image_links):
                 try:
                         if not is_supported_image_format(B):continue
                         with st.spinner(' Getting image text '):
-                                F=ocr.Reader([_F]);G=F.readtext(B);E=[]
+                                F=ocr.Reader([_E]);G=F.readtext(B);E=[]
                                 for A in G:E.append(A[1].strip())
                         A=filter_english_words(E)
                         if A:
-                                C=os.path.join('audio',os.path.splitext(os.path.basename(B))[0]+_K)
-                                if not os.path.exists(C):H=gTTS(text=A,lang=_F,slow=_B);H.save(C)
+                                C=os.path.join('audio',os.path.splitext(os.path.basename(B))[0]+_L)
+                                if not os.path.exists(C):H=gTTS(text=A,lang=_E,slow=_B);H.save(C)
                                 D.append(C)
                                 if on:res_box.markdown(f":blue[RAWR: ]:green[*{A}*]")
                         else:res_box.markdown(f":blue[Dao: ]:orange[No Text]")
@@ -164,12 +137,57 @@ def is_image_link(link):
         for B in A:
                 if link.lower().endswith(B):return _A
         return _B
-@st.cache_resource
-def load_model():return ocr.Reader([_F],model_storage_directory='.')
+def load_model():return ocr.Reader([_E],model_storage_directory='.')
 def filter_english_words(text):A=text;B='\\b[a-zA-Z]+(?:\\\'[a-zA-Z]+)?(?:-[a-zA-Z]+)?(?:[.,!?\\\'":;\\[\\]()*&^%$#@`~\\\\/]|\\.\\.\\.)?\\b';C=re.findall(B,A);D=' '.join(C);A=D.lower();return A
+def readit(url):
+        C=url;D=get_driver()
+        try:D.get(C)
+        except:pass
+        if not C:res_box.markdown(f":blue[Dao: ]:green[*Enter a valid URL before running.*]")
+        else:
+                try:
+                        H=requests.get(C)
+                        if H.status_code==200:
+                                M=BeautifulSoup(H.text,_F);E=M.find(_C,{_D:_P})
+                                if E:
+                                        a='';N=len(E.findAll('p'));B=E.findAll('p');F=1;b=N//F;O=[B[A:A+F]for A in range(0,len(B),F)];A=''
+                                        for P in B:A+=P.text+_G
+                                        A=A.replace('<p>','');A=A.replace('"','');st.markdown('<style>\n                          .stMarkdown{color: black;}\n                          .st-c8:hover{color:orange;}\n                          .streamlit-expander.st-bc.st-as.st-ar.st-bd.st-be.st-b8.st-bf.st-bg.st-bh.st-bi{display:none;}\n                          </style>',unsafe_allow_html=_A)
+                                        with st.expander('Read'):from annotated_text import annotated_text as Q;B=A.split(_G);R=[(A,'','#fea')for A in B];Q(*R);st.caption(f"{len(A)} characters in this chapter.");I=C;G=''.join([A for A in I if A.isdigit()]);S=str(int(G)+int(+1));T=str(int(G));J=str(I.replace(G,S));st.caption(':green[Chapter Complete:] '+T+'\n\n:orange[Next Chapter:] '+J);c=st.text_area(_H,f"{J}",key=generate_unique_key())
+                                        with tempfile.NamedTemporaryFile(suffix=_L,delete=_B)as K:A=A.replace('"','');U=gTTS(text=A,lang=_E,slow=_B);U.save(K.name);V=AudioSegment.from_mp3(K.name);W=speedup(V,1.2,150);W.export(_I,format='mp3');autoplay_audio(_I)
+                                        for X in O:
+                                                Y=''
+                                                for L in X:Y+=L.text+_G
+                                                if on:res_box.markdown(f":blue[Dao: ]:green[*{L.text}*]");time.sleep(5)
+                                        D.quit()
+                                else:res_box.markdown('')
+                        else:res_box.markdown(f":blue[Dao: ]:green[*Failed to fetch URL. Check your internet connection or the validity of the URL.*]")
+                except Exception as Z:res_box.markdown(f":blue[Dao: ]:green[*Error occurred: {Z}*]")
+        D.quit()
+def readit2(url):
+        B=url;C=get_driver()
+        try:C.get(B)
+        except:pass
+        if not B:res_box.markdown(f":blue[Dao: ]:green[*Enter a valid URL before running.*]")
+        else:
+                try:
+                        G=requests.get(B)
+                        if G.status_code==200:
+                                I=BeautifulSoup(G.text,_F);D=I.find(_C,{_D:_P})
+                                if D:
+                                        P='';J=len(D.findAll('p'));E=D.findAll('p');F=1;Q=J//F;R=[E[A:A+F]for A in range(0,len(E),F)];A=''
+                                        for K in E:A+=K.text+_G
+                                        A=A.replace('<p>','');A=A.replace('"','')
+                                        with tempfile.NamedTemporaryFile(suffix=_L,delete=_B)as H:A=A.replace('"','');L=gTTS(text=A,lang=_E,slow=_B);L.save(H.name);M=AudioSegment.from_mp3(H.name);N=speedup(M,1.2,150);N.export(_I,format='mp3');autoplay_audio(_I)
+                                        C.quit()
+                                else:res_box.markdown('')
+                        else:res_box.markdown(f":blue[Dao: ]:green[*Failed to fetch URL. Check your internet connection or the validity of the URL.*]")
+                except Exception as O:res_box.markdown(f":blue[Dao: ]:green[*Error occurred: {O}*]")
+        C.quit()
 history=[]
 ih=''
 icob=Image.open('static/-.ico')
+ranum=random.randint(1,99999)
 st.set_page_config(page_title='Manga Dōjutsu',page_icon=icob,layout='centered',initial_sidebar_state='expanded')
 st.markdown('\n    <style>\n        <br><hr><center>\n        .reportview-container {background: black;}\n        .sidebar .siderbar-content {background: black;}\n        .st-ck:hover {\n        color: #gold;\n        }\n        color: lime;\n        cursor: pointer;\n        }\n        img {\n        width:75%;\n        }\n        width:578px;\n        vertical-align: middle;\n        horizontal-align: middle;\n        max-width: 300px;\n        margin: auto;\n        }\n        .css-yhwc6k{\n        text-align: center;\n        }\n        #audio{autoplay:true;}\n        #MainMenu{visibility: hidden;}\n        footer{visibility: hidden;}\n        .css-14xtw13 e8zbici0{visibility: hidden;}\n        .css-m70y {display:none}\n        .st-emotion-cache-zq5wmm.ezrtsby0{visibility: hidden;}\n        .st-emotion-cache-zq5wmm.ezrtsby0{display:none}\n        .styles_terminalButton__JBj5T{visibility: hidden;}\n        .styles_terminalButton__JBj5T{display:none}\n        .viewerBadge_container__r5tak.styles_viewerBadge__CvC9N{visibility: hidden;}\n        .viewerBadge_container__r5tak.styles_viewerBadge__CvC9N{display:none}\n    </style>\n',unsafe_allow_html=_A)
 options=Options()
@@ -195,83 +213,55 @@ with st.sidebar:
                         if search_variable:
                                 search_url=f"https://daotranslate.us/?s={search_variable}";resp=requests.get(search_url)
                                 if resp.status_code==200:
-                                        soup=BeautifulSoup(resp.text,_G);search_result_div=soup.find(_C,{_D:_S})
+                                        soup=BeautifulSoup(resp.text,_F);search_result_div=soup.find(_C,{_D:_Q})
                                         if search_result_div:
-                                                titless=search_result_div.find_all(_C,{_D:_T})
+                                                titless=search_result_div.find_all(_C,{_D:_R})
                                                 for title in titless:
-                                                        title_url=title.a[_M];title_name=title_url.split(_U)[1];title_name=title_name.replace('/','');title_name=title_name.title();img_url=title.img[_L];ch=f"https://daotranslate.us/{title_name}-chapter-1/";ih=ch;st.write(f"[{title_name}]({ih})")
+                                                        title_url=title.a[_M];title_name=title_url.split(_S)[1];title_name=title_name.replace('/','');title_name=title_name.title();img_url=title.img[_K];ch=f"https://daotranslate.us/{title_name}-chapter-1/";ih=ch;st.write(f"[{title_name}]({ih})")
                                                         if img_url:st.image(img_url,caption=ih)
-                                                        button_key=title_name+str(random.randint(1,999))
-                                                        if ih:
-                                                                lisp=st.button(_N,key=button_key+ch)
-                                                                if lisp:perform_ok_actions(ih)
-                                                        st.divider()
+                                                        txt=st.text_area(_H,f"{ch}",key=generate_unique_key());st.divider()
         on=st.checkbox('Stream Story (Disabled)',value=_B,disabled=_A);col1,col2=st.columns(2);outer_cols=st.columns([1,1])
         with st.expander('Latest Releases'):
-                resp=requests.get('https://daotranslate.us/?s=a')
+                resp=requests.get('https://daotranslate.us/?s=i')
                 if resp.status_code==200:
-                        soup=BeautifulSoup(resp.text,_G);manga_list_div=soup.find(_C,{_D:_S})
+                        soup=BeautifulSoup(resp.text,_F);manga_list_div=soup.find(_C,{_D:_Q})
                         if manga_list_div:
-                                titles=manga_list_div.find_all(_C,{_D:_T})
+                                titles=manga_list_div.find_all(_C,{_D:_R})
                                 for title in titles:
-                                        title_url=title.a[_M];title_name=title_url.split(_U)[1].replace('/','').title();ih=f"https://daotranslate.us/{title_name}-chapter-1/";st.write(f"[{title_name}]({ih})");img_url=title.img[_L]
-                                        if img_url:st.image(img_url,caption=ih,use_column_width=_V)
-                                        button_key=title_name+str(random.randint(1,999))
-                                        if ih:
-                                                lisp=st.button(_N,key=button_key)
-                                                if lisp:perform_ok_actions(ih)
-                                        st.divider()
-        with st.expander(_W):
+                                        title_url=title.a[_M];title_name=title_url.split(_S)[1].replace('/','').title();ih=f"https://daotranslate.us/{title_name}-chapter-1/";st.write(f"[{title_name}]({ih})");img_url=title.img[_K]
+                                        if img_url:st.image(img_url,caption=ih,use_column_width=_T)
+                                        txt=st.text_area(_H,f"{ih}",key=generate_unique_key());st.divider()
+        with st.expander(_U):
                 resp=requests.get('https://manhuaaz.com/')
                 if resp.status_code==200:
-                        soup=BeautifulSoup(resp.text,_G);manga_links=soup.find_all('a',href=lambda href:href and href.startswith(_X))
+                        soup=BeautifulSoup(resp.text,_F);manga_links=soup.find_all('a',href=lambda href:href and href.startswith(_V))
                         for link in manga_links:
-                                href=link.get(_M);manga_name=href.split(_X)[1];ch=f"{href}chapter-1/";ih=ch;st.write(f"[{manga_name}]({ch})");img_tag=link.find('img')
-                                if img_tag:img_url=img_tag.get('data-src');st.image(img_url,caption=ch,use_column_width=_V)
-                                img_key=manga_name+str(random.randint(1,999999))
-                                if ih:
-                                        lisp=st.button(_N,key=img_key)
-                                        if lisp:perform_img_actions(ih)
+                                href=link.get(_M);manga_name=href.split(_V)[1]
+                                if'chapter'not in manga_name.lower():cch=f"{href}chapter-1/"
+                                else:cch=href
+                                st.write(f"[{manga_name}]({cch})");img_tag=link.find('img')
+                                if img_tag:img_url=img_tag.get('data-src');st.image(img_url,caption=cch,use_column_width=_T)
+                                if cch:txt=st.text_area(_H,f"{cch}",key=generate_unique_key())
                                 st.divider()
-        url=st.text_input(':orange[Enter URL:]',value='',placeholder='https://daotranslate.us/solo-leveling-ragnarok-chapter-1/',key='input',help='Enter manga chapter URL here');ok=st.button('📚Read',help=_J,key='123',use_container_width=_B);st.divider();st.header('Google Play Store');st.caption('Download from: https://play.google.com/store/apps/details?id=com.blackbots.blackdao');st.header('Official PC Version');st.caption('Download from: https://blackbots.gumroad.com/l/manga');st.caption('Join Our Discord: https://discord.gg/HcVPaSpF');st.divider()
-        with st.expander('Help'):st.caption('How to use BlackDao: Manga Dōjutsu');st.caption('- Enter search term into field');st.caption('- Click off or Press enter to submit search');st.caption('- Press Play button or Copy & Paste grey link into URL input field then press Read')
-tab1,tab2=st.tabs(['Text Based',_W])
+        st.divider();st.header('Google Play Store');st.caption('Download from: https://play.google.com/store/apps/details?id=com.blackbots.blackdao');st.header('Official PC Version');st.caption('Download from: https://blackbots.gumroad.com/l/manga');st.caption('Join Our Discord: https://discord.gg/HcVPaSpF');st.divider()
+        with st.expander('Help'):st.caption('How to use BlackDao: Manga Dōjutsu');st.caption('- Enter search term into field');st.caption('- Click off or Press enter to submit search');st.caption('- Press Play button or Copy & Paste grey link into URL input field then press Read');st.caption('- View Image Based Links with the Image Based Tab')
+xx=st.text_input(':orange[Enter Link:]',value='',placeholder='https://daotranslate.us/solo-leveling-ragnarok-chapter-1/',key='readfield',help='Enter manga chapter URL here')
+ok=st.button('📚Read',help='Read',key='readbutton',use_container_width=_B)
+tab1,tab2=st.tabs(['Text Based',_U])
 with tab1:
-        if tab1:
+        if _W in xx:
                 if ok:
-                        with st.spinner(_H):
-                                driver=get_driver()
-                                try:driver.get(url)
-                                except:pass
-                                if not url:res_box.markdown(f":blue[Dao: ]:green[*Enter a valid URL before running.*]")
-                                else:
-                                        try:
-                                                resp=requests.get(url)
-                                                if resp.status_code==200:
-                                                        soup=BeautifulSoup(resp.text,_G);d=soup.find(_C,{_D:_O})
-                                                        if d:
-                                                                all_text='';num_paragraphs=len(d.findAll('p'));paragraphs=d.findAll('p');desired_group_size=1;num_groups=num_paragraphs//desired_group_size;groups=[paragraphs[A:A+desired_group_size]for A in range(0,len(paragraphs),desired_group_size)];story=''
-                                                                for paragraph in paragraphs:story+=paragraph.text+_E
-                                                                story=story.replace('<p>','');story=story.replace('"','');translator=Translator(to_lang=_F);story=translator.translate(story);st.markdown('<style>\n                                      .stMarkdown{color: black;}\n                                      .st-c8:hover{color:orange;}\n                                      .streamlit-expander.st-bc.st-as.st-ar.st-bd.st-be.st-b8.st-bf.st-bg.st-bh.st-bi{display:none;}\n                                      </style>',unsafe_allow_html=_A)
-                                                                with st.expander(_J):from annotated_text import annotated_text;paragraphs=story.split(_E);formatted_paragraphs=[(A,'','#fea')for A in paragraphs];annotated_text(*formatted_paragraphs)
-                                                                with tempfile.NamedTemporaryFile(suffix=_K,delete=_B)as tmp_file:story=story.replace('"','');tts=gTTS(text=story,lang=_F,slow=_B);tts.save(tmp_file.name);audio=AudioSegment.from_mp3(tmp_file.name);new_file=speedup(audio,1.2,150);new_file.export(_I,format='mp3');autoplay_audio(_I)
-                                                                for group in groups:
-                                                                        group_text=''
-                                                                        for d_paragraph in group:group_text+=d_paragraph.text+_E
-                                                                        if on:res_box.markdown(f":blue[Dao: ]:green[*{d_paragraph.text}*]");time.sleep(5)
-                                                                oldurl=url;chap=''.join([A for A in oldurl if A.isdigit()]);nxtchap=str(int(chap)+int(+1));prvchap=str(int(chap));nxtUrl=str(oldurl.replace(chap,nxtchap));st.caption(_P+prvchap+_Q+nxtchap,text_color=_R)
-                                                        else:res_box.markdown('')
-                                                else:res_box.markdown(f":blue[Dao: ]:green[*Failed to fetch URL. Check your internet connection or the validity of the URL.*]")
-                                        except Exception as e:res_box.markdown(f":blue[Dao: ]:green[*Error occurred: {e}*]")
-if'image_links'not in st.session_state:st.session_state.image_links=[]
-if'current_image_index'not in st.session_state:st.session_state.current_image_index=0
+                        with st.spinner(_J):readit(xx)
+if _N not in st.session_state:st.session_state.image_links=[]
+if _O not in st.session_state:st.session_state.current_image_index=0
 with tab2:
-        if tab2:
-                if ok:
-                        with st.spinner(_H):
-                                st.session_state.image_links=get_image_links(url);st.session_state.current_image_index=0
-                                if st.session_state.image_links:
-                                        for image_link in st.session_state.image_links:st.image(image_link,use_column_width=_A)
-                                        st.write(f"Total Images: {len(st.session_state.image_links)}");transcribe_to_audio(st.session_state.image_links)
+        if _W not in xx.lower():
+                if tab2:
+                        if ok:
+                                with st.spinner(_J):
+                                        st.session_state.image_links=get_image_links(url);st.session_state.current_image_index=0
+                                        if st.session_state.image_links:
+                                                for image_link in st.session_state.image_links:st.image(image_link,use_column_width=_A)
+                                                st.write(f"Total Images: {len(st.session_state.image_links)}");transcribe_to_audio(st.session_state.image_links)
 st.markdown("<br><hr><center>© Cloud Bots™ BlackBots. All rights reserved.  <a href='mailto:admin@blackbots.net?subject=MangaDojutsu!&body=Please specify the issue you are facing with the app.'><strong>BlackBots.net</strong></a></center><hr>",unsafe_allow_html=_A)
 st.markdown('<style> footer {visibility: hidden;} </style>',unsafe_allow_html=_A)
