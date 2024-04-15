@@ -244,7 +244,11 @@ with st.sidebar:
                                 if cch:txt=st.text_area(_H,f"{cch}",key=generate_unique_key())
                                 st.divider()
         st.divider();st.header('Google Play Store');st.caption('Download from: https://play.google.com/store/apps/details?id=com.blackbots.blackdao');st.header('Official PC Version');st.caption('Download from: https://blackbots.gumroad.com/l/manga');st.caption('Join Our Discord: https://discord.gg/HcVPaSpF');st.divider()
-        with st.expander('Help'):st.caption('How to use BlackDao: Manga Dōjutsu');st.caption('- Enter search term into field');st.caption('- Click off or Press enter to submit search');st.caption('- Press Play button or Copy & Paste grey link into URL input field then press Read');st.caption('- View Image Based Links with the Image Based Tab')
+        with st.expander("Help"):
+            st.caption("How to use BlackDao: Manga Dōjutsu")
+            st.caption("- Enter search term into field to search Mangas")
+            st.caption("- Copy & Paste link into input field on main window then press Read")
+            st.caption("- View Image Based Links with the Image Based Tab")
 xx=st.text_input(':orange[Enter Link:]',value='',placeholder='https://daotranslate.us/solo-leveling-ragnarok-chapter-1/',key='readfield',help='Enter manga chapter URL here')
 ok=st.button('📚Read',help='Read',key='readbutton',use_container_width=_B)
 tab1,tab2=st.tabs(['Text Based',_U])
