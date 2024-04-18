@@ -184,7 +184,13 @@ if _L not in st.session_state:st.session_state.current_image_index=0
 genre=None
 with st.sidebar:
         st.image(side_image);st.caption('Manga Text or Image To Speach');on=st.checkbox('Stream Story (Disabled)',value=_B,disabled=_A);st.divider();st.header('Google Play Store');st.caption('Download from: https://play.google.com/store/apps/details?id=com.blackbots.blackdao');st.header('Official PC Version');st.caption('Download from: https://blackbots.gumroad.com/l/manga');st.caption('Join Our Discord: https://discord.gg/HcVPaSpF');st.divider()
-        with st.expander('Help'):st.caption('How to use BlackDao: Manga Dōjutsu');st.caption('- Enter search term into `Search` field to find Links');st.caption('- Copy a `Link`');st.caption('- Paste Link onto `Enter Link` field');st.caption('- Press `:green_book: Read`');st.caption('- View Image Based Links with the `Image Based` tab')
+        with st.expander('Help'):
+            st.caption("How to use BlackDao: Manga Dōjutsu")
+            st.caption("- Enter search term into `Search` field to find `Links`")
+            st.caption("- `Copy` a Link")
+            st.caption("- `Paste` Link onto `Enter Link` field")
+            st.caption("- `Press Read`")
+            st.caption("- View Image Based Links with the `Image Based` tab")
 col1,col2=st.columns(2)
 outer_cols=st.columns([1,2])
 search_variable=st.text_input(':orange[Search:]',placeholder='Search..',key='search',help='Enter a title here to search for')
