@@ -28,7 +28,9 @@ with st.sidebar:
     memo = st.text_input('Memo', value="Good luck!")
     img = st.text_input('Background Image', value="https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png", placeholder='https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png')
     link = st.text_input('URL when Card is clicked', value="https://one.fullsail.edu/")
-    st.write("Credit: (@SupremeCiento)[https://www.instagram.com/supreme.ciento/]")
+    
+    url = 'https://www.instagram.com/supreme.ciento/'
+    st.markdown("Credit: [@Supreme.Ciento](%s)" % url)
 
 def unique_key():
     unique_id = str(uuid.uuid4())
