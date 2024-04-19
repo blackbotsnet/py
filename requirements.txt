@@ -8,6 +8,7 @@ instaloader
 ffmpeg-python
 pandas
 curl_cffi
+streamlit_card
 torch
 translate
 torchvision
