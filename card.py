@@ -18,6 +18,48 @@ import html
 import hashlib
 
 
+st.markdown("""
+    <style>
+        <br><hr><center>
+        .reportview-container {background: black;}
+        .sidebar .siderbar-content {background: black;}
+        .st-ck:hover {
+        color: #gold;
+        }
+        color: lime;
+        cursor: pointer;
+        }
+        img {
+        width:75%;
+        }
+        width:578px;
+        vertical-align: middle;
+        horizontal-align: middle;
+        max-width: 300px;
+        margin: auto;
+        }
+        .css-yhwc6k{
+        text-align: center;
+        }
+        #audio{autoplay:true;}
+        #MainMenu{visibility: hidden;}
+        footer{visibility: hidden;}
+        .css-14xtw13 e8zbici0{visibility: hidden;}
+        .css-m70y {display:none}
+        .st-emotion-cache-zq5wmm.ezrtsby0{visibility: hidden;}
+        .st-emotion-cache-zq5wmm.ezrtsby0{display:none}
+        .styles_terminalButton__JBj5T{visibility: hidden;}
+        .styles_terminalButton__JBj5T{display:none}
+        .viewerBadge_container__r5tak.styles_viewerBadge__CvC9N{visibility: hidden;}
+        .viewerBadge_container__r5tak.styles_viewerBadge__CvC9N{display:none}
+        [data-testid='stSidebarNav'] > ul {
+            min-height: 50vh;
+        }
+        [data-testid='stSidebarNav'] > ul {
+            color: red;
+        }
+    </style>
+""", unsafe_allow_html=True)
 icob = Image.open('static/-.ico')
 
 st.set_page_config(
