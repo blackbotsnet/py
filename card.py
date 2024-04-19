@@ -80,8 +80,8 @@ with st.sidebar:
     memo = st.text_input('Memo', value="Good luck!")
     img = st.text_input('Background Image', value="https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png", placeholder='https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png')
     link = st.text_input('Click Link', value="https://one.fullsail.edu/")
-    siz = st.slider('Size', 100, 1000, 500)
-    st.write("{}x{}")
+    siz = st.slider('Width', 100, 1000, 300)
+    hiz = st.slider('Height', 100, 1000, 300)
     st.write('')
     st.write('')
     st.write('')
@@ -112,7 +112,7 @@ def generate_card():
         styles={
             "card": {
                 "width": new_width,
-                "height": new_height,
+                "height": hiz,
                 "border-radius": "60px",
                 "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
             },
