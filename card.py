@@ -1,12 +1,12 @@
 import streamlit as st
 from streamlit_card import card
 
-hide_github_icon = """
+hid = """
 #GithubIcon {
   visibility: hidden;
 }
 """
-st.markdown(hide_github_icon, unsafe_allow_html=True)
+st.markdown(hid, unsafe_allow_html=True)
 
 with st.sidebar:
     name = st.text_input('Your name', value="@Supreme.Ciento")
