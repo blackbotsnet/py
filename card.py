@@ -18,6 +18,15 @@ import html
 import hashlib
 
 
+icob = Image.open('static/-.ico')
+
+st.set_page_config(
+    page_title="FSS: Card Gen",
+    page_icon=icob,
+    layout="centered",
+    initial_sidebar_state="expanded"
+)
+
 st.markdown("""
     <style>
         <br><hr><center>
@@ -60,14 +69,7 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
-icob = Image.open('static/-.ico')
 
-st.set_page_config(
-    page_title="FSS: Card Gen",
-    page_icon=icob,
-    layout="centered",
-    initial_sidebar_state="expanded"
-)
 side_image = Image.open('static/4.png')
 
 with st.sidebar:
