@@ -50,5 +50,5 @@ def generate_card():
 generate_card()
 
 # Provide the generated card image for download
-st.download_button(label="Download Card", data=generate_card, file_name="student_card.png", mime="image/png")
+st.download_button(label="Download Card", data=generate_card, file_name="student_card.png")
 
