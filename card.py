@@ -29,17 +29,17 @@ st.set_page_config(
 side_image = Image.open('static/4.png')
 
 with st.sidebar:
-    st.image(side_image)
     st.caption("Full Sail Student Card Gen.")
-    name = st.text_input('Your name', value="Your Name Here")
-    stu = st.text_input('Student id #', value="012345678")
-    degree = st.text_input('Your degree', value="Degree Here")
+    name = st.text_input('Name:', value="Your Name Here")
+    stu = st.text_input('Student ID:', value="012345678")
+    degree = st.text_input('Degree/Certification', value="Degree Here")
     memo = st.text_input('Memo', value="Good luck!")
     img = st.text_input('Background Image', value="https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png", placeholder='https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png')
-    link = st.text_input('URL when Card is clicked', value="https://one.fullsail.edu/")
+    link = st.text_input('Click Link', value="https://one.fullsail.edu/")
     st.write('')
     st.write('')
     st.write('')
+    st.image(side_image)
     url = 'https://www.instagram.com/supreme.ciento/'
     st.caption("Credit: [@Supreme.Ciento](%s)" % url)
 
