@@ -51,10 +51,10 @@ def download_card(card_content):
     image_io = io.BytesIO()
     image.save(image_io, format='PNG')
     # Download image
-    st.write(image_io.getvalue(), format='PNG', download="card.png")
+    st.download_button('Download', image_io.getvalue(), file_name="card.png", mime="image/png")
 
 def card_to_image(card_content):
-    # This is where you'll implement the logic to convert the card to an image
+    # This is where you'll implement the logic to convert the card content to an image
     # You may use libraries like PIL or matplotlib for this purpose
     # Here's a placeholder implementation using PIL
     img = Image.new('RGB', (300, 250), color='white')
