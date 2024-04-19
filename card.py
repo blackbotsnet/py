@@ -42,24 +42,5 @@ def generate_card():
         url=link,
         key=unique_key()
     )
-    st.download_button('Download', download_card, args=(card_content,))
-
-def download_card(card_content):
-    # Convert card to image
-    image = card_to_image(card_content)
-    # Save image to BytesIO
-    image_io = io.BytesIO()
-    image.save(image_io, format='PNG')
-    # Download image
-    st.download_button('Download', image_io.getvalue(), file_name="card.png", mime="image/png")
-
-def card_to_image(card_content):
-    # This is where you'll implement the logic to convert the card content to an image
-    # You may use libraries like PIL or matplotlib for this purpose
-    # Here's a placeholder implementation using PIL
-    img = Image.new('RGB', (300, 250), color='white')
-    draw = ImageDraw.Draw(img)
-    draw.text((10, 10), card_content, fill='black')
-    return img
 
 generate_card()
