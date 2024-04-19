@@ -22,12 +22,12 @@ side_image = Image.open('static/4.png')
 with st.sidebar:
     st.image(side_image)
     st.caption("Full Sail Student Card Gen.")
-    name = st.text_input('Your name', value="@Supreme.Ciento")
+    name = st.text_input('Your name', value="Your Name Here")
     stu = st.text_input('Student id #', value="012345678")
-    degree = st.text_input('Your degree', value="Game Development")
+    degree = st.text_input('Your degree', value="Degree Here")
     memo = st.text_input('Memo', value="Good luck!")
     img = st.text_input('Background Image', value="https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png", placeholder='https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png')
-    link = st.text_input('URL when Card is clicked')
+    link = st.text_input('URL when Card is clicked', value="https://one.fullsail.edu/")
 
 def unique_key():
     unique_id = str(uuid.uuid4())
