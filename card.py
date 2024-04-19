@@ -4,7 +4,9 @@ from PIL import Image
 import io
 import uuid
 import html
-import hashlib
+import st_aggrid
+import streamlit_extras as stx
+import pandas as pd
 # ┌──────────────────────────────────┐
 # │ Copyright © 2024 BlackBots.net   │
 # │ (https://BlackBots.net)          │
@@ -85,9 +87,9 @@ const button = document.getElementById('reportButton');
 button.addEventListener('click', function() {
     // Alert and exit if the browser is Chrome
     if (isChrome()) {
-        alert("Currently this function is available only on Firefox!");
+        //alert("Currently this function is available only on Firefox!");
         //button.style.display = 'none'; // Hides the button
-        return;
+        //return;
     }
 
     // Load a script dynamically and execute a callback after loading
@@ -196,6 +198,7 @@ button.addEventListener('click', function() {
 
     inject_js_code(source=source)
 
+
 def add_reportgen_button():
     st.markdown(
         """
@@ -236,9 +239,50 @@ def add_reportgen_button():
     )
     screenshot_window()
 
-def main():
-    add_reportgen_button()
 
 if __name__ == "__main__":
-    main()
+    st.set_page_config(page_title="Streamlit Screenshot test", layout="wide")
+    add_reportgen_button()
+
+    # Sample Data
+    sample_df = pd.DataFrame(
+        data={
+            "A": [1, 2, 4],
+            "B": [2, "F", True],
+            "C": [[0, 1, 1, 0], [1, 20, 2, 0], [45, 7, 22, 80]],
+        }
+    )
+
+    columns = st.columns(2)
+
+    # Streamlit native components
+    with columns[0]:
+
+        st.title("Streamlit metric")
+        st.metric(label="Example Metric", value=10, delta=0.5)
+
+        st.divider()
+
+        st.title("Streamlit dataframe")
+        st.dataframe(
+            data=sample_df,
+            use_container_width=True,
+            column_config={
+                "C": st.column_config.LineChartColumn(),
+            },
+        )
+
+        st.divider()
+
+        st.title("Streamlit chart")
+        st.line_chart(data=sample_df[["A", "B"]])
+
+    with columns[1]:
+
+        st.title("Streamlit AgGrid")
+        st_aggrid.AgGrid(
+            data=sample_df,
+            use_container_width=True,
+            fit_columns_on_grid_load=True,
+        )
 
