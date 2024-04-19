@@ -21,7 +21,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 side_image = Image.open('static/4.png')
 
-
 with st.sidebar:
     st.image(side_image)
     st.caption("Full Sail Student Card Gen.")
@@ -32,7 +31,7 @@ with st.sidebar:
     img = st.text_input('Background Image', value="https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png", placeholder='https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png')
     link = st.text_input('URL when clicked')
 
-def example():
+def generate_card():
     card(
         title=name,
         text=[f"#{stu}", f"{degree}", f"{memo}"],
@@ -41,15 +40,11 @@ def example():
     )
 
 # Generate the card
-example()
-
-# Get the current Streamlit report context
-ctx = st.report_thread.get_report_ctx()
+generate_card()
 
 # Save the generated card image to a temporary buffer
 buffer = io.BytesIO()
-example()
-st.image(buffer, caption='Download your card', use_column_width=True)
+st.image(buffer, format='PNG', caption='Download your card', use_column_width=True)
 
 # Convert the generated card image to bytes
 buffer.seek(0)
