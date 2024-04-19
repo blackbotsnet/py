@@ -4,7 +4,7 @@ from PIL import Image
 import io
 import uuid
 import html
-
+import hashlib
 # ┌──────────────────────────────────┐
 # │ Copyright © 2024 BlackBots.net   │
 # │ (https://BlackBots.net)          │
