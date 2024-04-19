@@ -30,7 +30,7 @@ with st.sidebar:
     link = st.text_input('URL when Card is clicked', value="https://one.fullsail.edu/")
     
     url = 'https://www.instagram.com/supreme.ciento/'
-    st.markdown("Credit: [@Supreme.Ciento](%s)" % url)
+    st.caption("Credit: [@Supreme.Ciento](%s)" % url)
 
 def unique_key():
     unique_id = str(uuid.uuid4())
