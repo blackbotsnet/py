@@ -81,7 +81,7 @@ with st.sidebar:
     img = st.text_input('Background Image', value="https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png", placeholder='https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png')
     link = st.text_input('Click Link', value="https://one.fullsail.edu/")
     siz = st.slider('Width', 100, 1000, 300)
-    hiz = st.slider('Height', 100, 1000, 300)
+    hiz = st.slider('Height', 100, 1000, 400)
     st.write('')
     st.write('')
     st.write('')
