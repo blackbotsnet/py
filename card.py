@@ -28,7 +28,9 @@ with st.sidebar:
     memo = st.text_input('Memo', value="Good luck!")
     img = st.text_input('Background Image', value="https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png", placeholder='https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png')
     link = st.text_input('URL when Card is clicked', value="https://one.fullsail.edu/")
-    
+    st.write('')
+    st.write('')
+    st.write('')
     url = 'https://www.instagram.com/supreme.ciento/'
     st.caption("Credit: [@Supreme.Ciento](%s)" % url)
 
