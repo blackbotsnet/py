@@ -46,7 +46,6 @@ def generate_card():
                 "height": "400px",
                 "border-radius": "60px",
                 "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
-                ...
             },
         }
         key=unique_key()
