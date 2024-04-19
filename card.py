@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_card import card
 from PIL import Image
+import io
 
 # ┌──────────────────────────────────┐
 # │ Copyright © 2024 BlackBots.net   │
@@ -38,7 +39,15 @@ def example():
         image=img,
         url=link,
     )
-binary_contents = b'card'
-st.download_button('Download binary file', binary_contents)
 
+# Generate the card
 example()
+
+# Convert the generated card image to bytes
+buffer = io.BytesIO()
+card_image = card.to_image()
+card_image.save(buffer, format='PNG')
+card_image_bytes = buffer.getvalue()
+
+# Provide the generated card image for download
+st.download_button('Download Card', card_image_bytes, file_name='student_card.png', mime='image/png')
