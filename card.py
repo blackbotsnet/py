@@ -43,11 +43,17 @@ def example():
 # Generate the card
 example()
 
-# Convert the generated card image to bytes
+# Get the current Streamlit report context
+ctx = st.report_thread.get_report_ctx()
+
+# Save the generated card image to a temporary buffer
 buffer = io.BytesIO()
-card_image = card.to_image()
-card_image.save(buffer, format='PNG')
+example()
+st.image(buffer, caption='Download your card', use_column_width=True)
+
+# Convert the generated card image to bytes
+buffer.seek(0)
 card_image_bytes = buffer.getvalue()
 
 # Provide the generated card image for download
-st.download_button('Download Card', card_image_bytes, file_name='student_card.png', mime='image/png')
+st.markdown(get_binary_file_downloader_html('student_card.png', card_image_bytes, 'Download Card'), unsafe_allow_html=True)
