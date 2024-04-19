@@ -40,15 +40,21 @@ def generate_card():
         text=[f"#{stu}", f"{degree}", f"{memo}"],
         image=img,
         url=link,
-        styles=(
+        key=unique_key(),
+        styles={
             "card": {
-                "width": "300px",
-                "height": "400px",
+                "width": "500px",
+                "height": "500px",
                 "border-radius": "60px",
                 "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
+                ...
             },
-        )
-        key=unique_key()
+            "text": {
+                "font-family": "serif",
+                ...
+            }
+        }
     )
+        
 
 generate_card()
