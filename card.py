@@ -233,7 +233,6 @@ def add_reportgen_button():
 
 
 if __name__ == "__main__":
-    st.set_page_config(page_title="Streamlit Screenshot test", layout="wide")
     add_reportgen_button()
 
     # Sample Data
