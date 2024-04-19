@@ -44,6 +44,7 @@ generate_card()
 
 # Save the generated card image to a temporary buffer
 buffer = io.BytesIO()
+generate_card()
 st.image(buffer, format='PNG', caption='Download your card', use_column_width=True)
 
 # Convert the generated card image to bytes
@@ -51,4 +52,4 @@ buffer.seek(0)
 card_image_bytes = buffer.getvalue()
 
 # Provide the generated card image for download
-st.markdown(get_binary_file_downloader_html('student_card.png', card_image_bytes, 'Download Card'), unsafe_allow_html=True)
+st.download_button(label="Download Card", data=card_image_bytes, file_name="student_card.png", mime="image/png")
