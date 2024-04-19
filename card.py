@@ -40,14 +40,14 @@ def generate_card():
         text=[f"#{stu}", f"{degree}", f"{memo}"],
         image=img,
         url=link,
-        styles={
+        styles=(
             "card": {
                 "width": "300px",
                 "height": "400px",
                 "border-radius": "60px",
                 "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
             },
-        }
+        )
         key=unique_key()
     )
 
