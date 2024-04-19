@@ -1,13 +1,3 @@
-import streamlit as st
-from streamlit_card import card
-from PIL import Image
-import io
-import uuid
-import html
-import st_aggrid
-import streamlit_extras as stx
-import pandas as pd
-import hashlib
 # ┌──────────────────────────────────┐
 # │ Copyright © 2024 BlackBots.net   │
 # │ (https://BlackBots.net)          │
@@ -19,8 +9,18 @@ __credits__ = ["Guillermo Matas Ruiz"]
 __license__ = "MIT"
 __version__ = "1.0.0"
 
+import streamlit as st
+from streamlit_card import card
+from PIL import Image
+import io
+import uuid
+import html
+import hashlib
+
+# Load the side image
 side_image = Image.open('static/4.png')
 
+# Define the Streamlit sidebar
 with st.sidebar:
     st.image(side_image)
     st.caption("Full Sail Student Card Gen.")
@@ -31,18 +31,31 @@ with st.sidebar:
     img = st.text_input('Background Image', value="https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png", placeholder='https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png')
     link = st.text_input('URL when Card is clicked')
 
+# Function to generate a unique key
 def generate_unique_key():
     unique_id = str(uuid.uuid4())
     hashed_key = hashlib.sha256(unique_id.encode()).hexdigest()
     return hashed_key
-def generate_card():
-    card(
+
+# Function to generate the card and save it as an image
+def generate_and_download_card():
+    # Generate the card
+    card_content = card(
         title=name,
         text=[f"#{stu}", f"{degree}", f"{memo}"],
         image=img,
         url=link,
         key=generate_unique_key()
     )
+    
+    # Save the card as an image
+    buffer = io.BytesIO()
+    card_content.save(buffer, format="PNG")
+    buffer.seek(0)
+    
+    # Provide the card image for download
+    st.download_button(label="Download", data=buffer, file_name="student_card.png", mime="image/png")
 
-generate_card()
-st.download_button('Download', generate_card)
+# Generate the card
+generate_and_download_card()
+
