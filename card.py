@@ -8,9 +8,11 @@ from streamlit_card import card
 # └──────────────────────────────────┘
 
 st.markdown("""
+<style>
 #GithubIcon {
   visibility: hidden;
 }
+</style>
 """, unsafe_allow_html=True)
 
 with st.sidebar:
