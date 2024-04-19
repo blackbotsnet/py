@@ -21,7 +21,7 @@ side_image = Image.open('static/4.png')
 
 with st.sidebar:
     st.image(side_image)
-    st.caption(Full Sail Student Card Gen.")
+    st.caption("Full Sail Student Card Gen.")
     name = st.text_input('Your name', value="@Supreme.Ciento")
     stu = st.text_input('Student id #', value="012345678")
     degree = st.text_input('Your degree', value="Game Development")
