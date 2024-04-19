@@ -48,13 +48,18 @@ def generate_and_download_card():
         key=generate_unique_key()
     )
     
-    # Save the card as an image
-    buffer = io.BytesIO()
-    card_content.save(buffer, format="PNG")
-    buffer.seek(0)
+    @st.cache_data
+    def convert_df(df):
+        return df.to_csv().encode('utf-8')
     
-    # Provide the card image for download
-    st.download_button(label="Download", data=buffer, file_name="student_card.png", mime="image/png")
+    csv = convert_df(card)
+    
+    st.download_button(
+        label="Download data as CSV",
+        data=csv,
+        file_name='large_df.csv',
+        mime='text/csv',
+    )
 
 # Generate the card
 generate_and_download_card()
