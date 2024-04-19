@@ -51,12 +51,12 @@ _P='series/'
 _O='mdthumb'
 _N='listupd'
 _M='Searching..'
-_L='current_image_index'
-_K='image_links'
-_J='Copy'
-_I='href'
-_H='src'
-_G='Loading text & audio..'
+_L='Loading text & audio..'
+_K='current_image_index'
+_J='image_links'
+_I='Copy'
+_H='href'
+_G='src'
 _F='html.parser'
 _E='en'
 _D='class'
@@ -72,7 +72,7 @@ from gtts import gTTS
 from PIL import Image
 import easyocr as ocr,numpy as np
 from easyocr import Reader
-import streamlit as st,streamlit_nested_layout,streamlit.components.v1 as components
+import streamlit as st,streamlit_nested_layout,streamlit.components.v1 as components,streamlit_extras
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -83,15 +83,15 @@ from webdriver_manager.core.os_manager import ChromeType
 from bs4 import BeautifulSoup
 import webbrowser
 def generate_unique_key():A=str(uuid.uuid4());B=hashlib.sha256(A.encode()).hexdigest();return B
-def get_driver():return webdriver.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()),options=options)
 def autoplay_audio(file_path):
         with open(file_path,'rb')as A:B=A.read();C=base64.b64encode(B).decode();D=f'\n            <audio controls autoplay="true">\n            <source src="data:audio/mp3;base64,{C}" type="audio/mp3">\n            </audio>\n            ';st.markdown(D,unsafe_allow_html=_A)
+def get_driver():A=Options();A.add_argument('--disable-gpu');A.add_argument('--headless');A.add_argument('--disable-blink-features=AutomationControlled');A.add_experimental_option('useAutomationExtension',_B);A.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36');A.add_argument('--dns-prefetch-disable');A.add_argument('--no-sandbox');A.add_argument('--lang=en-US');A.add_argument('--disable-setuid-sandbox');A.add_argument('--ignore-certificate-errors');return webdriver.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()),options=A)
 def perform_img_actions(url):
-        if _K not in st.session_state:st.session_state.image_links=[]
-        if _L not in st.session_state:st.session_state.current_image_index=0
+        if _J not in st.session_state:st.session_state.image_links=[]
+        if _K not in st.session_state:st.session_state.current_image_index=0
         try:driver.get(url)
         except:pass
-        with st.spinner(_G):
+        with st.spinner(_L):
                 st.session_state.image_links=get_image_links(url);st.session_state.current_image_index=0
                 if st.session_state.image_links:
                         for A in st.session_state.image_links:st.image(A,use_column_width=_A)
@@ -103,7 +103,7 @@ def get_image_links(url):
                 else:st.write(f"Error loading URL: {C}");return[]
         B=[];D=driver.find_elements(By.CSS_SELECTOR,'img')
         for E in D:
-                A=E.get_attribute(_H)
+                A=E.get_attribute(_G)
                 if A and is_image_link(A):B.append(A)
         driver.quit();return B
 def transcribe_to_audio(image_links):
@@ -149,8 +149,10 @@ def readit(url):
                                         c='';O=len(E.findAll('p'));B=E.findAll('p');F=1;d=O//F;P=[B[A:A+F]for A in range(0,len(B),F)];A=''
                                         for Q in B:A+=Q.text+H
                                         A=A.replace('<p>','');A=A.replace('"','');st.markdown('<style>\n                          .stMarkdown{color: black;}\n                          .st-c8:hover{color:orange;}\n                          .streamlit-expander.st-bc.st-as.st-ar.st-bd.st-be.st-b8.st-bf.st-bg.st-bh.st-bi{display:none;}\n                          </style>',unsafe_allow_html=_A)
-                                        with st.expander('Read'):from annotated_text import annotated_text as R;B=A.split(H);S=[(A,'','#fea')for A in B];R(*S);st.caption(f"{len(A)} characters in this chapter.");J=C;G=''.join([A for A in J if A.isdigit()]);T=str(int(G)+int(+1));U=str(int(G));K=str(J.replace(G,T));st.caption(':green[Chapter Complete:] '+U+'\n\n:orange[Next Chapter:] '+K);e=st.text_area('Link',f"{K}",key=generate_unique_key())
-                                        with tempfile.NamedTemporaryFile(suffix='.mp3',delete=_B)as L:A=A.replace('"','');V=gTTS(text=A,lang=_E,slow=_B);V.save(L.name);W=AudioSegment.from_mp3(L.name);X=speedup(W,1.2,150);X.export(M,format='mp3');autoplay_audio(M)
+                                        with st.spinner('Loading text..'):
+                                                with st.expander('Read'):from annotated_text import annotated_text as R;B=A.split(H);S=[(A,'','#fea')for A in B];R(*S);st.caption(f"{len(A)} characters in this chapter.");J=C;G=''.join([A for A in J if A.isdigit()]);T=str(int(G)+int(+1));U=str(int(G));K=str(J.replace(G,T));st.caption(':green[Chapter Complete:] '+U+'\n\n:orange[Next Chapter:] '+K);e=st.text_area('Link',f"{K}",key=generate_unique_key())
+                                        with st.spinner('Loading audio..'):
+                                                with tempfile.NamedTemporaryFile(suffix='.mp3',delete=_B)as L:A=A.replace('"','');V=gTTS(text=A,lang=_E,slow=_B);V.save(L.name);W=AudioSegment.from_mp3(L.name);X=speedup(W,1.2,150);X.export(M,format='mp3');autoplay_audio(M)
                                         for Y in P:
                                                 Z=''
                                                 for a in Y:Z+=a.text+H
@@ -165,32 +167,15 @@ icob=Image.open('static/-.ico')
 ranum=random.randint(1,99999)
 st.set_page_config(page_title='Manga Dōjutsu',page_icon=icob,layout='centered',initial_sidebar_state='expanded')
 st.markdown("\n    <style>\n        <br><hr><center>\n        .reportview-container {background: black;}\n        .sidebar .siderbar-content {background: black;}\n        .st-ck:hover {\n        color: #gold;\n        }\n        color: lime;\n        cursor: pointer;\n        }\n        img {\n        width:75%;\n        }\n        width:578px;\n        vertical-align: middle;\n        horizontal-align: middle;\n        max-width: 300px;\n        margin: auto;\n        }\n        .css-yhwc6k{\n        text-align: center;\n        }\n        #audio{autoplay:true;}\n        #MainMenu{visibility: hidden;}\n        footer{visibility: hidden;}\n        .css-14xtw13 e8zbici0{visibility: hidden;}\n        .css-m70y {display:none}\n        .st-emotion-cache-zq5wmm.ezrtsby0{visibility: hidden;}\n        .st-emotion-cache-zq5wmm.ezrtsby0{display:none}\n        .styles_terminalButton__JBj5T{visibility: hidden;}\n        .styles_terminalButton__JBj5T{display:none}\n        .viewerBadge_container__r5tak.styles_viewerBadge__CvC9N{visibility: hidden;}\n        .viewerBadge_container__r5tak.styles_viewerBadge__CvC9N{display:none}\n        [data-testid='stSidebarNav'] > ul {\n            min-height: 50vh;\n        }\n        [data-testid='stSidebarNav'] > ul {\n            color: red;\n        }\n    </style>\n",unsafe_allow_html=_A)
-options=Options()
-options.add_argument('--disable-gpu')
-options.add_argument('--headless')
-options.add_argument('--disable-blink-features=AutomationControlled')
-options.add_experimental_option('useAutomationExtension',_B)
-options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36')
-options.add_argument('--dns-prefetch-disable')
-options.add_argument('--no-sandbox')
-options.add_argument('--lang=en-US')
-options.add_argument('--disable-setuid-sandbox')
-options.add_argument('--ignore-certificate-errors')
 main_image=Image.open('static/dojutsu.png')
 side_image=Image.open('static/4.png')
 st.sidebar.write('BlackDao: Manga Dōjutsu')
-if _K not in st.session_state:st.session_state.image_links=[]
-if _L not in st.session_state:st.session_state.current_image_index=0
+if _J not in st.session_state:st.session_state.image_links=[]
+if _K not in st.session_state:st.session_state.current_image_index=0
 genre=None
 with st.sidebar:
         st.image(side_image);st.caption('Manga Text or Image To Speach');on=st.checkbox('Stream Story (Disabled)',value=_B,disabled=_A);st.divider();st.header('Google Play Store');st.caption('Download from: https://play.google.com/store/apps/details?id=com.blackbots.blackdao');st.header('Official PC Version');st.caption('Download from: https://blackbots.gumroad.com/l/manga');st.caption('Join Our Discord: https://discord.gg/HcVPaSpF');st.divider()
-        with st.expander('Help'):
-            st.caption("How to use BlackDao: Manga Dōjutsu")
-            st.caption("- Enter search term into `Search` field to find `Links`")
-            st.caption("- `Copy` a Link")
-            st.caption("- `Paste` Link onto `Enter Link` field")
-            st.caption("- `Press Read`")
-            st.caption("- View Image Based Links with the `Image Based` tab")
+        with st.expander('Help'):st.caption('How to use BlackDao: Manga Dōjutsu');st.caption('- Enter search term into `Search` field to find `Links`');st.caption('- `Copy` a Link');st.caption('- `Paste` Link onto `Enter Link` field');st.caption('- `Press Read`');st.caption('- View Image Based Links with the `Image Based` tab')
 col1,col2=st.columns(2)
 outer_cols=st.columns([1,2])
 search_variable=st.text_input(':orange[Search:]',placeholder='Search..',key='search',help='Enter a title here to search for')
@@ -203,11 +188,11 @@ if search_variable:
                                 if search_result_div:
                                         titles=search_result_div.find_all(_C,{_D:_O})
                                         for title in titles:
-                                                title_url=title.a[_I];title_name=title_url.split(_P)[1].replace('/','').title();ih=f"https://daotranslate.us/{title_name}-chapter-1/"
+                                                title_url=title.a[_H];title_name=title_url.split(_P)[1].replace('/','').title();ih=f"https://daotranslate.us/{title_name}-chapter-1/"
                                                 with st.spinner(_M):
-                                                        st.write(f"[{title_name}]({ih})");img_url=title.img[_H]
+                                                        st.write(f"[{title_name}]({ih})");img_url=title.img[_G]
                                                         if img_url:st.image(img_url,caption=ih)
-                                                        if ih:txt=st.text_area(_J,f"{ih}",key=generate_unique_key())
+                                                        if ih:txt=st.text_area(_I,f"{ih}",key=generate_unique_key())
                                                         st.divider()
 with col1:
         with st.expander(':books: Random Titles'):
@@ -217,9 +202,9 @@ with col1:
                         if manga_list_div:
                                 titles=manga_list_div.find_all(_C,{_D:_O})
                                 for title in titles:
-                                        title_url=title.a[_I];title_name=title_url.split(_P)[1].replace('/','').title();ch=f"https://daotranslate.us/{title_name}-chapter-1/";st.write(f"[{title_name}]({ch})");img_url=title.img[_H]
+                                        title_url=title.a[_H];title_name=title_url.split(_P)[1].replace('/','').title();ch=f"https://daotranslate.us/{title_name}-chapter-1/";st.write(f"[{title_name}]({ch})");img_url=title.img[_G]
                                         if img_url:st.image(img_url,caption=ch,use_column_width=_Q)
-                                        if ch:txt=st.text_area(_J,f"{ch}",key=generate_unique_key())
+                                        if ch:txt=st.text_area(_I,f"{ch}",key=generate_unique_key())
                                         st.divider()
 with col2:
         with st.expander(':frame_with_picture: Image'):
@@ -227,12 +212,12 @@ with col2:
                 if resp.status_code==200:
                         soup=BeautifulSoup(resp.text,_F);manga_links=soup.find_all('a',href=lambda href:href and href.startswith(_R))
                         for link in manga_links:
-                                href=link.get(_I);manga_name=href.split(_R)[1]
+                                href=link.get(_H);manga_name=href.split(_R)[1]
                                 if'chapter'not in manga_name:cch=f"{href}chapter-1/"
                                 else:cch=href
                                 st.write(f"[{manga_name}]({cch})");img_tag=link.find('img')
                                 if img_tag:img_url=img_tag.get('data-src');st.image(img_url,caption=cch,use_column_width=_Q)
-                                if cch:txt=st.text_area(_J,f"{cch}",key=generate_unique_key())
+                                if cch:txt=st.text_area(_I,f"{cch}",key=generate_unique_key())
                                 st.divider()
 st.image(main_image)
 res_box=st.empty()
@@ -242,12 +227,12 @@ tab1,tab2=st.tabs(['Text Based','Image Based'])
 with tab1:
         if _S in xx:
                 if ok:
-                        with st.spinner(_G):readit(xx)
+                        with st.spinner('Loading, please be patient..'):readit(xx)
 with tab2:
         if _S not in xx.lower():
                 if tab2:
                         if ok:
-                                with st.spinner(_G):
+                                with st.spinner(_L):
                                         st.session_state.image_links=get_image_links(url);st.session_state.current_image_index=0
                                         if st.session_state.image_links:
                                                 for image_link in st.session_state.image_links:st.image(image_link,use_column_width=_A)
