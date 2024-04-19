@@ -28,6 +28,7 @@ with st.sidebar:
     memo = st.text_input('Memo', value="Good luck!")
     img = st.text_input('Background Image', value="https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png", placeholder='https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png')
     link = st.text_input('URL when Card is clicked', value="https://one.fullsail.edu/")
+    st.caption("Credit: (@SupremeCiento)[https://www.instagram.com/supreme.ciento/]")
 
 def unique_key():
     unique_id = str(uuid.uuid4())
@@ -56,3 +57,5 @@ def generate_card():
         
 
 generate_card()
+st.markdown("<br><hr><center>© Cloud Bots™ BlackBots. All rights reserved.  <a href='mailto:admin@blackbots.net?subject=FSCard!&body=Please specify the issue you are facing with the app.'><strong>BlackBots.net</strong></a></center><hr>", unsafe_allow_html=True)
+st.markdown("<style> footer {visibility: hidden;} </style>", unsafe_allow_html=True)
