@@ -7,6 +7,7 @@ import html
 import st_aggrid
 import streamlit_extras as stx
 import pandas as pd
+import hashlib
 # ┌──────────────────────────────────┐
 # │ Copyright © 2024 BlackBots.net   │
 # │ (https://BlackBots.net)          │
