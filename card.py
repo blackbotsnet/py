@@ -21,7 +21,7 @@ import hashlib
 icob = Image.open('static/-.ico')
 
 st.set_page_config(
-    page_title="Manga Dōjutsu",
+    page_title="FSS: Card Gen",
     page_icon=icob,
     layout="centered",
     initial_sidebar_state="expanded"
