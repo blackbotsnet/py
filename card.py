@@ -14,12 +14,12 @@ with st.sidebar:
     degree = st.text_input('Your degree', value="Game Development")
     memo = st.text_input('Memo', value="Good luck!")
     img = st.text_input('Background Image', value="https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png", placeholder='https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png')
-    link = st.text_input('Link')
+    link = st.text_input('URL when clicked')
 
 def example():
     card(
         title=name,
-        text=[f"Degree: {degree}", f"#: {stu}", f"{memo}"],
+        text=[f"#{stu}", f"{degree}", f"{memo}"],
         image=img,
         url=link,
     )
