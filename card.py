@@ -36,5 +36,7 @@ def example():
         image=img,
         url=link,
     )
+binary_contents = b'card'
+st.download_button('Download binary file', binary_contents)
 
 example()
