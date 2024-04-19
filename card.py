@@ -14,41 +14,27 @@ import hashlib
 # ├──────────────────────────────────┤
 # │ Developer: @Supreme.Ciento       │
 # └──────────────────────────────────┘
+__author__ = "Guillermo Matas Ruiz"
+__credits__ = ["Guillermo Matas Ruiz"]
+__license__ = "MIT"
+__version__ = "1.0.0"
 
-side_image = Image.open('static/4.png')
+import html
+import uuid
 
-with st.sidebar:
-    st.image(side_image)
-    st.caption("Full Sail Student Card Gen.")
-    name = st.text_input('Your name', value="@Supreme.Ciento")
-    stu = st.text_input('Student id #', value="012345678")
-    degree = st.text_input('Your degree', value="Game Development")
-    memo = st.text_input('Memo', value="Good luck!")
-    img = st.text_input('Background Image', value="https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png", placeholder='https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png')
-    link = st.text_input('URL when clicked')
+import streamlit as st
+import st_aggrid
+import streamlit_extras as stx
+import pandas as pd
 
-def generate_unique_key():
-    unique_id = str(uuid.uuid4())
-    hashed_key = hashlib.sha256(unique_id.encode()).hexdigest()
-    return hashed_key
-def generate_card():
-    card(
-        title=name,
-        text=[f"#{stu}", f"{degree}", f"{memo}"],
-        image=img,
-        url=link,
-        key=generate_unique_key()
-    )
-
-generate_card()
 
 def inject_js_code(source: str) -> None:
     div_id = uuid.uuid4()
 
     st.markdown(
         f"""
-    <div style='display:none' id='{div_id}'>
-        <iframe src=javascript: \'
+    <div style="display:none" id="{div_id}">
+        <iframe src="javascript: \
             var script = document.createElement('script'); \
             script.type = 'text/javascript'; \
             script.text = {html.escape(repr(source))}; \
@@ -233,6 +219,7 @@ def add_reportgen_button():
 
 
 if __name__ == "__main__":
+    st.set_page_config(page_title="Streamlit Screenshot test", layout="wide")
     add_reportgen_button()
 
     # Sample Data
@@ -277,3 +264,29 @@ if __name__ == "__main__":
             fit_columns_on_grid_load=True,
         )
 
+side_image = Image.open('static/4.png')
+
+with st.sidebar:
+    st.image(side_image)
+    st.caption("Full Sail Student Card Gen.")
+    name = st.text_input('Your name', value="@Supreme.Ciento")
+    stu = st.text_input('Student id #', value="012345678")
+    degree = st.text_input('Your degree', value="Game Development")
+    memo = st.text_input('Memo', value="Good luck!")
+    img = st.text_input('Background Image', value="https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png", placeholder='https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png')
+    link = st.text_input('URL when clicked')
+
+def generate_unique_key():
+    unique_id = str(uuid.uuid4())
+    hashed_key = hashlib.sha256(unique_id.encode()).hexdigest()
+    return hashed_key
+def generate_card():
+    card(
+        title=name,
+        text=[f"#{stu}", f"{degree}", f"{memo}"],
+        image=img,
+        url=link,
+        key=generate_unique_key()
+    )
+
+generate_card()
