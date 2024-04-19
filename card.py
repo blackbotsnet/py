@@ -1,5 +1,7 @@
 import streamlit as st
 from streamlit_card import card
+from PIL import Image
+
 # ┌──────────────────────────────────┐
 # │ Copyright © 2024 BlackBots.net   │
 # │ (https://BlackBots.net)          │
