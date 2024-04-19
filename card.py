@@ -40,7 +40,7 @@ def generate_card():
         text=[f"#{stu}", f"{degree}", f"{memo}"],
         image=img,
         url=link,
-        key=generate_unique_key()
+        key=unique_key()
     )
     
 generate_card()
