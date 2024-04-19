@@ -52,7 +52,7 @@ def generate_and_download_card():
     def convert_df(df):
         return df.to_csv().encode('utf-8')
     
-    csv = convert_df(card)
+    csv = convert_df(card_content)
     
     st.download_button(
         label="Download data as CSV",
