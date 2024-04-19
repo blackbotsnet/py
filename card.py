@@ -80,12 +80,22 @@ with st.sidebar:
     memo = st.text_input('Memo', value="Good luck!")
     img = st.text_input('Background Image', value="https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png", placeholder='https://www.ieabroad.com/wp-content/uploads/Full-Sail-University.png')
     link = st.text_input('Click Link', value="https://one.fullsail.edu/")
+    siz = st.slider('Size', 100, 1000, 500)
+    st.write("{}x{}")
     st.write('')
     st.write('')
     st.write('')
     st.image(side_image)
     url = 'https://www.instagram.com/supreme.ciento/'
     st.caption("Credit: [@Supreme.Ciento](%s)" % url)
+
+def maintain_aspect_ratio(original_width, original_height, new_width):
+    return (original_height / original_width) * new_width
+
+original_width = 300
+original_height = 400
+new_width = siz
+new_height = maintain_aspect_ratio(original_width, original_height, new_width)
 
 def unique_key():
     unique_id = str(uuid.uuid4())
@@ -101,8 +111,8 @@ def generate_card():
         key=unique_key(),
         styles={
             "card": {
-                "width": "500px",
-                "height": "500px",
+                "width": new_width,
+                "height": new_height,
                 "border-radius": "60px",
                 "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
             },
