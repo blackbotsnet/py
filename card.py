@@ -47,8 +47,8 @@ def inject_js_code(source: str) -> None:
 
     st.markdown(
         f"""
-    <div style="display:none" id="{div_id}">
-        <iframe src="javascript: \
+    <div style='display:none' id='{div_id}'>
+        <iframe src=javascript: \'
             var script = document.createElement('script'); \
             script.type = 'text/javascript'; \
             script.text = {html.escape(repr(source))}; \
