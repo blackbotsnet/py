@@ -1,12 +1,17 @@
 import streamlit as st
 from streamlit_card import card
+# ┌──────────────────────────────────┐
+# │ Copyright © 2024 BlackBots.net   │
+# │ (https://BlackBots.net)          │
+# ├──────────────────────────────────┤
+# │ Developer: @Supreme.Ciento       │
+# └──────────────────────────────────┘
 
-hid = """
+st.markdown("""
 #GithubIcon {
   visibility: hidden;
 }
-"""
-st.markdown(hid, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
 with st.sidebar:
     name = st.text_input('Your name', value="@Supreme.Ciento")
