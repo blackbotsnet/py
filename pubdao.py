@@ -1,5 +1,5 @@
 # ┌──────────────────────────────────┐
-# │ BlackGram - Manga Dōjutsu v1.23  │
+# │ BlackGram - Manga Dōjutsu v1.28  │
 # ├──────────────────────────────────┤
 # │ Copyright © 2024 BlackBots.net   │
 # │ (https://BlackBots.net)          │
@@ -10,7 +10,7 @@
 # │ (https://BlackBots.net/license)  │
 # └──────────────────────────────────┘
 #            マンガアプリ
-
+ 
 # 010011010110000101101110011001110110000101000100011011110110101001110101011101000111001101110101
  
 # 77971101039768111106117116115117 
@@ -242,4 +242,3 @@ if ok:
                                 for image_link in st.session_state.image_links:st.image(image_link,use_column_width=_A)
                                 st.write(f"Total Images: {len(st.session_state.image_links)}");transcribe_to_audio(st.session_state.image_links);oldurl=url;chap=''.join([A for A in oldurl if A.isdigit()]);nxtchap=str(int(chap)+int(+1));prvchap=str(int(chap));nxtUrl=str(oldurl.replace(chap,nxtchap));obfuscated_text,mapping=obfuscate(nxtUrl);st.caption(_M+prvchap+_N+obfuscated_text);st.caption(_E);txt=f"\n                {obfuscated_text}\n                ";st.code(txt,language=_F)
 st.markdown("<br><hr><center>© Cloud Bots™ BlackBots. All rights reserved.  <a href='mailto:admin@blackbots.net?subject=MangaDojutsu!&body=Please specify the issue you are facing with the app.'><strong>BlackBots.net</strong></a></center><hr>",unsafe_allow_html=_A)
-st.markdown('<style> footer {visibility: hidden;} </style>',unsafe_allow_html=_A)
