@@ -222,9 +222,8 @@ with col2:
                                 href=link.get(_I)
                                 if'chapter'not in href:cch=f"{href}chapter-1/"
                                 else:cch=href
-                                manga_name=href.split(_T)[1];st.write(f"[{manga_name}]({cch})");img_tag=link.find('img');original_string=cch;obfuscated_text,mapping=obfuscate(original_string)
-                                if img_tag:img_url=img_tag.get('data-src');st.image(img_url,caption=obfuscated_text,use_column_width=_S)
-                                st.caption(_E);txt=f"\n                {obfuscated_text}\n                ";st.code(txt,language=_F);st.divider()
+                                manga_name=href.split(_T)[1];img_tag=link.find('img');original_string=cch;obfuscated_text,mapping=obfuscate(original_string)
+                                if img_tag:st.write(f"[{manga_name}]({cch})");img_url=img_tag.get('data-src');st.image(img_url,caption=obfuscated_text,use_column_width=_S);st.caption(_E);txt=f"\n                    {obfuscated_text}\n                    ";st.code(txt,language=_F);st.divider()
 st.image(main_image)
 res_box=st.empty()
 xx=st.text_input(':orange[Manga Code:]',value='',placeholder='iuuqt://ebhdrrghmbuf.vt/..',key='readfield',help='Enter Manga Code here')
