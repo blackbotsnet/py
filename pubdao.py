@@ -137,7 +137,7 @@ def filter_english_words(text):
         try:
                 if not isinstance(A,str):raise ValueError('Input must be a string')
                 B='\\b[a-zA-Z]+(?:\\\'[a-zA-Z]+)?(?:-[a-zA-Z]+)?(?:[.,!?\\\'":;\\[\\]()*&^%$#@`~\\\\/]|\\.\\.\\.)?\\b';C=re.findall(B,A);D=' '.join(C);A=D.lower()
-        except Exception as E:print('e')
+        except Exception as E:st.write(f"Error filtering English words: {E}");A=''
         return A
 def readit(url):
         M='file.mp3';H='\n';C=url;D=get_driver()
