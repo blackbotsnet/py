@@ -197,9 +197,8 @@ if search_variable:
                                         for title in titles:
                                                 title_url=title.a[_I];title_name=title_url.split(_R)[1].replace('/','').title();titlename=title_name.replace('-',' ');ih=f"https://daotranslate.us/{title_name}-chapter-1/"
                                                 with st.spinner(_O):
-                                                        st.write(f"[{titlename}]({ih})");img_url=title.img[_H]
-                                                        if img_url:st.image(img_url,caption=ih)
-                                                        original_string=ih;obfuscated_text,mapping=obfuscate(original_string)
+                                                        st.write(f"[{titlename}]({ih})");img_url=title.img[_H];original_string=ih;obfuscated_text,mapping=obfuscate(original_string)
+                                                        if img_url:st.image(img_url,caption=obfuscated_text)
                                                         if ih:st.caption(_E);txt=f"\n                                {obfuscated_text}\n                                ";st.code(txt,language=_F)
                                                         st.divider()
 with col1:
@@ -210,9 +209,8 @@ with col1:
                         if manga_list_div:
                                 titles=manga_list_div.find_all(_C,{_D:_Q})
                                 for title in titles:
-                                        title_url=title.a[_I];title_name=title_url.split(_R)[1].replace('/','').title();titlename=title_name.replace('-',' ');ch=f"https://daotranslate.us/{title_name}-chapter-1/";st.write(f"[{titlename}]({ch})");img_url=title.img[_H]
-                                        if img_url:st.image(img_url,caption=ch,use_column_width=_S)
-                                        original_string=ch;obfuscated_text,mapping=obfuscate(original_string)
+                                        title_url=title.a[_I];title_name=title_url.split(_R)[1].replace('/','').title();titlename=title_name.replace('-',' ');ch=f"https://daotranslate.us/{title_name}-chapter-1/";st.write(f"[{titlename}]({ch})");img_url=title.img[_H];original_string=ch;obfuscated_text,mapping=obfuscate(original_string)
+                                        if img_url:st.image(img_url,caption=obfuscated_text,use_column_width=_S)
                                         if ch:st.caption(_E);txt=f"\n                        {obfuscated_text}\n                        ";st.code(txt,language=_F)
                                         st.divider()
 with col2:
@@ -224,9 +222,9 @@ with col2:
                                 href=link.get(_I)
                                 if'chapter'not in href:cch=f"{href}chapter-1/"
                                 else:cch=href
-                                manga_name=href.split(_T)[1];st.write(f"[{manga_name}]({cch})");img_tag=link.find('img')
-                                if img_tag:img_url=img_tag.get('data-src');st.image(img_url,caption=cch,use_column_width=_S)
-                                original_string=cch;obfuscated_text,mapping=obfuscate(original_string);st.caption(_E);txt=f"\n                {obfuscated_text}\n                ";st.code(txt,language=_F);st.divider()
+                                manga_name=href.split(_T)[1];st.write(f"[{manga_name}]({cch})");img_tag=link.find('img');original_string=cch;obfuscated_text,mapping=obfuscate(original_string)
+                                if img_tag:img_url=img_tag.get('data-src');st.image(img_url,caption=obfuscated_text,use_column_width=_S)
+                                st.caption(_E);txt=f"\n                {obfuscated_text}\n                ";st.code(txt,language=_F);st.divider()
 st.image(main_image)
 res_box=st.empty()
 xx=st.text_input(':orange[Manga Code:]',value='',placeholder='iuuqt://ebhdrrghmbuf.vt/..',key='readfield',help='Enter Manga Code here')
@@ -242,3 +240,4 @@ if ok:
                                 for image_link in st.session_state.image_links:st.image(image_link,use_column_width=_A)
                                 st.write(f"Total Images: {len(st.session_state.image_links)}");transcribe_to_audio(st.session_state.image_links);oldurl=url;chap=''.join([A for A in oldurl if A.isdigit()]);nxtchap=str(int(chap)+int(+1));prvchap=str(int(chap));nxtUrl=str(oldurl.replace(chap,nxtchap));obfuscated_text,mapping=obfuscate(nxtUrl);st.caption(_M+prvchap+_N+obfuscated_text);st.caption(_E);txt=f"\n                {obfuscated_text}\n                ";st.code(txt,language=_F)
 st.markdown("<br><hr><center>© Cloud Bots™ BlackBots. All rights reserved.  <a href='mailto:admin@blackbots.net?subject=MangaDojutsu!&body=Please specify the issue you are facing with the app.'><strong>BlackBots.net</strong></a></center><hr>",unsafe_allow_html=_A)
+st.markdown('<style> footer {visibility: hidden;} </style>',unsafe_allow_html=_A)
