@@ -217,8 +217,9 @@ if search_variable:
                                                                 if img_tag:st.write(f"[{manga_name}]({cch})");img_url=img_tag.get(_Y);st.image(img_url,caption=obfuscated_text,use_column_width=_J);txt=f"\n                                    {obfuscated_text}\n                                    ";st.code(txt,language=_F);st.caption(_M);st.divider()
                                                         except StopIteration:break
 with col1:
+        ranchar=random.choice(string.ascii_uppercase)
         with st.expander(':books: Random Titles(Text)'):
-                resp=requests.get('https://daotranslate.us/?s=i')
+                resp=requests.get(f"https://daotranslate.us/?s={ranchar}")
                 if resp.status_code==200:
                         soup=BeautifulSoup(resp.text,_C);manga_list_div=soup.find(_D,{_E:_U})
                         if manga_list_div:
