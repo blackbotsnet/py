@@ -8,12 +8,11 @@ instaloader
 ffmpeg-python
 pandas
 curl_cffi
-streamlit_card
-torch
-translate
+torch==1.13.1
 torchvision
 opencv-python
 easyocr
+translate
 instagrapi
 g4f
 webdriver-manager
@@ -23,7 +22,7 @@ pymongo==4.1.1
 dnspython==2.2.1
 streamlit-aggrid
 streamlit_player
-streamlit_extras 
+streamlit-extras
 gTTS==2.2.4
 pydub
 fake_useragent 
@@ -32,3 +31,6 @@ pydantic
 emoji
 tls_client 
 st-annotated-text
+pyperclip
+scikit-learn
+scipy

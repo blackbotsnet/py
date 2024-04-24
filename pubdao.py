@@ -1,5 +1,5 @@
 # ┌──────────────────────────────────┐
-# │ BlackGram - Manga Dōjutsu v1.28  │
+# │ BlackDao: Manga Dōjutsu v2.12.21 │
 # ├──────────────────────────────────┤
 # │ Copyright © 2024 BlackBots.net   │
 # │ (https://BlackBots.net)          │
@@ -59,6 +59,8 @@ import re
 import requests
 from PIL import Image
 import numpy as np
+import pandas as pd
+import pickle
 
 import easyocr as ocr  # OCR
 from easyocr import Reader
@@ -81,6 +83,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
 
 import webbrowser
+from utils import recommendations, read_object
 
 
 def generate_unique_key():
@@ -412,6 +415,7 @@ with st.sidebar:
     st.image(side_image)
     st.caption("Manga Text or Image To Speach")
     on = st.checkbox('Stream Story (Disabled)', value=False, disabled=True)
+	
     st.divider()
     st.header("Google Play Store")
     st.caption("Download from: https://play.google.com/store/apps/details?id=com.blackbots.blackdao")
@@ -426,11 +430,12 @@ with st.sidebar:
         st.caption("- `Press Read`")
     st.button("Restart", on_click=update_value, key='keyy')
 
-col1, col2, col3 = st.columns(3)
-outer_cols = st.columns([1, 2])
+
 search_variable = st.text_input(":orange[Search:]", placeholder="Search..", key='search', help="Enter a title here to search for")
                             
 if search_variable:
+    if '"' in search_variable:
+        search_variable = search_variable.replace('"', '')
     with st.spinner('Searching..'):
         with st.expander(":mag: Search"):
             search_url_1 = f"https://daotranslate.us/?s={search_variable}"
@@ -494,7 +499,48 @@ if search_variable:
                                     st.caption('Copy Code')
                                     st.divider()
                             except StopIteration:
-                                break 
+                                break
+
+def load_data():
+    cos_simi_mat_desc = read_object('artifacts/cosine_similarity_desc.pkl')
+    df_manga_rel = pd.read_csv('artifacts/manga_clean.csv', index_col='manga_id')
+    titles = df_manga_rel['ctitle'].dropna().tolist()
+    return cos_simi_mat_desc, titles
+
+# Initialize titles dictionary
+if "titles_dict" not in st.session_state:
+    st.session_state["titles_dict"] = {}
+
+simi_mat, titles = load_data()
+st.session_state["titles_dict"]["titles"] = titles
+
+# Get titles from session state
+titles = st.session_state.get("titles_dict", {}).get("titles", [])
+
+# Pagination logic
+page_number = st.session_state.get("page_number", 0)
+if "next_page" in st.session_state:
+    page_number += 1
+elif "prev_page" in st.session_state:
+    page_number -= 1
+
+with st.expander('Popular Titles'):
+    start_idx = page_number * 20
+    end_idx = min((page_number + 1) * 20, len(titles))
+    for title in titles[start_idx:end_idx]:
+        st.write(title)
+
+    if page_number > 0:
+        st.button("Previous", key="prev_page")
+    st.write(f"Page {page_number + 1}")
+    if end_idx < len(titles):
+        st.button("Next", key="next_page")
+
+st.session_state["page_number"] = page_number
+
+col1, col2, col3 = st.columns(3)
+outer_cols = st.columns([1, 2])
+
 with col1:
     ranchar = random.choice(string.ascii_uppercase)
     with st.expander(':books: Novels'):
@@ -584,11 +630,9 @@ with col3:
                     st.caption('Copy Code')
                     st.divider()
 
-
 st.image(main_image)
 res_box = st.empty()
 
-#xx = st.text_input(":orange[Manga Code:]", value='', placeholder="iuuqt://ebhdrrghmbuf.vt/..", key='readfield', help="Enter Manga Code here")
 url = deobfuscate(st.text_input(":orange[Manga Code:]", value='', placeholder="iuuqt://ebhdrrghmbuf.vt/..", key='readfield', help="Enter Manga Code here"), mapping)
 ok = st.button(":green_book: Read", help="Read", key='readbutton', use_container_width=False)
 
