@@ -528,10 +528,7 @@ if search_variable:
                             except StopIteration:
                                 break
 
-<<<<<<< HEAD
 
-=======
->>>>>>> bd3b26414b82d475bfa7b9771a2b6215a15d219f
 col1, col2, col3 = st.columns(3)
 outer_cols = st.columns([1, 2])
 
