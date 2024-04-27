@@ -282,12 +282,12 @@ with B2:
 				for X in x:
 					z=X.a[l];g=z.split(Ab)[1].replace('/',B).title();A0=g.replace('-',s);A2=f"https://daotranslate.net/{g}-chapter-1/";A.write(f"[{A0}]({A2})");G=X.img[r];L=A2;C,I=W(L)
 					if G:
-						try:M=f(G,scale_factor=2);A.image(M,use_column_width=AA)
+						try:M=f(G,scale_factor=4);A.image(M,use_column_width=AA)
 						except:pass
 					if A2:H=f"\n                        {C}\n                        ";D=a(C,I);A.code(H,language=d);A.button(t,on_click=m,args=[D],key=w())
 					A.divider()
 with B3:
-	with A.expander(f":frame_with_picture: Top Rated"):
+	with A.expander(f":chart_with_upwards_trend: Top Rated"):
 		S=P.get('https://nightcomic.com/')
 		if S.status_code==200:
 			j=Z(S.text,b);B6=j.find_all(c,class_='page-item-detail manga')
@@ -295,7 +295,7 @@ with B3:
 				Q=o.find('a',class_='btn-link');R=o.find(q);X=o.find('h3',class_='h5').text.strip();B7=o.find('span',class_='score').text.strip()
 				if Q and R:
 					E=Q.get(l);G=R.get(A9);L=E;C,I=W(L);D=a(C,I);A.write(f"[{X}]({E}) - Rating: {B7}")
-					try:M=f(G,scale_factor=2);A.image(M,use_column_width=AA)
+					try:M=f(G,scale_factor=4);A.image(M,use_column_width=AA)
 					except:pass
 					H=f"\n                    {C}\n                    ";A.code(H,language=d);A.caption(v);A.divider()
 with B4:
@@ -310,7 +310,7 @@ with B4:
 				A1=E.split(u)[1];R=Q.find(q);L=Y;C,I=W(L)
 				if R:
 					A.write(f"[{A1}]({Y})");G=R.get(A9)
-					try:M=f(G,scale_factor=2);A.image(M,use_column_width=AA)
+					try:M=f(G,scale_factor=4);A.image(M,use_column_width=AA)
 					except:pass
 					D=a(C,I);H=f"\n                    {C}\n                    ";A.code(H,language=d);A.caption(v);A.divider()
 A.image(Aq)
@@ -331,4 +331,3 @@ if B8:
 				A.write(f"Total Images: {O(A.session_state.image_links)}");AF(A.session_state.image_links);AP=D;A4=B.join([A for A in AP if A.isdigit()]);BA=T(U(A4)+U(+1));BB=T(U(A4));BC=T(AP.replace(A4,BA));C,I=W(BC);A.caption(AU+BB+AV+C);H=f"\n                {C}\n                ";A.code(H,language=d);A.caption(v)
 A.markdown("<br><hr><center>© Cloud Bots™ BlackBots. All rights reserved.  <a href='mailto:admin@blackbots.net?subject=MangaDojutsu!&body=Please specify the issue you are facing with the app.'><strong>BlackBots.net</strong></a></center><hr>",unsafe_allow_html=J)
 A.markdown('<style> footer {visibility: hidden;} </style>',unsafe_allow_html=J)
- 
