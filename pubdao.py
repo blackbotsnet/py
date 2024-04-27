@@ -278,7 +278,7 @@ BP=A.columns([1,2])
 AQ=0
 with B7:
 	BA=AB.choice(string.ascii_uppercase)
-	with A.expander(':books: Novels'):
+	with A.expander(':loud_sound: Text & Audio '):
 		S=P.get(f"https://daotranslate.net/?s={BA}")
 		if S.status_code==200:
 			j=Z(S.text,b);AR=j.find(c,{k:Ae})
