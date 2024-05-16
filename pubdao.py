@@ -44,307 +44,341 @@
 #                                     888E                                                      
 #                                     888P                                                      
 #                                   .J88" "                                                     
-Al='daotrans'
-Ak='series/'
-Aj='mdthumb'
-Ai='listupd'
-Ah='Searching..'
-Ag='Restart'
-Af='\n\n:orange[Next Chapter:] '
-Ae=':green[Chapter Complete:] '
-Ad='Loading text & audio..'
-Ac='current_image_index'
-Ab='image_links'
-AD='.list-chapter .chapter-item a.btn-link'
-AC='PANEL/'
-AB='NOVEL/'
-AA='TOP/'
-y='h3'
-x='page-item-detail manga'
-w='Read'
-v=chr
-p='Copy Code'
-o='always'
-n='a'
-m=' '
-l='img'
+A_='daotrans'
+Az='Loading, please be patient..'
+Ay='series/'
+Ax='mdthumb'
+Aw='listupd'
+Av='Searching..'
+Au='Restart'
+At='Continue'
+As='<style>\n                          .stMarkdown{color: black;}\n                          .st-c8:hover{color:orange;}\n                          .streamlit-expander.st-bc.st-as.st-ar.st-bd.st-be.st-b8.st-bf.st-bg.st-bh.st-bi{display:none;}\n                          </style>'
+Ar='Loading text & audio..'
+Aq='current_image_index'
+Ap='image_links'
+AN='.list-chapter .chapter-item a.btn-link'
+AM='PANEL/'
+AL='NOVEL/'
+AK='TOP/'
+AJ='\n\n:orange[Next Chapter:] '
+AI=':green[Chapter Complete:] '
+AH='.mp3'
+AG=range
+A2='h3'
+A1='page-item-detail manga'
+A0='en'
+v='Copy Code'
+u='always'
+t='a'
+s='"'
+r='\n'
+q=' '
+p='img'
+f='Read'
 e='java'
-d='html.parser'
-Z=len
-U='href'
-T='div'
-S='src'
-R=Exception
-Q=str
-N=False
-M=int
+b='html.parser'
+W='href'
+V='src'
+R='div'
+Q=Exception
+O=len
+K=str
+J=False
+I=int
 F='class'
 D=True
 B=''
-import os,io,base64,hashlib,random as AE,string,tempfile as Am,time,uuid
-from io import BytesIO as AF
-import re,requests as K
-from PIL import Image as V
-import numpy as BN,pandas as BO,pickle
-from paddleocr import PaddleOCR as An
-from gtts import gTTS
-from pydub import AudioSegment as Ao
-from pydub.effects import speedup
-import streamlit as A,streamlit_nested_layout,streamlit.components.v1 as BP,streamlit_scrollable_textbox as Ap,streamlit_extras
-from bs4 import BeautifulSoup as a
-from selenium import webdriver as Aq
+import os,io,base64,hashlib,random as AO,string,tempfile as AP,time,uuid
+from io import BytesIO as AQ
+import re,requests as L
+from PIL import Image as X
+import numpy as BZ,pandas as Ba,pickle
+from paddleocr import PaddleOCR as B0
+from gtts import gTTS as A3
+from pydub import AudioSegment as AR
+from pydub.effects import speedup as AS
+import streamlit as A,streamlit_nested_layout,streamlit.components.v1 as Bb,streamlit_scrollable_textbox as B1,streamlit_extras
+from bs4 import BeautifulSoup as Y
+from selenium import webdriver as B2
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import WebDriverException as Ar
-from webdriver_manager.chrome import ChromeDriverManager as As
-from webdriver_manager.core.os_manager import ChromeType as At
+from selenium.common.exceptions import WebDriverException as B3
+from webdriver_manager.chrome import ChromeDriverManager as B4
+from webdriver_manager.core.os_manager import ChromeType as B5
 import webbrowser
 from utils import recommendations,read_object
-def z():A=Q(uuid.uuid4());B=hashlib.sha256(A.encode()).hexdigest();return B
-def Au(file_path):
+def w():A=K(uuid.uuid4());B=hashlib.sha256(A.encode()).hexdigest();return B
+def AT(file_path):
 	with open(file_path,'rb')as B:C=B.read();E=base64.b64encode(C).decode();F=f'\n            <audio controls autoplay="true">\n            <source src="data:audio/mp3;base64,{E}" type="audio/mp3">\n            </audio>\n            ';A.markdown(F,unsafe_allow_html=D)
-def A0():A=Options();A.add_argument('--disable-gpu');A.add_argument('--headless');A.add_argument('--disable-blink-features=AutomationControlled');A.add_experimental_option('useAutomationExtension',N);A.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36');A.add_argument('--dns-prefetch-disable');A.add_argument('--no-sandbox');A.add_argument('--lang=en-US');A.add_argument('--disable-setuid-sandbox');A.add_argument('--ignore-certificate-errors');return Aq.Chrome(service=Service(As(chrome_type=At.CHROMIUM).install()),options=A)
-def BQ(url):
-	if Ab not in A.session_state:A.session_state.image_links=[]
-	if Ac not in A.session_state:A.session_state.current_image_index=0
-	try:BI.get(url)
+def x():A=Options();A.add_argument('--disable-gpu');A.add_argument('--headless');A.add_argument('--disable-blink-features=AutomationControlled');A.add_experimental_option('useAutomationExtension',J);A.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36');A.add_argument('--dns-prefetch-disable');A.add_argument('--no-sandbox');A.add_argument('--lang=en-US');A.add_argument('--disable-setuid-sandbox');A.add_argument('--ignore-certificate-errors');return B2.Chrome(service=Service(B4(chrome_type=B5.CHROMIUM).install()),options=A)
+def Bc(url):
+	if Ap not in A.session_state:A.session_state.image_links=[]
+	if Aq not in A.session_state:A.session_state.current_image_index=0
+	try:BU.get(url)
 	except:A.stop();pass
-	with A.spinner(Ad):
-		A.session_state.image_links=AG(url);A.session_state.current_image_index=0
+	with A.spinner(Ar):
+		A.session_state.image_links=AU(url);A.session_state.current_image_index=0
 		if A.session_state.image_links:
 			for B in A.session_state.image_links:A.image(B,use_column_width=D)
-			A.write(f"Total Images: {Z(A.session_state.image_links)}");AH(A.session_state.image_links)
-def AG(url):
-	B=A0()
+			A.write(f"Total Images: {O(A.session_state.image_links)}");AV(A.session_state.image_links)
+def AU(url):
+	B=x()
 	try:B.get(url)
-	except Ar as M:
+	except B3 as M:
 		if B.current_url==url:return[]
 		else:A.stop();return[]
-	C=[];G=B.find_elements(By.CSS_SELECTOR,l)
+	C=[];G=B.find_elements(By.CSS_SELECTOR,p)
 	for H in G:
-		D=H.get_attribute(S)
-		if D and A1(D):C.append(D)
+		D=H.get_attribute(V)
+		if D and A4(D):C.append(D)
 	I=B.find_elements(By.CSS_SELECTOR,'img[id^="image-"]')
 	for J in I:
-		E=J.get_attribute(S)
-		if E and A1(E):C.append(E)
+		E=J.get_attribute(V)
+		if E and A4(E):C.append(E)
 	K=B.find_elements(By.CSS_SELECTOR,'img.wp-manga-chapter-img')
 	for L in K:
-		F=L.get_attribute(S)
-		if F and A1(F):C.append(F)
+		F=L.get_attribute(V)
+		if F and A4(F):C.append(F)
 	B.quit();return C
-def AH(image_links):
-	L='converted_img.jpg';G=[];M=An(use_angle_cls=D,lang='en');H=[]
+def AV(image_links):
+	N='converted_img.jpg';G=[];O=B0(use_angle_cls=D,lang=A0);H=[]
 	for(Y,E)in enumerate(image_links,start=1):
-		if not Av(E):continue
+		if not B6(E):continue
 		with A.spinner(' Getting image text '):
-			try:O=K.get(E).content;P=io.BytesIO(O);S=V.open(P);T=S.convert('RGB');T.save(L,'JPEG')
-			except R as I:continue
+			try:P=L.get(E).content;R=io.BytesIO(P);S=X.open(R);T=S.convert('RGB');T.save(N,'JPEG')
+			except Q as I:continue
 			try:
-				U=M.ocr(L,det=N,cls=D);W=U[0][0][0];C=Aw(Q(W));H.append(C);J=m.join(H);A.write('All Text:',J)
-				if J:
-					F=os.path.join('audio',os.path.splitext(os.path.basename(E))[0]+'.mp3')
-					if not os.path.exists(F):X=gTTS(text=C,lang='en',slow=N);X.save(F)
+				U=O.ocr(N,det=J,cls=D);V=U[0][0][0];C=B7(K(V));H.append(C);M=q.join(H);A.write('All Text:',M)
+				if M:
+					F=os.path.join('audio',os.path.splitext(os.path.basename(E))[0]+AH)
+					if not os.path.exists(F):W=A3(text=C,lang=A0,slow=J);W.save(F)
 					G.append(F)
-					if AI:u.markdown(f":blue[Streaming: ]:green[*{C}*]")
-				else:u.markdown(f":blue[Dao: ]:orange[No Text]")
-			except R as I:A.write(f"Error processing text: {I}");C=B
+					if AW:o.markdown(f":blue[Streaming: ]:green[*{C}*]")
+				else:o.markdown(f":blue[Dao: ]:orange[No Text]")
+			except Q as I:A.write(f"Error processing text: {I}");C=B
 	return G
-def Av(image_url):
+def B6(image_url):
 	A=['.png','.jpg','.jpeg','.webp']
 	for format in A:
 		if image_url.lower().endswith(format):return D
-	return N
-def A1(link):
+	return J
+def A4(link):
 	A=['.png','.jpg','.jpeg','.webp']
 	for B in A:
 		if link.lower().endswith(B):return D
-	return N
-def Aw(text):
+	return J
+def B7(text):
 	C=text
 	try:
-		if not isinstance(C,Q):raise ValueError('Input must be a string')
-		D='\\b[a-zA-Z]+(?:\\\'[a-zA-Z]+)?(?:-[a-zA-Z]+)?(?:[.,!?\\\'":;\\[\\]()*&^%$#@`~\\\\/]|\\.\\.\\.)?\\b';E=re.findall(D,C);F=m.join(E);C=F.lower()
-	except R as G:A.write(f"Error filtering English words: {G}");C=B
+		if not isinstance(C,K):raise ValueError('Input must be a string')
+		D='\\b[a-zA-Z]+(?:\\\'[a-zA-Z]+)?(?:-[a-zA-Z]+)?(?:[.,!?\\\'":;\\[\\]()*&^%$#@`~\\\\/]|\\.\\.\\.)?\\b';E=re.findall(D,C);F=q.join(E);C=F.lower()
+	except Q as G:A.write(f"Error filtering English words: {G}");C=B
 	return C
-def q(url):
-	b='file.mp3';O='\n';E=url;H=A0()
+def g(url):
+	T='file.mp3';E=url;H=x()
 	try:H.get(E)
 	except:pass
-	if not E:u.markdown(f":blue[Dao: ]:green[*Enter a valid URL before running.*]")
+	if not E:o.markdown(f":blue[Dao: ]:green[*Enter a valid URL before running.*]")
 	else:
 		try:
-			P=K.get(E)
-			if P.status_code==200:
-				c=a(P.text,d);I=c.find(T,{F:'epcontent entry-content'})
-				if I:
-					t=B;e=Z(I.findAll('p'));G=I.findAll('p');J=1;v=e//J;f=[G[A:A+J]for A in range(0,Z(G),J)];C=B
-					for g in G:C+=g.text+O
-					C=C.replace('<p>',B);C=C.replace('"',B);A.markdown('<style>\n                          .stMarkdown{color: black;}\n                          .st-c8:hover{color:orange;}\n                          .streamlit-expander.st-bc.st-as.st-ar.st-bd.st-be.st-b8.st-bf.st-bg.st-bh.st-bi{display:none;}\n                          </style>',unsafe_allow_html=D)
-					with A.expander(w):from annotated_text import annotated_text as h;G=C.split(O);i=[(A,B,'#fea')for A in G];h(*i);A.caption(f"{Z(C)} characters in this chapter.");S=E;L=B.join([A for A in S if A.isdigit()]);U=Q(M(L)+M(+1));j=Q(M(L));k=Q(S.replace(L,U));V,l=W(k);A.caption(Ae+j+Af+U);A.caption(V);E=r(V,l);A.button('Continue',on_click=q,args=[E],key=z())
-					with Am.NamedTemporaryFile(suffix='.mp3',delete=N)as X:C=C.replace('"',B);m=gTTS(text=C,lang='en',slow=N);m.save(X.name);n=Ao.from_mp3(X.name);o=speedup(n,1.2,150);o.export(b,format='mp3');Au(b)
-					for p in f:
-						s=B
-						for Y in p:s+=Y.text+O
-						if AI:u.markdown(f":blue[Dao: ]:green[*{Y.text}*]");time.sleep(5)
+			U=L.get(E)
+			if U.status_code==200:
+				c=Y(U.text,b);M=c.find(R,{F:'epcontent entry-content'})
+				if M:
+					y=B;d=O(M.findAll('p'));G=M.findAll('p');N=1;z=d//N;e=[G[A:A+N]for A in AG(0,O(G),N)];C=B
+					for i in G:C+=i.text+r
+					C=C.replace('<p>',B);C=C.replace(s,B);A.markdown(As,unsafe_allow_html=D)
+					with A.expander(f):from annotated_text import annotated_text as j;G=C.split(r);k=[(A,B,'#fea')for A in G];j(*k);A.caption(f"{O(C)} characters in this chapter.");V=E;P=B.join([A for A in V if A.isdigit()]);W=K(I(P)+I(+1));l=K(I(P));m=K(V.replace(P,W));X,n=S(m);A.caption(AI+l+AJ+W);A.caption(X);E=h(X,n);A.button(At,on_click=g,args=[E],key=w())
+					with AP.NamedTemporaryFile(suffix=AH,delete=J)as Z:C=C.replace(s,B);p=A3(text=C,lang=A0,slow=J);p.save(Z.name);q=AR.from_mp3(Z.name);t=AS(q,1.2,150);t.export(T,format='mp3');AT(T);A.download_button(T)
+					for u in e:
+						v=B
+						for a in u:v+=a.text+r
+						if AW:o.markdown(f":blue[Dao: ]:green[*{a.text}*]");time.sleep(5)
 					H.quit()
 				else:A.write(B)
 			else:A.write(f":blue[Dao: ]:green[*Failed to fetch URL. Check your internet connection or the validity of the URL.*]")
-		except R as x:pass
+		except Q as A1:pass
 	H.quit()
-def W(text):
+def B8(url):
+	E=url;M=x()
+	try:M.get(E)
+	except:pass
+	if not E:o.markdown(f":blue[Dao: ]:green[*Enter a valid URL before running.*]")
+	else:
+		try:
+			U=L.get(E)
+			if U.status_code==200:
+				a=Y(U.text,b);N=a.find(R,{F:'entry-content'})
+				if N:
+					p=B;c=O(N.findAll('p'));G=N.findAll('p');P=1;q=c//P;t=[G[A:A+P]for A in AG(0,O(G),P)];C=B
+					for d in G:C+=d.text+r
+					C=C.replace('<p>',B);C=C.replace(s,B);A.markdown(As,unsafe_allow_html=D)
+					with A.expander(f):
+						from annotated_text import annotated_text as e;G=C.split(r);i=[(A,B,'#fea')for A in G];e(*i);A.caption(f"{O(C)} characters in this chapter.");V=E;T=B.join([A for A in V if A.isdigit()]);W=K(I(T)+I(+1));H=K(I(T));j=K(V.replace(T,W));X,k=S(j);A.caption(AI+H+AJ+W);A.caption(X);E=h(X,k);A.button(At,on_click=g,args=[E],key=w())
+						with AP.NamedTemporaryFile(suffix=AH,delete=J)as Z:C=C.replace(s,B);l=A3(text=C,lang=A0,slow=J);l.save(Z.name);m=AR.from_mp3(Z.name);n=AS(m,1.2,150);n.export(f"Chapter{H}.mp3",format='mp3');AT(f"Chapter{H}.mp3");A.download_button(f"Chapter{H}.mp3")
+					M.quit()
+				else:A.write(B)
+			else:A.write(f":blue[Dao: ]:green[*Failed to fetch URL. Check your internet connection or the validity of the URL.*]")
+		except Q as u:pass
+	M.quit()
+def S(text):
 	C=text;D={}
-	for E in range(26):D[v(65+E)]=v((E+1)%26+65);D[v(97+E)]=v((E+1)%26+97)
+	for E in AG(26):D[chr(65+E)]=chr((E+1)%26+65);D[chr(97+E)]=chr((E+1)%26+97)
 	A=B.join(D.get(A,A)for A in C)
-	if'nightcomic.com'in C:A=AA+A
-	if'daotranslate'in C:A=AB+A
-	if'manhuaaz.com'in C:A=AC+A
+	if'nightcomic.com'in C:A=AK+A
+	if'daotranslate'in C:A=AL+A
+	if'manhuaaz.com'in C:A=AM+A
 	return A,D
-def r(obfuscated_text,mapping):
+def h(obfuscated_text,mapping):
 	A=obfuscated_text
-	if A.startswith(AA):A=A[Z(AA):]
-	if A.startswith(AB):A=A[Z(AB):]
-	if A.startswith(AC):A=A[Z(AC):]
+	if A.startswith(AK):A=A[O(AK):]
+	if A.startswith(AL):A=A[O(AL):]
+	if A.startswith(AM):A=A[O(AM):]
 	C={B:A for(A,B)in mapping.items()};D=B.join(C.get(A,A)for A in A);return D
-BR=[]
-s=B
-Ax=V.open('static/-.ico')
-BS=AE.randint(1,99999)
-A.set_page_config(page_title='Manga Dōjutsu',page_icon=Ax,layout='centered',initial_sidebar_state='expanded')
+Bd=[]
+y=B
+B9=X.open('static/-.ico')
+Be=AO.randint(1,99999)
+A.set_page_config(page_title='Manga Dōjutsu',page_icon=B9,layout='centered',initial_sidebar_state='expanded')
 A.markdown("\n    <style>\n        <br><hr><center>\n        .reportview-container {background: black;}\n        .sidebar .siderbar-content {background: black;}\n        .st-ck:hover {\n        color: #gold;\n        }\n        color: lime;\n        cursor: pointer;\n        }\n        img {\n        width:75%;\n        }\n        width:578px;\n        vertical-align: middle;\n        horizontal-align: middle;\n        max-width: 300px;\n        margin: auto;\n        }\n        .css-yhwc6k{\n        text-align: center;\n        }\n        #audio{autoplay:true;}\n        #MainMenu{visibility: hidden;}\n        footer{visibility: hidden;}\n        .css-14xtw13 e8zbici0{visibility: hidden;}\n        .css-m70y {display:none}\n        .st-emotion-cache-zq5wmm.ezrtsby0{visibility: hidden;}\n        .st-emotion-cache-zq5wmm.ezrtsby0{display:none}\n        .styles_terminalButton__JBj5T{visibility: hidden;}\n        .styles_terminalButton__JBj5T{display:none}\n        .viewerBadge_container__r5tak.styles_viewerBadge__CvC9N{visibility: hidden;}\n        .viewerBadge_container__r5tak.styles_viewerBadge__CvC9N{display:none}\n        [data-testid='stSidebarNav'] > ul {min-height: 50vh;}\n        [data-testid='stSidebarNav'] > ul {color: red;}\n        .language-java {color: black;}\n        .css-nps9tx, .e1m3hlzs0, .css-1p0bytv, .e1m3hlzs1 {\n        visibility: collapse;\n        height: 0px;\n        }\n\t .stException {\n\t    display: none;\n\t}\n    </style>\n",unsafe_allow_html=D)
-Ay=V.open('static/dojutsu.png')
-Az=V.open('static/4.png')
+BA=X.open('static/dojutsu.png')
+BB=X.open('static/4.png')
 A.sidebar.write('BlackDao: Manga Dōjutsu')
-if Ab not in A.session_state:A.session_state.image_links=[]
-if Ac not in A.session_state:A.session_state.current_image_index=0
-BT=None
+if Ap not in A.session_state:A.session_state.image_links=[]
+if Aq not in A.session_state:A.session_state.current_image_index=0
+Bf=None
 with A.sidebar:
 	if'value'not in A.session_state:A.session_state.value=B
-	def A_():A.session_state.value=Ag
-	A.image(Az);A.caption('Manga Text or Image To Speach');AI=A.checkbox('Stream Story (Experimental)',value=N,disabled=N)
-	with open('titles.txt','r')as B0:B1=B0.readlines()
-	B2=B1;A.write(':orange[Popular Titles]');Ap.scrollableTextbox(B2,height=300,border=None);A.divider();A.header('Google Play Store');A.caption('Download from: https://play.google.com/store/apps/details?id=com.blackbots.blackdao');A.header('Official PC Version');A.caption('Download from: https://blackbots.gumroad.com/l/manga');A.caption('Join Our Discord: https://discord.gg/HcVPaSpF');A.divider()
+	def BC():A.session_state.value=Au
+	A.image(BB);A.caption('Manga Text or Image To Speach');AW=A.checkbox('Stream Story (Experimental)',value=J,disabled=J)
+	with open('titles.txt','r')as BD:BE=BD.readlines()
+	BF=BE;A.write(':orange[Popular Titles]');B1.scrollableTextbox(BF,height=300,border=None);A.divider();A.header('Google Play Store');A.caption('Download from: https://play.google.com/store/apps/details?id=com.blackbots.blackdao');A.header('Official PC Version');A.caption('Download from: https://blackbots.gumroad.com/l/manga');A.caption('Join Our Discord: https://discord.gg/HcVPaSpF');A.divider()
 	with A.expander('Help'):A.caption('How to use BlackDao: Manga Dōjutsu');A.caption('- `Copy` a Code');A.caption('- `Paste` Code onto `Manga Code` field');A.caption('- `Press Read`')
-	A.button(Ag,on_click=A_,key='keyy')
-def AJ(img_url,scale_factor):A=scale_factor;C=K.get(img_url);B=V.open(AF(C.content));D,E=B.size;F=M(D*A);G=M(E*A);H=B.resize((F,G),V.LANCZOS);return H
-def t(img_url,scale_factor):B=scale_factor;D=K.get(img_url);C=V.open(AF(D.content));E,F=C.size;G=M(E*B);H=M(F*B);I=C.resize((G,H),V.LANCZOS);A=io.BytesIO();I.save(A,format='PNG');A=A.getvalue();return A
-L=A.text_input(':orange[Search:]',placeholder='Search..',key='search',help='Enter a title here to search for')
-AK=0
-if L:
-	L=L.replace('"',B);L=L.replace('-',m);L=L.replace(':',B)
-	with A.spinner(Ah):
+	A.button(Au,on_click=BC,key='keyy')
+def AX(img_url,scale_factor):A=scale_factor;C=L.get(img_url);B=X.open(AQ(C.content));D,E=B.size;F=I(D*A);G=I(E*A);H=B.resize((F,G),X.LANCZOS);return H
+def z(img_url,scale_factor):B=scale_factor;D=L.get(img_url);C=X.open(AQ(D.content));E,F=C.size;G=I(E*B);H=I(F*B);J=C.resize((G,H),X.LANCZOS);A=io.BytesIO();J.save(A,format='PNG');A=A.getvalue();return A
+P=A.text_input(':orange[Search:]',placeholder='Search..',key='search',help='Enter a title here to search for')
+AY=0
+if P:
+	P=P.replace(s,B);P=P.replace('-',q);P=P.replace(':',B)
+	with A.spinner(Av):
 		with A.expander(':mag: Search'):
-			B3=f"https://daotranslate.net/?s={L}";AL=K.get(B3);B4=f"https://www.mangaread.org/?s={L}&post_type=wp-manga";AM=K.get(B4);B5=f"https://mangatx.to/?s={L}&post_type=wp-manga&post_type=wp-manga";AN=K.get(B5)
-			if AL.status_code==200 and AM.status_code==200 and AN.status_code==200:
-				B6=a(AL.text,d);B7=a(AM.text,d);B8=a(AN.text,d);AO=B6.find(T,{F:Ai});AP=B7.find_all(T,{F:x});AQ=B8.find_all(T,{F:x})
-				if AO:
-					A2=AO.find_all(T,{F:Aj})
-					for f in A2:
-						if AK>=20:break
-						A3=f.a[U];g=A3.split(Ak)[1].replace('/',B).title();A4=g.replace('-',m);s=f"https://daotranslate.net/{g}-chapter-1/"
-						with A.spinner(Ah):
-							AR,h,AS=A.columns(3)
-							with h:A.write(f"[{A4}]({s})")
-							G=f.img[S];A5=s;E,O=W(A5)
+			BG=f"https://daotranslate.net/?s={P}";AZ=L.get(BG);BH=f"https://www.mangaread.org/?s={P}&post_type=wp-manga";Aa=L.get(BH);BI=f"https://mangatx.to/?s={P}&post_type=wp-manga&post_type=wp-manga";Ab=L.get(BI)
+			if AZ.status_code==200 and Aa.status_code==200 and Ab.status_code==200:
+				BJ=Y(AZ.text,b);BK=Y(Aa.text,b);BL=Y(Ab.text,b);Ac=BJ.find(R,{F:Aw});Ad=BK.find_all(R,{F:A1});Ae=BL.find_all(R,{F:A1})
+				if Ac:
+					A5=Ac.find_all(R,{F:Ax})
+					for i in A5:
+						if AY>=20:break
+						A6=i.a[W];j=A6.split(Ay)[1].replace('/',B).title();A7=j.replace('-',q);y=f"https://daotranslate.net/{j}-chapter-1/"
+						with A.spinner(Av):
+							Af,k,Ag=A.columns(3)
+							with k:A.write(f"[{A7}]({y})")
+							G=i.img[V];A8=y;E,T=S(A8)
 							if G:
 								try:
-									A6=AJ(G,scale_factor=4);AR,h,AS=A.columns(3)
-									with h:A.image(A6,use_column_width=None)
-								except R as i:A.error(f"Error loading image: {i}")
-							if s:
-								AR,h,AS=A.columns(3)
-								with h:H=f"\n                                    {E}\n                                    ";P=r(E,O);A.code(H,language=e);A.button(w,on_click=q,args=[P],key=z())
-							A.divider();AK+=1
-				if AP:
-					AT=0
-					for C in AP:
-						if AT>=5:break
-						b=C.find(y,{F:'h5'}).text.strip();j=C.find(n,href=D)[U];X=C.select(AD)
-						if X:I=X[0][U]
-						else:I=B
-						A.write(f"[{b}]({I})");J=C.find(l,src=D)
-						if J:
-							G=J[S]
-							try:c=t(G,scale_factor=4);A.image(c,use_column_width=o)
-							except R as i:pass
-						E,O=W(I);H=f"{E}";A.code(H,language=e);A.caption(p);A.divider();AT+=1
-				if AQ:
-					AU=0
-					for C in AQ:
-						if AU>=5:break
-						b=C.find(y,{F:'h4'}).text.strip();j=C.find(n,href=D)[U];J=C.find(l,src=D)
-						if J:
-							G=J[S]
-							try:c=t(G,scale_factor=4);A.image(c,use_column_width=o)
-							except R as i:pass
-						B9=C.find('span',{F:'chapter'}).text.strip();A.write(f"[{b}]({j})");A.write(f"Latest Chapter: {B9}");E,O=W(j);H=f"{E}";A.code(H,language=e);A.caption(p);A.divider();AU+=1
-BA,BB,BC=A.columns(3)
-BU=A.columns([1,2])
-AV=0
-with BA:
-	BD=AE.choice(string.ascii_uppercase)
+									A9=AX(G,scale_factor=4);Af,k,Ag=A.columns(3)
+									with k:A.image(A9,use_column_width=None)
+								except Q as l:A.error(f"Error loading image: {l}")
+							if y:
+								Af,k,Ag=A.columns(3)
+								with k:H=f"\n                                    {E}\n                                    ";U=h(E,T);A.code(H,language=e);A.button(f,on_click=g,args=[U],key=w())
+							A.divider();AY+=1
+				if Ad:
+					Ah=0
+					for C in Ad:
+						if Ah>=5:break
+						c=C.find(A2,{F:'h5'}).text.strip();m=C.find(t,href=D)[W];Z=C.select(AN)
+						if Z:M=Z[0][W]
+						else:M=B
+						A.write(f"[{c}]({M})");N=C.find(p,src=D)
+						if N:
+							G=N[V]
+							try:d=z(G,scale_factor=4);A.image(d,use_column_width=u)
+							except Q as l:pass
+						E,T=S(M);H=f"{E}";A.code(H,language=e);A.caption(v);A.divider();Ah+=1
+				if Ae:
+					Ai=0
+					for C in Ae:
+						if Ai>=5:break
+						c=C.find(A2,{F:'h4'}).text.strip();m=C.find(t,href=D)[W];N=C.find(p,src=D)
+						if N:
+							G=N[V]
+							try:d=z(G,scale_factor=4);A.image(d,use_column_width=u)
+							except Q as l:pass
+						BM=C.find('span',{F:'chapter'}).text.strip();A.write(f"[{c}]({m})");A.write(f"Latest Chapter: {BM}");E,T=S(m);H=f"{E}";A.code(H,language=e);A.caption(v);A.divider();Ai+=1
+AA,AB,AC=A.columns(3)
+Bg=A.columns([1,2])
+Aj=0
+with AA:
+	BN=AO.choice(string.ascii_uppercase)
 	with A.expander(':loud_sound: Text & Audio '):
-		Y=K.get(f"https://daotranslate.net/?s={BD}")
-		if Y.status_code==200:
-			k=a(Y.text,d);AW=k.find(T,{F:Ai})
-			if AW:
-				A2=AW.find_all(T,{F:Aj})
-				for f in A2:
-					if AV>=10:break
-					A3=f.a[U];g=A3.split(Ak)[1].replace('/',B).title();A4=g.replace('-',m);A7=f"https://daotranslate.net/{g}-chapter-1/";A.write(f"[{A4}]({A7})");G=f.img[S];A5=A7;E,O=W(A5)
+		a=L.get(f"https://daotranslate.net/?s={BN}")
+		if a.status_code==200:
+			n=Y(a.text,b);Ak=n.find(R,{F:Aw})
+			if Ak:
+				A5=Ak.find_all(R,{F:Ax})
+				for i in A5:
+					if Aj>=10:break
+					A6=i.a[W];j=A6.split(Ay)[1].replace('/',B).title();A7=j.replace('-',q);AD=f"https://daotranslate.net/{j}-chapter-1/";A.write(f"[{A7}]({AD})");G=i.img[V];A8=AD;E,T=S(A8)
 					if G:
-						try:A6=AJ(G,scale_factor=4);A.image(A6,use_column_width=o)
+						try:A9=AX(G,scale_factor=4);A.image(A9,use_column_width=u)
 						except:pass
-					if A7:H=f"\n                        {E}\n                        ";P=r(E,O);A.code(H,language=e);A.button(w,on_click=q,args=[P],key=z());A.divider();AV+=1
-AX=0
-with BB:
+					if AD:H=f"\n                        {E}\n                        ";U=h(E,T);A.code(H,language=e);A.button(f,on_click=g,args=[U],key=w());A.divider();Aj+=1
+Al=0
+with AB:
 	with A.expander(f":chart_with_upwards_trend: Top Rated"):
-		Y=K.get('https://mangatx.to/')
-		if Y.status_code==200:
-			k=a(Y.text,d);A8=k.find_all(T,{F:x})
-			for C in A8:
-				if AX>=10:break
-				b=C.find(y,{F:'h5'}).text.strip();j=C.find(n,href=D)[U];X=C.select(AD)
-				if X:I=X[0][U]
-				else:I=B
-				A.write(f"[{b}]({I})");J=C.find(l,src=D)
-				if J:
-					G=J[S]
-					try:c=t(G,scale_factor=4);A.image(c,use_column_width=o)
-					except R as i:pass
-				E,O=W(I);H=f"{E}";A.code(H,language=e);A.caption(p);A.divider();AX+=1
-AY=0
-with BC:
+		a=L.get('https://mangatx.to/')
+		if a.status_code==200:
+			n=Y(a.text,b);AE=n.find_all(R,{F:A1})
+			for C in AE:
+				if Al>=10:break
+				c=C.find(A2,{F:'h5'}).text.strip();m=C.find(t,href=D)[W];Z=C.select(AN)
+				if Z:M=Z[0][W]
+				else:M=B
+				A.write(f"[{c}]({M})");N=C.find(p,src=D)
+				if N:
+					G=N[V]
+					try:d=z(G,scale_factor=4);A.image(d,use_column_width=u)
+					except Q as l:pass
+				E,T=S(M);H=f"{E}";A.code(H,language=e);A.caption(v);A.divider();Al+=1
+Am=0
+with AC:
 	with A.expander(f":frame_with_picture: Recently Updated"):
-		Y=K.get('https://www.mangaread.org/')
-		if Y.status_code==200:
-			k=a(Y.text,d);A8=k.find_all(T,{F:x})
-			for C in A8:
-				if AY>=10:break
-				b=C.find(y,{F:'h5'}).text.strip();j=C.find(n,href=D)[U];X=C.select(AD)
-				if X:I=X[0][U]
-				else:I=B
-				A.write(f"[{b}]({I})");J=C.find(l,src=D)
-				if J:
-					G=J[S]
-					try:c=t(G,scale_factor=4);A.image(c,use_column_width=o)
-					except R as i:pass
-				BE=C.select('.list-chapter .chapter-item')
-				for AZ in BE:BF=AZ.find(n,class_='btn-link').text.strip();BG=AZ.find('span',class_='post-on').text.strip()
-				A.write(f"Chapter: {BF}");A.write(f"Released: {BG}");E,O=W(I);H=f"{E}";A.code(H,language=e);A.caption(p);A.divider();AY+=1
-A.image(Ay)
-u=A.empty()
-P=r(A.text_input(':orange[Manga Code:]',value=B,placeholder='iuuqt://ebhdrrghmbuf.vt/..',key='readfield',help='Enter Manga Code here'),O)
-BH=A.button(':green_book: Read',help=w,key='readbutton',use_container_width=N)
-if BH:
-	if Al in P:
-		with A.spinner('Loading, please be patient..'):q(P)
-	if Al not in P.lower():
-		with A.spinner(Ad):
-			BI=A0();A.session_state.image_links=AG(P);A.session_state.current_image_index=0
+		a=L.get('https://www.mangaread.org/')
+		if a.status_code==200:
+			n=Y(a.text,b);AE=n.find_all(R,{F:A1})
+			for C in AE:
+				if Am>=10:break
+				c=C.find(A2,{F:'h5'}).text.strip();m=C.find(t,href=D)[W];Z=C.select(AN)
+				if Z:M=Z[0][W]
+				else:M=B
+				A.write(f"[{c}]({M})");N=C.find(p,src=D)
+				if N:
+					G=N[V]
+					try:d=z(G,scale_factor=4);A.image(d,use_column_width=u)
+					except Q as l:pass
+				BO=C.select('.list-chapter .chapter-item')
+				for An in BO:BP=An.find(t,class_='btn-link').text.strip();BQ=An.find('span',class_='post-on').text.strip()
+				A.write(f"Chapter: {BP}");A.write(f"Released: {BQ}");E,T=S(M);H=f"{E}";A.code(H,language=e);A.caption(v);A.divider();Am+=1
+A.image(BA)
+o=A.empty()
+U=h(A.text_input(':orange[Code:]',value=B,placeholder='iuuqt://ebhdrrghmbuf.vt/..',key='readfield',help='Enter Manga Code here'),T)
+AA,AB,AC=A.columns(3)
+with AA:BR=A.button(':green_book: Read',help=f,key='readbutton',use_container_width=J)
+with AB:BS=A.text_input(':orange[URL:]',value=B,placeholder='https://asuralightnovel.com/novel/hi..',key='readfield2',help='Enter Novel URL here')
+with AC:BT=A.button('Use URL',help=f,key='readbutton2',use_container_width=J)
+if BT:
+	with A.spinner(Az):B8(BS)
+if BR:
+	if A_ in U:
+		with A.spinner(Az):g(U)
+	if A_ not in U.lower():
+		with A.spinner(Ar):
+			BU=x();A.session_state.image_links=AU(U);A.session_state.current_image_index=0
 			if A.session_state.image_links:
-				for BJ in A.session_state.image_links:A.image(BJ,use_column_width=D)
-				A.write(f"Total Images: {Z(A.session_state.image_links)}");AH(A.session_state.image_links);Aa=P;A9=B.join([A for A in Aa if A.isdigit()]);BK=Q(M(A9)+M(+1));BL=Q(M(A9));BM=Q(Aa.replace(A9,BK));E,O=W(BM);A.caption(Ae+BL+Af+E);H=f"\n                {E}\n                ";A.code(H,language=e);A.caption(p)
+				for BV in A.session_state.image_links:A.image(BV,use_column_width=D)
+				A.write(f"Total Images: {O(A.session_state.image_links)}");AV(A.session_state.image_links);Ao=U;AF=B.join([A for A in Ao if A.isdigit()]);BW=K(I(AF)+I(+1));BX=K(I(AF));BY=K(Ao.replace(AF,BW));E,T=S(BY);A.caption(AI+BX+AJ+E);H=f"\n                {E}\n                ";A.code(H,language=e);A.caption(v)
 A.markdown("<br><hr><center>© Cloud Bots™ BlackBots. All rights reserved.  <a href='mailto:admin@blackbots.net?subject=MangaDojutsu!&body=Please specify the issue you are facing with the app.'><strong>BlackBots.net</strong></a></center><hr>",unsafe_allow_html=D)
 A.markdown('<style> footer {visibility: hidden;} </style>',unsafe_allow_html=D)
